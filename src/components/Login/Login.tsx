@@ -1,14 +1,12 @@
 import React from "react"
 import loginImage from "../../undraw_login_re_4vu2.svg"
 import './Login.css';
-import Web3 from 'web3'
-const SMART_CONTRACT_ABI = require('../config');
-const SMART_CONTRACT_ADDRESS = require('../config');
+
 export class Login extends React.Component {
-    
-    handleClick() {
-        console.log('this is:');
-      }
+    // constructor(props) {
+    //     super(props);
+    // }
+
     render() {
         return (
             <div className="App">
@@ -23,8 +21,8 @@ export class Login extends React.Component {
 
                                 <div className="form">
                                     <div className="form-group">
-                                        <label htmlFor="username">Username</label>
-                                        <input type="text" name="username" placeholder="Enter your username" />
+                                        <label htmlFor="email">Email</label>
+                                        <input type="text" name="email" placeholder="Enter your email" />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="password">Password</label>
@@ -33,7 +31,7 @@ export class Login extends React.Component {
                                 </div>
                             </div>
                             <div className="footer">
-                                <button type="button" className="btn"  onClick={() => this.handleClick()}>Sign In</button>
+                                <button type="button" className="btn">Sign In</button>
                             </div>
                         </div>
                     </div>
