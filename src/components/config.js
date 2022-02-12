@@ -307,7 +307,7 @@ export const SMART_CONTRACT_ABI = [
 		"outputs": [
 			{
 				"internalType": "string",
-				"name": "userEmail",
+				"name": "email",
 				"type": "string"
 			},
 			{
