@@ -39,9 +39,10 @@ function UserDisplay({email}: UserProps) {
       const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
       const accounts = await web3.eth.getAccounts()
       const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
-      contract.options.address =  "0xC4fF6Dde93E2BF20Cf26923582F0aDab4816304D"
-      const userCount: User = await contract.methods.users("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").call({ from: accounts[0] })
+      contract.options.address =  "0x7d28858a0e87b0a26A93830065a1f2BC47716906"
+      const userCount: User = await contract.methods.users("0x7b61FC9AbeB0ac95a66E04F8AE69f1DAA842A45").call({ from: accounts[0] })
       setEmailState(userCount.email)
+      console.log(userCount)
    }
  
   return (

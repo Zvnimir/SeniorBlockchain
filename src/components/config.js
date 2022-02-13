@@ -1,4 +1,4 @@
-export const SMART_CONTRACT_ADDRESS = '0xC4fF6Dde93E2BF20Cf26923582F0aDab4816304D'
+export const SMART_CONTRACT_ADDRESS = '0x7d28858a0e87b0a26A93830065a1f2BC47716906'
 
 export const SMART_CONTRACT_ABI = [
 	{
@@ -53,36 +53,21 @@ export const SMART_CONTRACT_ABI = [
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "_userEmial",
+				"name": "_authorAddress",
 				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_paperID",
+				"type": "uint256"
 			},
 			{
 				"internalType": "string",
-				"name": "_fname",
+				"name": "_reviewContent",
 				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_lname",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_biografy",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_passwordHash",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "_address",
-				"type": "address"
 			}
 		],
-		"name": "addUser",
+		"name": "addReview",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -161,6 +146,38 @@ export const SMART_CONTRACT_ABI = [
 						"internalType": "bool",
 						"name": "confirmed",
 						"type": "bool"
+					},
+					{
+						"internalType": "string[]",
+						"name": "postedPapers",
+						"type": "string[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "authorHash",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "paperReviwed",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "reviewContent",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "reviewId",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Main.Review[]",
+						"name": "writtenReviews",
+						"type": "tuple[]"
 					}
 				],
 				"internalType": "struct Main.User",
@@ -207,6 +224,50 @@ export const SMART_CONTRACT_ABI = [
 				"type": "uint256"
 			},
 			{
+				"internalType": "address",
+				"name": "authorAddress",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_userEmial",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_fname",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_lname",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_biografy",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_passwordHash",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "_address",
+				"type": "address"
+			}
+		],
+		"name": "register",
+		"outputs": [
+			{
 				"components": [
 					{
 						"internalType": "string",
@@ -247,51 +308,45 @@ export const SMART_CONTRACT_ABI = [
 						"internalType": "bool",
 						"name": "confirmed",
 						"type": "bool"
+					},
+					{
+						"internalType": "string[]",
+						"name": "postedPapers",
+						"type": "string[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "authorHash",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "paperReviwed",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "reviewContent",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "reviewId",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Main.Review[]",
+						"name": "writtenReviews",
+						"type": "tuple[]"
 					}
 				],
 				"internalType": "struct Main.User",
-				"name": "author",
+				"name": "",
 				"type": "tuple"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_userEmial",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_fname",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_lname",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_biografy",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_passwordHash",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "_address",
-				"type": "address"
-			}
-		],
-		"name": "register",
-		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -307,7 +362,7 @@ export const SMART_CONTRACT_ABI = [
 		"outputs": [
 			{
 				"internalType": "string",
-				"name": "email",
+				"name": "userEmail",
 				"type": "string"
 			},
 			{
