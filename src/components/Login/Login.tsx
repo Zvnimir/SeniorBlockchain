@@ -1,6 +1,10 @@
 import React from "react"
+import Web3 from "web3";
 import loginImage from "../../undraw_login_re_4vu2.svg"
 import './Login.css';
+
+const SMART_CONTRACT_ABI = require('../config');
+const SMART_CONTRACT_ADDRESS = require('../config');
 
 export class Login extends React.Component {
     
