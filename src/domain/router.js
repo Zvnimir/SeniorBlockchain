@@ -5,6 +5,7 @@ import { Login } from '../components/Login/Login';
 import { Register } from '../components/Login/Register';
 import PaperDisplay from '../components/Paper/Paper';
 import UserDisplay from '../components/User/User';
+import Admin from '../components/Admin/Admin';
 
 function Router() {
   return (
