@@ -16,6 +16,7 @@ function Router() {
         <Route exact path="/register" element={ <Register title={"Test Register"} domain={"Domain"} description={"Description"}/> } />
         <Route exact path="/login" element={ <Login title={"Test Login"} domain={"Domain"} description={"Description"}/> } />
         <Route exact path="/user" element={ <UserDisplay title={"Test user"} domain={"Domain"} description={"Description"}/> } />
+        <Route exact path='/admin' element={ <Admin></Admin> } />
       </Routes>
     </div>
   );
