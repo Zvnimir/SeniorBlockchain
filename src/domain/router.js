@@ -12,6 +12,7 @@ import { AppBar, Avatar, Box, Button, IconButton, Toolbar, Typography } from '@m
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import { useNavigate } from 'react-router-dom';
 import UploadPaper from '../components/Paper/UploadPaper';
+import {Newsfeed} from '../components/Newsfeed/Newsfeed';
 
 function Router() {
 
@@ -29,6 +30,7 @@ function Router() {
         <Route exact path="/login" element={ <Login title={"Test Login"} domain={"Domain"} description={"Description"}/> } />
         <Route exact path="/user" element={ <UserDisplay title={"Test user"} domain={"Domain"} description={"Description"}/> } />
         <Route exact path='/admin' element={ <Admin></Admin> } />
+        <Route exact path="/newsfeed" element={ <Newsfeed title={"Test Newsfeed"} domain={"Domain"} description={"Description"}/> } />
       </Routes>
     </div>
   );
