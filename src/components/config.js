@@ -1,6 +1,6 @@
 export const SMART_CONTRACT_ADDRESS = '0x7d28858a0e87b0a26A93830065a1f2BC47716906'
 
-export const SMART_CONTRACT_ABI = [
+export const SMART_CONTRACT_ABI =[
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -73,6 +73,84 @@ export const SMART_CONTRACT_ABI = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_authorAddress",
+				"type": "address"
+			}
+		],
+		"name": "getAuthoredPapers",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "authorHash",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "category",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "paperAbstract",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "minuteRead",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "authorAddress",
+						"type": "address"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "authorHash",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "paperReviwed",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "reviewContent",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "reviewId",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Main.Review[]",
+						"name": "paperReviews",
+						"type": "tuple[]"
+					}
+				],
+				"internalType": "struct Main.Paper[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "getHello",
 		"outputs": [
@@ -80,6 +158,224 @@ export const SMART_CONTRACT_ABI = [
 				"internalType": "string",
 				"name": "",
 				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getPapers",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "authorHash",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "category",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "paperAbstract",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "minuteRead",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "authorAddress",
+						"type": "address"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "authorHash",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "paperReviwed",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "reviewContent",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "reviewId",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Main.Review[]",
+						"name": "paperReviews",
+						"type": "tuple[]"
+					}
+				],
+				"internalType": "struct Main.Paper[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getUsers",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "userEmail",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "firstName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "lastName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "passwordHash",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "biografy",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "balance",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "userAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "confirmed",
+						"type": "bool"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "authorHash",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "title",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "category",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "paperAbstract",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "minuteRead",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "authorAddress",
+								"type": "address"
+							},
+							{
+								"components": [
+									{
+										"internalType": "string",
+										"name": "authorHash",
+										"type": "string"
+									},
+									{
+										"internalType": "uint256",
+										"name": "paperReviwed",
+										"type": "uint256"
+									},
+									{
+										"internalType": "string",
+										"name": "reviewContent",
+										"type": "string"
+									},
+									{
+										"internalType": "uint256",
+										"name": "reviewId",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct Main.Review[]",
+								"name": "paperReviews",
+								"type": "tuple[]"
+							}
+						],
+						"internalType": "struct Main.Paper[]",
+						"name": "postedPapers",
+						"type": "tuple[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "authorHash",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "paperReviwed",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "reviewContent",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "reviewId",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Main.Review[]",
+						"name": "writtenReviews",
+						"type": "tuple[]"
+					}
+				],
+				"internalType": "struct Main.User[]",
+				"name": "",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -148,9 +444,68 @@ export const SMART_CONTRACT_ABI = [
 						"type": "bool"
 					},
 					{
-						"internalType": "string[]",
+						"components": [
+							{
+								"internalType": "string",
+								"name": "authorHash",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "title",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "category",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "paperAbstract",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "minuteRead",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "authorAddress",
+								"type": "address"
+							},
+							{
+								"components": [
+									{
+										"internalType": "string",
+										"name": "authorHash",
+										"type": "string"
+									},
+									{
+										"internalType": "uint256",
+										"name": "paperReviwed",
+										"type": "uint256"
+									},
+									{
+										"internalType": "string",
+										"name": "reviewContent",
+										"type": "string"
+									},
+									{
+										"internalType": "uint256",
+										"name": "reviewId",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct Main.Review[]",
+								"name": "paperReviews",
+								"type": "tuple[]"
+							}
+						],
+						"internalType": "struct Main.Paper[]",
 						"name": "postedPapers",
-						"type": "string[]"
+						"type": "tuple[]"
 					},
 					{
 						"components": [
@@ -310,9 +665,68 @@ export const SMART_CONTRACT_ABI = [
 						"type": "bool"
 					},
 					{
-						"internalType": "string[]",
+						"components": [
+							{
+								"internalType": "string",
+								"name": "authorHash",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "title",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "category",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "paperAbstract",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "minuteRead",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "authorAddress",
+								"type": "address"
+							},
+							{
+								"components": [
+									{
+										"internalType": "string",
+										"name": "authorHash",
+										"type": "string"
+									},
+									{
+										"internalType": "uint256",
+										"name": "paperReviwed",
+										"type": "uint256"
+									},
+									{
+										"internalType": "string",
+										"name": "reviewContent",
+										"type": "string"
+									},
+									{
+										"internalType": "uint256",
+										"name": "reviewId",
+										"type": "uint256"
+									}
+								],
+								"internalType": "struct Main.Review[]",
+								"name": "paperReviews",
+								"type": "tuple[]"
+							}
+						],
+						"internalType": "struct Main.Paper[]",
 						"name": "postedPapers",
-						"type": "string[]"
+						"type": "tuple[]"
 					},
 					{
 						"components": [
