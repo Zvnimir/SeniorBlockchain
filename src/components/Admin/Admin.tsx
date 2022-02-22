@@ -1,3 +1,5 @@
+import { Card, CardContent, Container, TableCell, TableRow } from "@mui/material";
+
 import React from "react";
 
 function Admin(){
@@ -5,29 +7,32 @@ function Admin(){
       return (
         
         <div className="App">
-            <div className="admin">
-                <div className="container">
-                    <div className="base-container">
-                        <div className="header">Admin</div>
-                        <div className="content">
-                            <div className="row">
-                            <article className="article">
-                            <h2 className="article__title">User name... </h2>
-                            <button type="button" className="btn">Approve</button>
-                            </article>
-                            </div>
+          
+                      <Card>
+                          <CardContent>
+                          <div className="header">Users waiting for verification</div>
+                            <Container>
+                                <TableRow>
+                                    <TableCell>
+                                    <p className="">User name... </p>
+                                    </TableCell>
+                                    <TableCell>
+                                    <button type="button" className="btn">Approve</button>
+                                    </TableCell>
+                                </TableRow>
 
-                            <div className="row">
-                            <article className="article">
-                            <h2 className="article__title">User name... </h2>
-                            <button type="button" className="btn">Approve</button>
-                            </article>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                <TableRow>
+                                    <TableCell>
+                                    <p className="header">User name... </p>
+                                    </TableCell>
+                                    <TableCell>
+                                    <button type="button" className="btn">Approve</button>
+                                    </TableCell>
+                                </TableRow>
+
+                            </Container>
+                            </CardContent>
+                </Card>
         </div>
 
       );
