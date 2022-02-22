@@ -5,6 +5,7 @@ import Web3 from 'web3';
 import { Paper } from '../../model/Paper'
 import { Document, Page } from 'react-pdf';
 import SinglePage from '../../domain/singe-page-pdf';
+import { loadBlockchainData } from '../../domain/blockchain-connector';
 
 const SMART_CONTRACT_ABI = require('../config');
 const SMART_CONTRACT_ADDRESS = require('../config');
@@ -27,31 +28,34 @@ function PaperDisplay({paper}: PaperProps) {
     const [file, setFile] = useState('./sample.pdf');
     const [numPages, setNumPages] = useState(null);
 
-    useEffect( () => {
-        loadBlockchainData()
-    }, []);
+    const [loading, setLoading] = useState(true);
 
-    const loadBlockchainData = async () => {
-        const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
-        const accounts = await web3.eth.getAccounts()
-        const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
-        contract.options.address =  "0xC4fF6Dde93E2BF20Cf26923582F0aDab4816304D"
-        const paperOutput = await contract.methods.papers("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").call({ from: accounts[0] })
-        setPaperState(paperOutput)
-    }
+   useEffect( () => {
+      loadBlockchainData<Paper>("paper").then(result => {
+         if(result) {
+            setPaperState(result)
+         } 
+      }).finally(() => {
+         setLoading(false)
+         console.log(paperState)
+       });
+   }, []);
 
     function onDocumentLoadSuccess({ numPages: nextNumPages }: any) {
         setNumPages(nextNumPages);
     }
     
+    if (loading) {
+        return <p>Data is loading...</p>;
+    }
 
     return (
                 <Container maxWidth="md" sx={{ mt: 4 }}>
                     <Typography variant="h4" component="div">
                         { 
-                            'Paper Title'
-                            //paperState.title 
+                            //paperState 
                         }
+                        Sample Paper
                     </Typography>
                     <Grid container spacing={2} sx={{ m: 2 }}>
                         <Grid item xs={8}>

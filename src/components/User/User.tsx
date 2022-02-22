@@ -32,8 +32,8 @@ function UserDisplay({user}: UserProps) {
 
    useEffect( () => {
       //gets data from blockchain
-      loadBlockchainData("user").then(result => {
-         if(result != null) {
+      loadBlockchainData<User>("user").then(result => {
+         if(result) {
             setUserState(result)
          } 
       //once we get the data we set loading to false
@@ -43,16 +43,6 @@ function UserDisplay({user}: UserProps) {
    }, []);
 
 
-   // const loadBlockchainData = async () => {
-   //    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
-   //    const accounts = await web3.eth.getAccounts()
-   //    const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
-   //    contract.options.address =  "0xA742a55b2021A89c7BE5B0c6230B4724a4E1f279"
-   //    const userCount = await contract.methods.users("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d").call({ from: accounts[0] })
-   //    setEmailState(userCount.userEmail)
-   //    console.log(userCount)
-   // }
-   
    //makes sure that undefined states dont throw errors
    if (loading) {
       return <p>Data is loading...</p>;
@@ -212,7 +202,7 @@ function UserDisplay({user}: UserProps) {
                }} />
                <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                     { userState.firstName }  
+                     { userState.firstName }  { userState.lastName }
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.

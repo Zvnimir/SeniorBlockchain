@@ -1,10 +1,11 @@
 import Web3 from 'web3'
+import { Paper } from '../model/Paper';
 import { User } from '../model/User';
 
 const SMART_CONTRACT_ABI = require('../components/config');
 const SMART_CONTRACT_ADDRESS = require('../components/config');
 
-export const loadBlockchainData = async (dataType: String) => {
+export async function loadBlockchainData<Type>(dataType: String): Promise<Type | null>{
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
     const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
@@ -12,13 +13,15 @@ export const loadBlockchainData = async (dataType: String) => {
     
     switch(dataType) {
         case "user": {
-            const userCount: User = await contract.methods.users("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d").call({ from: accounts[0] })
-            return userCount
-            break;
+            const result: Type = await contract.methods.users("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d").call({ from: accounts[0] })
+            return result
+        }
+        case "paper": {
+            const result: Type = await contract.methods.papers("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d").call({ from: accounts[0] })
+            return result
         }
         default: {
             return null
-            break;
         }
     }
  }
