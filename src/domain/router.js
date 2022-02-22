@@ -5,6 +5,7 @@ import { Login } from '../components/Login/Login';
 import { Register } from '../components/Login/Register';
 import PaperDisplay from '../components/Paper/Paper';
 import UserDisplay from '../components/User/User';
+import {Newsfeed} from '../components/Newsfeed/Newsfeed';
 
 function Router() {
   return (
@@ -15,6 +16,7 @@ function Router() {
         <Route exact path="/register" element={ <Register title={"Test Register"} domain={"Domain"} description={"Description"}/> } />
         <Route exact path="/login" element={ <Login title={"Test Login"} domain={"Domain"} description={"Description"}/> } />
         <Route exact path="/user" element={ <UserDisplay title={"Test user"} domain={"Domain"} description={"Description"}/> } />
+        <Route exact path="/newsfeed" element={ <Newsfeed title={"Test Newsfeed"} domain={"Domain"} description={"Description"}/> } />
       </Routes>
     </div>
   );
