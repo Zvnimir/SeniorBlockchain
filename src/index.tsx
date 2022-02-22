@@ -11,11 +11,13 @@ import '@fontsource/roboto/700.css';
 import { BrowserRouter } from 'react-router-dom';
 import Router from './domain/router';
 
-ReactDOM.render(
+ReactDOM.render(  
   <React.StrictMode>
-    <BrowserRouter>
-      <Router />
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </>
   </React.StrictMode>,
   document.getElementById('root')
 );
