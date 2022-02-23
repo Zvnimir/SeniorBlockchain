@@ -10,7 +10,7 @@ function UploadPaper() {
     return (
         <>
             
-            <Container maxWidth="sm" sx={{ mt: 4, pt: 2 }}>
+            <Container maxWidth="sm" sx={{ mt: 4, pt: 2 }} >
                 <Typography variant="h5" component="div" align='center' >
                     Upload your paper
                 </Typography>
@@ -32,10 +32,15 @@ function UploadPaper() {
                         </Button>
                     </label>
                     <br></br>
+                    <Box display="flex"
+                        alignItems="center"
+                        justifyContent="center">
                     <Button variant="contained" component="span">
                         Publish
                     </Button>
                 </Box>
+                    </Box>
+                    
             </Container>
         </>
     ) 

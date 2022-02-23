@@ -53,23 +53,23 @@ function PaperDisplay({paper}: PaperProps) {
                 <Container maxWidth="md" sx={{ mt: 4 }}>
                     <Typography variant="h4" component="div">
                         { 
-                            //paperState 
+                            paperState.title
                         }
-                        Sample Paper
+                        
                     </Typography>
                     <Grid container spacing={2} sx={{ m: 2 }}>
                         <Grid item xs={8}>
                             <Typography variant="body1" component="div">
-                                { "Domain" }
+                                { paperState.domain }
                             </Typography>
                             <Typography variant="body1" component="div" sx={{ mt: 1 }}>
-                                { "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquet risus feugiat in ante metus dictum at tempor." }
+                                { paperState.description }
                             </Typography>
                         </Grid>
                         <Grid item xs={1}></Grid>
                         <Grid item xs={2}>
                             <Typography variant="body1" component="div">
-                                { "Username" }
+                                { paperState.uploader }
                             </Typography>  
                         </Grid>
                         <Grid item xs={1}>
