@@ -3,18 +3,20 @@ import { Review } from "./Review";
 import { Notification } from "./Notification";
 
 export interface User {
-    username: string
-    password: String
-    verified: Boolean
-    email: String
+    userEmail: String
     firstName: String
     lastName: String
+    passwordHash: String
+    biografy: String
+    balance: number
+    userAddress: String
+    confirmed: Boolean
+    postedPapers: Paper[]
+    writtenReviews: Review[]
+    
+    //these do not exist in the contract but probably should
+    username: string
     degree: String
     profession: String
-    dateOfBirth: Date
-    //identification: Id
-    balance: number
-    papers: Paper[]
-    reviews: Review[]
     notifications: Notification[]
 }

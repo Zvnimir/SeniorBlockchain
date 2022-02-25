@@ -7,8 +7,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { Box, Button, CardActions, CardContent, Grid } from "@mui/material";
-import './Newsfeed.css';
-
+import './Newsfeed.css'
 
 const SMART_CONTRACT_ABI = require('../config');
 const SMART_CONTRACT_ADDRESS = require('../config');
@@ -43,6 +42,7 @@ export class Newsfeed extends React.Component {
                             </p>
                         </article>
                     </div>
+                    
                     <div className="column">
                         <article className="article">
                             <h3 className="article__category">Front-end</h3>

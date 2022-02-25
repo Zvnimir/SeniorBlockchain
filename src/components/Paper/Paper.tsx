@@ -60,16 +60,25 @@ function PaperDisplay({paper}: PaperProps) {
                     <Grid container spacing={2} sx={{ m: 2 }}>
                         <Grid item xs={8}>
                             <Typography variant="body1" component="div">
-                                { paperState.domain }
+                                { 
+                                paperState.category 
+                                }
+                                
                             </Typography>
                             <Typography variant="body1" component="div" sx={{ mt: 1 }}>
-                                { paperState.description }
+                                { 
+                                paperState.paperAbstract
+                                }
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In nibh mauris cursus mattis molestie a. Est placerat in egestas erat imperdiet sed euismod nisi porta.
                             </Typography>
                         </Grid>
                         <Grid item xs={1}></Grid>
                         <Grid item xs={2}>
                             <Typography variant="body1" component="div">
-                                { paperState.uploader }
+                                { 
+                                paperState.authorHash
+                                }
+                                
                             </Typography>  
                         </Grid>
                         <Grid item xs={1}>

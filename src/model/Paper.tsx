@@ -2,9 +2,12 @@ import { Review } from "./Review";
 import { User } from "./User";
 
 export interface Paper {
+    authorHash: number
     title: string
-    domain: string
-    description: string
-    uploader: User
-    reviews: Review[]
+    category: string
+    paperAbstract: string
+    minuteRead: number
+    authorAddress: string
+    paperReviews: Review[]
 }
+
