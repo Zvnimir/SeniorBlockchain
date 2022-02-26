@@ -15,16 +15,10 @@ type PaperProps = {
     paper: Paper
 }
 
-const options = {
-    cMapUrl: 'cmaps/',
-    cMapPacked: true,
-};
-
 function PaperDisplay({paper}: PaperProps) {
 
     const[paperState, setPaperState] = useState(paper)
 
-    console.log(paper)
     //State for pdf disply
     const [file, setFile] = useState('./sample.pdf');
     const [numPages, setNumPages] = useState(null);
@@ -47,6 +41,7 @@ function PaperDisplay({paper}: PaperProps) {
     }
     
     if (loading) {
+        console.log(paperState)
         return <p>Data is loading...</p>;
     }
 

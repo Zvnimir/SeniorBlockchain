@@ -49,7 +49,7 @@ function Newsfeed({ papers }: PapersProps) {
             console.log(result);
             result.forEach((person) => { console.log(person); });
 
-            console.log(paperState[0].title);
+            //console.log(paperState[0].title);
         } 
         //once we get the data we set loading to false
         }).finally(() => {
