@@ -1,18 +1,18 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import App from '../components/App/App';
-import { Login } from '../components/Login/Login';
-import { Register } from '../components/Login/Register';
+//import { Login } from '../components/Login/Login';
+import Register from '../components/Login/Register';
 import PaperDisplay from '../components/Paper/Paper';
 import UserDisplay from '../components/User/User';
 import Admin from '../components/Admin/Admin';
 import Navbar from '../domain/Navbar'
-
 import { AppBar, Avatar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import { useNavigate } from 'react-router-dom';
 import UploadPaper from '../components/Paper/UploadPaper';
 import Newsfeed from '../components/Newsfeed/Newsfeed';
+import Login from '../components/Login/Login';
 
 function Router() {
 
