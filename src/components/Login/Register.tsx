@@ -1,39 +1,33 @@
 import { Grid } from "@mui/material";
-import React from "react"
 import loginImage from "../../undraw_login_re_4vu2.svg"
 import './Register.css';
-import Web3 from 'web3'
-const SMART_CONTRACT_ABI = require('../config');
-const SMART_CONTRACT_ADDRESS = require('../config');
+import { loadBlockchainData } from '../../domain/blockchain-connector';
+import React, { ChangeEvent, ChangeEventHandler, useState } from 'react'
 
-export class Register extends React.Component {
-    constructor(props: {} | Readonly<{}>) {
-        super(props);
+function Register() {
+    
+    const[firstName, setFirstNameState] = useState("")
+    const[lastName, setLastNameState] = useState("")
+    const[password, setPasswordState] = useState("")
+    const[email, setEmailState] = useState("")
+    
+    
+    const handleChangeFirstName = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFirstNameState(e.target.value)
     }
 
-    state = {
-        firstName: '',
-        lastName: '',
-        password: '',
-        email: ''
+    const handleChangeLastName = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setLastNameState(e.target.value)
     }
 
-    handleChangeFirstName = (e: React.ChangeEvent<HTMLInputElement>) => this.setState({
-        firstName: e.target.value
-    })
+    const handleChangePassword = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setPasswordState(e.target.value)
+    }
 
-    handleChangeLastName = (e: React.ChangeEvent<HTMLInputElement>) => this.setState({
-        lastName: e.target.value
-    })
-
-    handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => this.setState({
-        password: e.target.value
-    })
-
-    handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => this.setState({
-        email: e.target.value
-    })
-    // const [selectedFile, setSelectedFile] = useState(null);
+    const handleChangeEmail = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setEmailState(e.target.value)
+    }
+/** 
     async register() {
         //result;
         const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
@@ -53,7 +47,8 @@ export class Register extends React.Component {
         // this.setState({ username: userCount})
         //console.log(this.state.username)
     }
-    render() {
+    */
+ 
         return (
             <div className="App">
                 <div className="register">
@@ -71,13 +66,13 @@ export class Register extends React.Component {
                                             <Grid item xs>
                                                 <div className="form-group">
                                                     <label htmlFor="firstname">First name</label>
-                                                    <input type="text" name="firstname" placeholder="Enter your first name" value={this.state.firstName} onChange={this.handleChangeFirstName}/>
+                                                    <input type="text" name="firstname" placeholder="Enter your first name" value={firstName} onChange={handleChangeFirstName}/>
                                                 </div>
                                             </Grid>
                                             <Grid item xs>
                                                 <div className="form-group">
                                                     <label htmlFor="lastname">Last name</label>
-                                                    <input type="text" name="lastname" placeholder="Enter your last name" value={this.state.lastName} onChange={this.handleChangeLastName} />
+                                                    <input type="text" name="lastname" placeholder="Enter your last name" value={lastName} onChange={handleChangeLastName} />
                                                 </div>
                                             </Grid>
                                         </Grid>
@@ -86,13 +81,13 @@ export class Register extends React.Component {
                                             <Grid item xs>
                                                 <div className="form-group">
                                                     <label htmlFor="email">Email</label>
-                                                    <input type="email" name="email" placeholder="Enter your email" value={this.state.email} onChange={this.handleChangeEmail} />
+                                                    <input type="email" name="email" placeholder="Enter your email" value={email} onChange={handleChangeEmail} />
                                                 </div>
                                             </Grid>
                                             <Grid item xs>
                                                 <div className="form-group">
                                                     <label htmlFor="password">Password</label>
-                                                    <input type="text" name="password" placeholder="Enter your password" value={this.state.password} onChange={this.handleChangePassword} />
+                                                    <input type="text" name="password" placeholder="Enter your password" value={password} onChange={handleChangePassword} />
                                                 </div>
                                             </Grid>
                                             <Grid item xs>
@@ -130,7 +125,7 @@ export class Register extends React.Component {
                             </div>
                             <div className="footer">
 
-                                <button type="button" className="btn" onClick={() => this.register()}>Sign Up</button>
+                                <button type="button" className="btn" onClick={() => {loadBlockchainData("register", [email, firstName, lastName, password]).then(result => { console.log(result)})}}>Sign Up</button>
                             </div>
                         </div>
                     </div>
@@ -138,5 +133,5 @@ export class Register extends React.Component {
             </div>
         );
     }
-}
+    export default Register
 
