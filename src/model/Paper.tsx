@@ -2,7 +2,7 @@ import { Review } from "./Review";
 import { User } from "./User";
 
 export interface Paper {
-    authorHash: number
+    authorHash: string
     title: string
     category: string
     paperAbstract: string

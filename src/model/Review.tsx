@@ -3,11 +3,7 @@ import { User } from "./User";
 
 export interface Review {
     reviewId: number
-    authorHash: User
+    authorHash: string
     paperReviwed: number
-    reviewContent: number
-    
-    //these do not exist in the contract but probably should
-    replys: Review[]
-    fatherReview: Review | null
+    content: number
 }
