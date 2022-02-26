@@ -24,6 +24,11 @@ export async function loadBlockchainData<Type>(dataType: String): Promise<Type |
             const result: Type = await contract.methods.getPapers().call({ from: accounts[0] })
             return result
         }
+
+        case "userPapers": {
+            const result: Type = await contract.methods.getAuthoredPapers("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").call({ from: accounts[0] })
+            return result
+        }
         default: {
             return null
         }
