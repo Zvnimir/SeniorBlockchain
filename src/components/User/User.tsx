@@ -17,18 +17,20 @@ import Avatar from '@mui/material/Avatar';
 import Web3 from 'web3'
 import { User } from '../../model/User';
 import { loadBlockchainData } from '../../domain/blockchain-connector';
-
+import { Paper } from '../../model/Paper'
 const SMART_CONTRACT_ABI = require('../config');
 const SMART_CONTRACT_ADDRESS = require('../config');
 
 type UserProps = {
    user: User
+   papers: Paper[]
 }
 
-function UserDisplay({user}: UserProps) {
+function UserDisplay({user, papers }: UserProps) {
 
    const [userState, setUserState] = useState(user)
    const [loading, setLoading] = useState(true);
+   const [paperState, setPaperState] = useState(papers)
 
    useEffect( () => {
       //gets data from blockchain
@@ -36,6 +38,19 @@ function UserDisplay({user}: UserProps) {
          if(result) {
             setUserState(result)
          } 
+      //once we get the data we set loading to false
+      }).finally(() => {
+         setLoading(false);
+       });
+
+       loadBlockchainData<Paper[]>("userPapers").then(result => {
+         if(result) {
+          setPaperState(result)
+         // console.log(result);
+          result.forEach((person) => { console.log(person); });
+
+          //console.log(paperState[0].title);
+      } 
       //once we get the data we set loading to false
       }).finally(() => {
          setLoading(false);
@@ -62,7 +77,10 @@ function UserDisplay({user}: UserProps) {
                      <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                   </ListItemAvatar>
                   <ListItemText
-                     primary="Paper 1"
+                     primary={ 
+
+                        paperState[0].title
+                        }
                      secondary={
                         <React.Fragment>
                            <Typography

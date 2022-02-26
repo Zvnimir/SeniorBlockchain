@@ -9,15 +9,24 @@ export async function loadBlockchainData<Type>(dataType: String): Promise<Type |
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
     const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
-    contract.options.address =  "0xA742a55b2021A89c7BE5B0c6230B4724a4E1f279"
+    contract.options.address =  '0xc02853EE017edbacEe4320df4af821E3b7a6F339'
     
     switch(dataType) {
         case "user": {
-            const result: Type = await contract.methods.users("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d").call({ from: accounts[0] })
+            const result: Type = await contract.methods.users("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").call({ from: accounts[0] })
             return result
         }
         case "paper": {
             const result: Type = await contract.methods.papers("1").call({ from: accounts[0] })
+            return result
+        }
+        case "papers": {
+            const result: Type = await contract.methods.getPapers().call({ from: accounts[0] })
+            return result
+        }
+
+        case "userPapers": {
+            const result: Type = await contract.methods.getAuthoredPapers("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").call({ from: accounts[0] })
             return result
         }
         default: {
