@@ -3,18 +3,17 @@ import { Review } from "./Review";
 import { Notification } from "./Notification";
 
 export interface User {
-    username: string
-    password: String
-    verified: Boolean
-    email: String
+    email: String //c
     firstName: String
     lastName: String
-    degree: String
-    profession: String
-    dateOfBirth: Date
-    //identification: Id
+    passwordHash: String
+    biography: String //c
     balance: number
-    papers: Paper[]
-    reviews: Review[]
-    notifications: Notification[]
+    userAddress: String
+    confirmed: Boolean
+    postedPapers: Paper[] 
+    writtenReviews: Review[]
+    degree: String //c
+    profession: String //c
+    // notifications: Notification[]
 }
