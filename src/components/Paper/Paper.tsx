@@ -24,6 +24,7 @@ function PaperDisplay({paper}: PaperProps) {
 
     const[paperState, setPaperState] = useState(paper)
 
+    console.log(paper)
     //State for pdf disply
     const [file, setFile] = useState('./sample.pdf');
     const [numPages, setNumPages] = useState(null);
