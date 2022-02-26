@@ -1,4 +1,4 @@
-export const SMART_CONTRACT_ADDRESS = '0xc02853EE017edbacEe4320df4af821E3b7a6F339'
+export const SMART_CONTRACT_ADDRESS = '0xFd444f7BE6f466dd5dCD6525c02a40838787ab27'
 
 export const SMART_CONTRACT_ABI = [{
         "inputs": [],

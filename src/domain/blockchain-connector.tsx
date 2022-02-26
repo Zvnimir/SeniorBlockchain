@@ -9,7 +9,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
     const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
-    contract.options.address =  '0x7d28858a0e87b0a26A93830065a1f2BC47716906'
+    contract.options.address =  '0xFd444f7BE6f466dd5dCD6525c02a40838787ab27'
     
     switch(dataType) {
         case "user": {
@@ -17,7 +17,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
             return result
         }
         case "paper": {
-            const result: Type = await contract.methods.papers("6").call({ from: accounts[0] })
+            const result: Type = await contract.methods.papers("8").call({ from: accounts[0] })
             return result
         }
         case "papers": {
@@ -26,7 +26,9 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         }
         case "uploadPaper": {
             if(data != undefined) {
-                const result: Type = await contract.methods.addPaper(6, "#000", data[0], data[1], data[2], data[3], "0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").call({ from: accounts[0] })
+                const result: Type = await contract.methods.addPaper(8, "#000", "Pas", "Pas", "Pas", 6, "0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").send({ from: accounts[0] })
+                console.log("Pas")
+                console.log(result)
                 return result
             }
             return null
