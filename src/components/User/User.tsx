@@ -71,144 +71,39 @@ function UserDisplay({user, papers }: UserProps) {
    <div className="centered">
       <Grid container spacing={20}>    
          <Grid item xs={6}>
+        
+           
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', overflow: 'auto', maxHeight: 350, '& ul': { padding: 0 }, }}>
-               <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                     <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText
-                     primary={ 
-
-                        paperState[0].title
-                        }
-                     secondary={
-                        <React.Fragment>
-                           <Typography
-                              sx={{ display: 'inline' }}
-                              component="span"
-                              variant="body2"
-                              color="text.primary"
-                           >
-                              Biology
-                           </Typography>
-                           {" - Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.…"}
-                        </React.Fragment>
-                     }
-                  />
-               </ListItem>
-               <Divider variant="inset" component="li" />
-               <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                     <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText
-                     primary="Paper 2"
-                     secondary={
-                        <React.Fragment>
-                           <Typography
-                              sx={{ display: 'inline' }}
-                              component="span"
-                              variant="body2"
-                              color="text.primary"
-                           >
-                              Math
-                           </Typography>
-                           {" - Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.…"}
-                        </React.Fragment>
-                     }
-                  />
-               </ListItem>
-               <Divider variant="inset" component="li" />
-               <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                     <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText
-                     primary="Paper 2"
-                     secondary={
-                        <React.Fragment>
-                           <Typography
-                              sx={{ display: 'inline' }}
-                              component="span"
-                              variant="body2"
-                              color="text.primary"
-                           >
-                              Java
-                           </Typography>
-                           {" - Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.…"}
-                        </React.Fragment>
-                     }
-                  />
-               </ListItem>
-
-               <Divider variant="inset" component="li" />
-               <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                     <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText
-                     primary="Paper 2"
-                     secondary={
-                        <React.Fragment>
-                           <Typography
-                              sx={{ display: 'inline' }}
-                              component="span"
-                              variant="body2"
-                              color="text.primary"
-                           >
-                              Math
-                           </Typography>
-                           {" - Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.…"}
-                        </React.Fragment>
-                     }
-                  />
-               </ListItem>
-               <Divider variant="inset" component="li" />
-               <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                     <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText
-                     primary="Paper 2"
-                     secondary={
-                        <React.Fragment>
-                           <Typography
-                              sx={{ display: 'inline' }}
-                              component="span"
-                              variant="body2"
-                              color="text.primary"
-                           >
-                              Math
-                           </Typography>
-                           {" - Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.…"}
-                        </React.Fragment>
-                     }
-                  />
-               </ListItem>
-               <Divider variant="inset" component="li" />
-               <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                     <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText
-                     primary="Paper 2"
-                     secondary={
-                        <React.Fragment>
-                           <Typography
-                              sx={{ display: 'inline' }}
-                              component="span"
-                              variant="body2"
-                              color="text.primary"
-                           >
-                              Math
-                           </Typography>
-                           {" - Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.…"}
-                        </React.Fragment>
-                     }
-                  />
-               </ListItem>
-            </List>
-         </Grid>
+            { 
+           paperState.map(paper => (
+              <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+              </ListItemAvatar>
+              <ListItemText
+                 primary={ paper.title}
+                 secondary={
+                    <React.Fragment>
+                       <Typography
+                          sx={{ display: 'inline' }}
+                          component="span"
+                          variant="body2"
+                          color="text.primary"
+                       >
+                         { paper.category}
+                       </Typography>
+                       {"- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquet nunc blandit ultricies sodales Nulla nec lacus id diam finibus porttitor."}
+                    </React.Fragment>
+                 }
+              />
+           </ListItem>
+    
+       
+           ))}
+             
+           </List>
+          
+          </Grid>
 
          <Grid item xs="auto">
             <Card sx={{ maxWidth: 345 }}>

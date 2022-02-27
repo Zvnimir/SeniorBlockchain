@@ -1,29 +1,25 @@
-import React from "react"
-import Web3 from "web3";
 import loginImage from "../../undraw_login_re_4vu2.svg"
 import './Login.css';
+import { loadBlockchainData } from '../../domain/blockchain-connector';
+import React, { ChangeEvent, useState } from 'react'
+import { styled} from '@mui/material'
 
-const SMART_CONTRACT_ABI = require('../config');
-const SMART_CONTRACT_ADDRESS = require('../config');
-
-export class Login extends React.Component {
-
-
-    state = {
-        username: '',
-        password: ''
-    }
-
-    handleChangeUsername = (e: React.ChangeEvent<HTMLInputElement>) => this.setState({
-        username: e.target.value
-    })
-
-    handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => this.setState({
-        password: e.target.value
-    })
-
-
-
+ function Login() {
+    
+        const[usernameState, setUsernameState] = useState("")
+        const[passwordState, setPasswordState] = useState("")
+        
+        const handleChangeUsername = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+            setUsernameState(e.target.value)
+        }
+    
+        const handleChangePassword = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+            setPasswordState(e.target.value)
+        }
+    
+        
+    //}
+/** 
     async login() {
         //result;
         const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
@@ -41,7 +37,8 @@ export class Login extends React.Component {
         //this.setState({ username: userCount})
         console.log(userCount)
     }
-    render() {
+    */
+    
         return (
             <div className="App">
                 <div className="login">
@@ -56,21 +53,22 @@ export class Login extends React.Component {
                                 <div className="form">
                                     <div className="form-group">
                                         <label htmlFor="username">Username</label>
-                                        <input type="text" name="username" placeholder="Enter your username" value={this.state.username} onChange={this.handleChangeUsername} />
+                                        <input type="text" name="username" placeholder="Enter your username" onChange={handleChangeUsername} />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="password">Password</label>
-                                        <input type="text" name="password" placeholder="Enter your password" value={this.state.password} onChange={this.handleChangePassword} />
+                                        <input type="text" name="password" placeholder="Enter your password" onChange={handleChangePassword} />
                                     </div>
                                 </div>
                             </div>
                             <div className="footer">
-                                <button type="button" className="btn" onClick={() => this.login()}>Sign In</button>
+                                <button type="button" className="btn" onClick={() => {loadBlockchainData("login", [usernameState, passwordState]).then(result => { console.log(result)})}}>Sign In</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        );
+        )
     }
-}
+export default Login
+
