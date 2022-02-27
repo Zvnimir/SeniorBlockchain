@@ -8,6 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { Card, Button, CardActions, CardContent, Grid, Box } from "@mui/material";
 import { Container } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import Web3 from 'web3';
 import { Paper } from '../../model/Paper'
@@ -36,6 +37,7 @@ type PapersProps = {
 
 function Newsfeed({ papers }: PapersProps) {
 
+    let navigate = useNavigate();
 
     const [paperState, setPaperState] = useState(papers)
     const [loading, setLoading] = useState(true);
@@ -46,10 +48,6 @@ function Newsfeed({ papers }: PapersProps) {
         loadBlockchainData<Paper[]>("papers").then(result => {
             if (result) {
                 setPaperState(result)
-                console.log(result);
-                result.forEach((person) => { console.log(person); });
-
-                console.log(paperState[0].title);
             }
             //once we get the data we set loading to false
         }).finally(() => {
@@ -80,7 +78,7 @@ function Newsfeed({ papers }: PapersProps) {
                                 <Typography sx={{ fontSize: 14, backgroundColor: 'success.main', borderRadius: 5, maxWidth: 150, padding: 1, textAlign: 'center', color: 'white' }} gutterBottom>
                                     {
                                         paper.category
-                                    }      
+                                    }
                                 </Typography>
                                 <Typography variant="h5" component="div">
                                     {
@@ -98,7 +96,10 @@ function Newsfeed({ papers }: PapersProps) {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small">Learn More</Button>
+                                <Button size="small"
+                                    onClick={() => {
+                                        navigate("../paper", { replace: true });
+                                    }}>Learn More</Button>
                             </CardActions>
                         </Card>
                     ))}

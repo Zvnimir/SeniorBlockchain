@@ -17,28 +17,6 @@ import { styled} from '@mui/material'
             setPasswordState(e.target.value)
         }
     
-        
-    //}
-/** 
-    async login() {
-        //result;
-        const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
-        const accounts = await web3.eth.getAccounts()
-        const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
-        contract.options.address = "0x7d28858a0e87b0a26A93830065a1f2BC47716906"
-        this.setState({ contract })
-        const userCount = await contract.methods.login(this.state.username, this.state.password, "0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").call({ from: accounts[0] }).then((value: any) => {
-            if (value == true) {
-                console.log("done")
-            } else {
-                console.log("oops")
-            }
-        })
-        //this.setState({ username: userCount})
-        console.log(userCount)
-    }
-    */
-    
         return (
             <div className="App">
                 <div className="login">

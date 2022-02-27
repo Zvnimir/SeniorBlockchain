@@ -1,6 +1,7 @@
 import React from 'react'
 import { AppBar, Avatar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
+import HomeIcon from '@mui/icons-material/Home';
 import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
@@ -16,11 +17,19 @@ function Navbar() {
                 </Typography>
                 <IconButton aria-label="delete" size="large" color="inherit" 
                     onClick={() => {
+                        navigate("../newsFeed", { replace: true });
+                    }}
+                >
+                    <HomeIcon fontSize="inherit" />
+                </IconButton>
+                <IconButton aria-label="delete" size="large" color="inherit" 
+                    onClick={() => {
                         navigate("../uploadPaper", { replace: true });
                     }}
                 >
                     <FileUploadOutlinedIcon fontSize="inherit" />
                 </IconButton>
+                
                 <Button
                     onClick={() => {
                         navigate("../user", { replace: true });
