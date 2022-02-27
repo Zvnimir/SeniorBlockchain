@@ -78,7 +78,9 @@ function Newsfeed({ papers }: PapersProps) {
                         < Card sx={{ minWidth: 275, marginTop: 2 }}>
                             <CardContent>
                                 <Typography sx={{ fontSize: 14, backgroundColor: 'success.main', borderRadius: 5, maxWidth: 150, padding: 1, textAlign: 'center', color: 'white' }} gutterBottom>
-                                    Computer Science
+                                    {
+                                        paper.category
+                                    }      
                                 </Typography>
                                 <Typography variant="h5" component="div">
                                     {
@@ -86,11 +88,13 @@ function Newsfeed({ papers }: PapersProps) {
                                         paper.title
                                     }
 
-                                    Achieving Efficient Structured Concurrency through Lightweight Fibers in Java Virtual Machine
 
                                 </Typography>
                                 <Typography variant="body2">
-                                    Contemporary concurrent server applications, commonly built of smaller and independent services, are using concurrent threads to serve many incoming requests and often have to perform under excessive load. Those applications are relatively easy to develop in general-purpose, imperative programming languages such as Java, and have great tooling support. However, such applications are not easily scalable, mostly due to relying on oversized OS kernel threads, which can be created only in a limited number on finite hardware resources.
+                                    {
+
+                                        paper.paperAbstract
+                                    }
                                 </Typography>
                             </CardContent>
                             <CardActions>
