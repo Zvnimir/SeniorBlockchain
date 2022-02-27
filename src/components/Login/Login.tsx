@@ -3,9 +3,9 @@ import './Login.css';
 import { loadBlockchainData } from '../../domain/blockchain-connector';
 import React, { ChangeEvent, useState } from 'react'
 import { styled} from '@mui/material'
-
+import { useNavigate } from 'react-router-dom';
  function Login() {
-    
+        let navigate = useNavigate();
         const[usernameState, setUsernameState] = useState("")
         const[passwordState, setPasswordState] = useState("")
         
@@ -40,7 +40,7 @@ import { styled} from '@mui/material'
                                 </div>
                             </div>
                             <div className="footer">
-                                <button type="button" className="btn" onClick={() => {loadBlockchainData("login", [usernameState, passwordState]).then(result => { console.log(result)})}}>Sign In</button>
+                                <button type="button" className="btn" onClick={() => {loadBlockchainData("login", [usernameState, passwordState]).then(result => { navigate("../Newsfeed", { replace: true });})}}>Sign In</button>
                             </div>
                         </div>
                     </div>
