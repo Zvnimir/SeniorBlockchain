@@ -40,7 +40,7 @@ function PaperDisplay({paper}: PaperProps) {
         setNumPages(nextNumPages);
     }
     
-    if (loading) {
+    if (loading || paperState == undefined) {
         console.log(paperState)
         return <p>Data is loading...</p>;
     }

@@ -44,7 +44,7 @@ function UploadPaper() {
                         '& > :not(style)': { m: 1 },
                     }}
                     noValidate
-                    autoComplete="off"
+                    
                 >
                     <TextField id="title" label="Title" variant="standard" fullWidth={true} onChange={handleChangeTitle}/>
                     <TextField id="category" label="Category" variant="standard" fullWidth={true} onChange={handleChangeCategory}/>

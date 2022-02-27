@@ -17,7 +17,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
             return result
         }
         case "paper": {
-            const result: Type = await contract.methods.papers("8").call({ from: accounts[0] })
+            const result: Type = await contract.methods.papers("0").call({ from: accounts[0] })
             return result
         }
         case "papers": {
@@ -26,9 +26,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         }
         case "uploadPaper": {
             if(data != undefined) {
-                const result: Type = await contract.methods.addPaper(8, "#000", "Pas", "Pas", "Pas", 6, "0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").send({ from: accounts[0] })
-                console.log("Pas")
-                console.log(result)
+                const result: Type = await contract.methods.addPaper(3, "#000", data[0], data[1], data[2], data[3], "0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").send({ from: accounts[0] })
                 return result
             }
             return null
