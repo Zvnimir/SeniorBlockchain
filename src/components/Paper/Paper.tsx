@@ -40,7 +40,7 @@ function PaperDisplay({paper}: PaperProps) {
         setNumPages(nextNumPages);
     }
     
-    if (loading || paperState == undefined) {
+    if (loading) {
         console.log(paperState)
         return <p>Data is loading...</p>;
     }
@@ -57,38 +57,36 @@ function PaperDisplay({paper}: PaperProps) {
                         <Grid item xs={8}>
                             <Typography variant="body1" component="div">
                                 { 
-                                paperState.category 
+                                    paperState.category 
                                 }
                                 
                             </Typography>
                             <Typography variant="body1" component="div" sx={{ mt: 1 }}>
                                 { 
-                                paperState.paperAbstract
+                                    paperState.paperAbstract
                                 }
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In nibh mauris cursus mattis molestie a. Est placerat in egestas erat imperdiet sed euismod nisi porta.
                             </Typography>
                         </Grid>
                         <Grid item xs={1}></Grid>
                         <Grid item xs={2}>
                             <Typography variant="body1" component="div">
                                 { 
-                                paperState.authorHash
+                                    paperState.authorHash
                                 }
                                 
                             </Typography>  
                         </Grid>
                         <Grid item xs={1}>
-                            <Avatar>U</Avatar>
+                            <Avatar>?</Avatar>
                         </Grid>
                     </Grid>
 
-                    <Box sx={{ justifyContent: 'center' }}>
+                    <Box sx={{ justifyContent: 'center', mb: 2 }}>
                         <SinglePage pdf={file}></SinglePage>
                     </Box>
-                  
+
                 </Container>
         )
-    
 }
 
 export default PaperDisplay

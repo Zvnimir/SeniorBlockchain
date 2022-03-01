@@ -18,6 +18,9 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         }
         case "paper": {
             const result: Type = await contract.methods.papers("0").call({ from: accounts[0] })
+            // .then((res: any) => {
+            //     console.log(res)
+            // })
             return result
         }
         case "papers": {
