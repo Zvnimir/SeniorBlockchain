@@ -6,6 +6,7 @@ import { Paper } from '../../model/Paper'
 import { Document, Page } from 'react-pdf';
 import SinglePage from '../../domain/singe-page-pdf';
 import { loadBlockchainData } from '../../domain/blockchain-connector';
+import Review from '../Review/Review';
 
 const SMART_CONTRACT_ABI = require('../config');
 const SMART_CONTRACT_ADDRESS = require('../config');
@@ -25,16 +26,16 @@ function PaperDisplay({paper}: PaperProps) {
 
     const [loading, setLoading] = useState(true);
 
-   useEffect( () => {
-      loadBlockchainData<Paper>("paper").then(result => {
-         if(result) {
-            setPaperState(result)
-         } 
-      }).finally(() => {
-         setLoading(false)
-         console.log(paperState)
-       });
-   }, []);
+    useEffect( () => {
+        loadBlockchainData<Paper>("paper").then(result => {
+            if(result) {
+                setPaperState(result)
+            } 
+        }).finally(() => {
+            setLoading(false)
+            console.log(paperState)
+        })
+    }, [])
 
     function onDocumentLoadSuccess({ numPages: nextNumPages }: any) {
         setNumPages(nextNumPages);
@@ -81,9 +82,20 @@ function PaperDisplay({paper}: PaperProps) {
                         </Grid>
                     </Grid>
 
-                    <Box sx={{ justifyContent: 'center', mb: 2 }}>
+                    {/* <Box sx={{ justifyContent: 'center', mb: 2 }}>
                         <SinglePage pdf={file}></SinglePage>
+                    </Box> */}
+
+                    <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", mt: 4 }}>
+                        {/* Once the paperReviews are implemted in the backend we can uncomment this, same goes for the commented stuff inside the Review component*/}
+                        {/* {paperState.paperReviews.map(review => (  
+                            <Review review={review}></Review>
+                        ))}   */}
+                        <Review></Review>
+                        <Review></Review>
+                        <Review></Review>
                     </Box>
+                    
 
                 </Container>
         )
