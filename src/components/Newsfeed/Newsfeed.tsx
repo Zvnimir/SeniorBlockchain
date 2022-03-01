@@ -8,6 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { Card, Button, CardActions, CardContent, Grid, Box } from "@mui/material";
 import { Container } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import Web3 from 'web3';
 import { Paper } from '../../model/Paper'
@@ -36,6 +37,7 @@ type PapersProps = {
 
 function Newsfeed({ papers }: PapersProps) {
 
+    let navigate = useNavigate();
 
     const [paperState, setPaperState] = useState(papers)
     const [loading, setLoading] = useState(true);
@@ -46,10 +48,6 @@ function Newsfeed({ papers }: PapersProps) {
         loadBlockchainData<Paper[]>("papers").then(result => {
             if (result) {
                 setPaperState(result)
-                console.log(result);
-                result.forEach((person) => { console.log(person); });
-
-                console.log(paperState[0].title);
             }
             //once we get the data we set loading to false
         }).finally(() => {
@@ -78,7 +76,9 @@ function Newsfeed({ papers }: PapersProps) {
                         < Card sx={{ minWidth: 275, marginTop: 2 }}>
                             <CardContent>
                                 <Typography sx={{ fontSize: 14, backgroundColor: 'success.main', borderRadius: 5, maxWidth: 150, padding: 1, textAlign: 'center', color: 'white' }} gutterBottom>
-                                    Computer Science
+                                    {
+                                        paper.category
+                                    }
                                 </Typography>
                                 <Typography variant="h5" component="div">
                                     {
@@ -86,15 +86,20 @@ function Newsfeed({ papers }: PapersProps) {
                                         paper.title
                                     }
 
-                                    Achieving Efficient Structured Concurrency through Lightweight Fibers in Java Virtual Machine
 
                                 </Typography>
                                 <Typography variant="body2">
-                                    Contemporary concurrent server applications, commonly built of smaller and independent services, are using concurrent threads to serve many incoming requests and often have to perform under excessive load. Those applications are relatively easy to develop in general-purpose, imperative programming languages such as Java, and have great tooling support. However, such applications are not easily scalable, mostly due to relying on oversized OS kernel threads, which can be created only in a limited number on finite hardware resources.
+                                    {
+
+                                        paper.paperAbstract
+                                    }
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small">Learn More</Button>
+                                <Button size="small"
+                                    onClick={() => {
+                                        navigate("../paper", { replace: true });
+                                    }}>Learn More</Button>
                             </CardActions>
                         </Card>
                     ))}

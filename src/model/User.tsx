@@ -13,7 +13,7 @@ export interface User {
     confirmed: Boolean
     postedPapers: Paper[] 
     writtenReviews: Review[]
-    degree: String //c
-    profession: String //c
+    // degree: String //c
+    // profession: String //c
     // notifications: Notification[]
 }
