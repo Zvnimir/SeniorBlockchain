@@ -12,10 +12,17 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
     contract.options.address =  '0xCF9c32dAa7eef4969C7DA756DAb23FDa87047f1e'
     
     switch(dataType) {
+        //user
         case "user": {
             const result: Type = await contract.methods.users("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").call({ from: accounts[0] })
             return result
         }
+        case "userPapers": {
+            const result: Type = await contract.methods.getAuthoredPapers("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").call({ from: accounts[0] })
+            return result
+        }
+
+        //paper
         case "paper": {
             const result: Type = await contract.methods.papers("1").call({ from: accounts[0] })
             // .then((res: any) => {
@@ -34,20 +41,26 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
             }
             return null
         }
-        case "userPapers": {
-            const result: Type = await contract.methods.getAuthoredPapers("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").call({ from: accounts[0] })
-            return result
+
+        //review
+        case "uploadReview": {
+            if(data != undefined) {
+                const result: Type = await contract.methods.addReview("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83", data[1], data[2]).send({ from: accounts[0] })
+                return result
+            }
+            return null
         }
         
+        //login & regsiter
         case "login": {
             const result: Type = await contract.methods.login("admin@gmail.com","admin","0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").call({ from: accounts[0] })
             return result
         }
-
         case "register": {
             const result: Type = await contract.methods.register("emal", "firstname", "lastname", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida neque arcu, non aliquam lectus aliquet a. Suspendisse placerat mi at erat pellentesque venenatis. Mauris eget congue libero. Aenean viverra tincidunt massa a ultrices.", "password", "0x7b61FC9AbeB0ac95a66E04F8AE69f1DAA842A451").call({ from: accounts[0] })
             return result
         }
+
         default: {
             return null
         }
