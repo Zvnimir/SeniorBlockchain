@@ -2,6 +2,7 @@ import { Box, Button, Card, CardContent, Container, Modal, TableCell, TableRow }
 // import Popup from './Popup';
 import React, { useState } from "react";
 import { styled } from '@mui/material/styles';
+
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -13,112 +14,152 @@ import SinglePage from '../../domain/singe-page-pdf';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-    '& .MuiDialogContent-root': {
-      padding: theme.spacing(2),
-    },
-    '& .MuiDialogActions-root': {
-      padding: theme.spacing(1),
-    },
-  }));
-  
-  export interface DialogTitleProps {
-    id: string;
-    children?: React.ReactNode;
-    onClose: () => void;
-  }
-  
-  const BootstrapDialogTitle = (props: DialogTitleProps) => {
-    const { children, onClose, ...other } = props;
-  
-    return (
-      <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
-        {children}
-        {onClose ? (
-          <IconButton
-            aria-label="close"
-            onClick={onClose}
-            sx={{
-              position: 'absolute',
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-          
-          </IconButton>
-        ) : null}
-      </DialogTitle>
-    );
+  '& .MuiDialogContent-root': {
+    padding: theme.spacing(2),
+  },
+  '& .MuiDialogActions-root': {
+    padding: theme.spacing(1),
+  },
+}));
+
+export interface DialogTitleProps {
+  id: string;
+  children?: React.ReactNode;
+  onClose: () => void;
+}
+
+const BootstrapDialogTitle = (props: DialogTitleProps) => {
+  const { children, onClose, ...other } = props;
+
+  return (
+    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+      {children}
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+
+        </IconButton>
+      ) : null}
+    </DialogTitle>
+  );
+};
+
+
+function Admin() {
+
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  //   function onDocumentLoadSuccess({ numPages }) {
+  //     setNumPages(numPages);
+  //   }
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
   };
 
 
-function Admin(){
-
-    const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-
-//   function onDocumentLoadSuccess({ numPages }) {
-//     setNumPages(numPages);
-//   }
-
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-    const handleClose = () => {
-      setOpen(false);
-    };
-  
 
 
-  
-      return (
-        
-        <div className="App">
-          
-                      <Card>
-                          <CardContent>
-                          <div className="header">Users waiting for verification</div>
-                            <Container>
-                                <TableRow>
-                                    <TableCell>
-                                    <p className="">User name... </p>
-                                    </TableCell>
-                                    <TableCell>
-                                        <button type="button" className="btn"  onClick={handleClickOpen} >View Document</button>
-                                    </TableCell>
-                                    <TableCell>
-                                    <button type="button" className="btn" >Approve</button>
-                                   
-                                    </TableCell>
-                                </TableRow>
+  return (
 
-                                <TableRow>
-                                    <TableCell>
-                                    <p className="header">User name... </p>
-                                    </TableCell>
-                                    <TableCell>
-                                        <button type="button" className="btn"  onClick={handleClickOpen} >View Document</button>
-                                    </TableCell>
-                                    <TableCell>
-                                    <button type="button" className="btn">Approve</button>
-                                    </TableCell>
-                                </TableRow>
+    <div className="App">
 
-                            </Container>
-                            </CardContent>
-                </Card>
+      <Card>
+        <CardContent>
+          <div className="header">Users waiting for verification</div>
+          <Container>
+            <TableRow>
+            <TableCell>
+                <p className="">Username </p>
+              </TableCell>
+              <TableCell>
+                <p className="">Document </p>
+              </TableCell>
+              <TableCell>
+                <p className="">Confirmation Type </p>
+              </TableCell>
+              <TableCell>
+                <p className=""> </p>
+              </TableCell>
+              <TableCell>
+                <p className=""> </p>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <p className="">User name... </p>
+              </TableCell>
+              <TableCell>
+
+                <button type="button" className="btn" onClick={handleClickOpen} >View Document</button>
+
+              </TableCell>
+              <TableCell>
+                <p className="">Basic </p>
+              </TableCell>
+              <TableCell>
+                <Button variant="contained" color="success">
+                  Approve
+                </Button>
+
+              </TableCell>
+              <TableCell>
+                <Button variant="contained" color="error">
+                  Reject
+                </Button>
+              </TableCell>
+            </TableRow>
+
+            <TableRow>
+              <TableCell>
+                <p className="header">User name... </p>
+              </TableCell>
+              <TableCell>
+                <button type="button" className="btn" onClick={handleClickOpen} >View Document</button>
+              </TableCell>
+              <TableCell>
+                <p className="">Degree in X Catrgory </p>
+              </TableCell>
+              <TableCell>
+                <Button variant="contained" color="success">
+                  Approve
+                </Button>
+
+              </TableCell>
+              <TableCell>
+                <Button variant="contained" color="error">
+                  Reject
+                </Button>
+              </TableCell>
+            </TableRow>
+
+          </Container>
+        </CardContent>
+      </Card>
 
 
-                      
-                  
-                  
 
-            
-                
-       
-                <BootstrapDialog
+
+
+
+
+
+
+      <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
@@ -127,11 +168,11 @@ function Admin(){
           Document
         </BootstrapDialogTitle>
         <DialogContent dividers>
-        <div>
-        <SinglePage pdf="sample.pdf"></SinglePage>
-        </div>
-       
-                  
+          <div>
+            <SinglePage pdf="sample.pdf"></SinglePage>
+          </div>
+
+
 
         </DialogContent>
         <DialogActions>
@@ -142,13 +183,13 @@ function Admin(){
       </BootstrapDialog>
 
 
-     
-  </div>
-     
 
-      );
-    
-  }
-  
+    </div>
+
+
+  );
+
+}
+
 export default Admin;
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import { AppBar, Avatar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import HomeIcon from '@mui/icons-material/Home';
 import { useNavigate } from 'react-router-dom';
@@ -29,6 +30,10 @@ function Navbar() {
                 >
                     <FileUploadOutlinedIcon fontSize="inherit" />
                 </IconButton>
+                <IconButton aria-label="delete" size="large" color="inherit">
+                    <NotificationsIcon fontSize="inherit" />
+                </IconButton>
+
                 
                 <Button
                     onClick={() => {

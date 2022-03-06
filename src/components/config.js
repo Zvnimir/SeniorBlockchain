@@ -1,9 +1,30 @@
-export const SMART_CONTRACT_ADDRESS = '0xCF9c32dAa7eef4969C7DA756DAb23FDa87047f1e'
+export const SMART_CONTRACT_ADDRESS = '0x7e46941B006595E231956B836Ea5158be58313D9'
 
 export const SMART_CONTRACT_ABI = [{
         "inputs": [],
         "stateMutability": "nonpayable",
         "type": "constructor"
+    },
+    {
+        "inputs": [{
+                "internalType": "address",
+                "name": "_userAdress",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "_degreeCatrgory",
+                "type": "string"
+            }
+        ],
+        "name": "addDegree",
+        "outputs": [{
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        }],
+        "stateMutability": "nonpayable",
+        "type": "function"
     },
     {
         "inputs": [{
@@ -66,6 +87,21 @@ export const SMART_CONTRACT_ABI = [{
         ],
         "name": "addReview",
         "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "address",
+            "name": "_userAdress",
+            "type": "address"
+        }],
+        "name": "approveUser",
+        "outputs": [{
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+        }],
         "stateMutability": "nonpayable",
         "type": "function"
     },
@@ -148,6 +184,42 @@ export const SMART_CONTRACT_ABI = [{
             "internalType": "string",
             "name": "",
             "type": "string"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "uint256",
+            "name": "_paperID",
+            "type": "uint256"
+        }],
+        "name": "getPaperReviews",
+        "outputs": [{
+            "components": [{
+                    "internalType": "string",
+                    "name": "authorHash",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "paperReviwed",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "string",
+                    "name": "content",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "reviewId",
+                    "type": "uint256"
+                }
+            ],
+            "internalType": "struct Main.Review[]",
+            "name": "",
+            "type": "tuple[]"
         }],
         "stateMutability": "view",
         "type": "function"

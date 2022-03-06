@@ -14,6 +14,7 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
+import Alert from '@mui/material/Alert';
 import Web3 from 'web3'
 import { User } from '../../model/User';
 import { loadBlockchainData } from '../../domain/blockchain-connector';
@@ -107,6 +108,8 @@ function UserDisplay({user, papers }: UserProps) {
 
          <Grid item xs="auto">
             <Card sx={{ maxWidth: 345 }}>
+            <Alert severity="error">The user is not confirmed</Alert>
+
                <Avatar alt="The image" src={"user.png"} className="userPicture" style={{
                   width: 150,
                   height: 150,
@@ -117,6 +120,7 @@ function UserDisplay({user, papers }: UserProps) {
                   <Typography gutterBottom variant="h5" component="div">
                      { userState.firstName }  { userState.lastName }
                   </Typography>
+
                   <Typography variant="body2" color="text.secondary">
                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                      Nullam aliquet nunc blandit ultricies sodales.

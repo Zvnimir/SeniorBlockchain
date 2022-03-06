@@ -3,24 +3,30 @@ import { title } from 'process';
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import Web3 from 'web3';
 import { Paper } from '../../model/Paper'
+import { Review } from '../../model/Review'
 import { Document, Page } from 'react-pdf';
 import SinglePage from '../../domain/singe-page-pdf';
 import { loadBlockchainData } from '../../domain/blockchain-connector';
-import Review from '../Review/Review';
+import ReviewDisplay from '../Review/Review';
 
 const SMART_CONTRACT_ABI = require('../config');
 const SMART_CONTRACT_ADDRESS = require('../config');
 
 
 type PaperProps = {
-    paper: Paper
+    paper: Paper,
+    reviews: Review[]
 }
 
-function PaperDisplay({paper}: PaperProps) {
+
+
+function PaperDisplay({paper, reviews}: PaperProps) {
 
     const[paperState, setPaperState] = useState(paper)
 
     const[reviewContentState, setReviewContentState] = useState("")
+
+    const[reviewsState, setReviewssState] = useState(reviews)
 
     //State for pdf disply
     const [file, setFile] = useState('./sample.pdf');
@@ -33,6 +39,7 @@ function PaperDisplay({paper}: PaperProps) {
     }
 
     useEffect( () => {
+        // display paper data
         loadBlockchainData<Paper>("paper").then(result => {
             if(result) {
                 setPaperState(result)
@@ -41,12 +48,23 @@ function PaperDisplay({paper}: PaperProps) {
             setLoading(false)
             console.log(paperState)
         })
+
+        // displaying the reviews
+        loadBlockchainData<Review[]>("paperReviews").then(result => {
+            if(result) {
+                setReviewssState(result)
+            } 
+        }).finally(() => {
+            setLoading(false)
+            console.log(reviewsState)
+        })
+
+
     }, [])
 
     function onDocumentLoadSuccess({ numPages: nextNumPages }: any) {
         setNumPages(nextNumPages);
     }
-    
     if (loading) {
         console.log(paperState)
         return <p>Data is loading...</p>;
@@ -127,9 +145,19 @@ function PaperDisplay({paper}: PaperProps) {
                         {/* {paperState.paperReviews.map(review => (  
                             <Review review={review}></Review>
                         ))}   */}
-                        <Review></Review>
-                        <Review></Review>
-                        <Review></Review>
+
+                        {/* Add the list of Reviews from the review state */}
+
+                       {
+                            reviewsState.map(review => (
+                               
+                                <ReviewDisplay review={review}></ReviewDisplay>
+                            ))
+                       }
+
+                        
+                        {/* <ReviewDisplay></ReviewDisplay>
+                        <ReviewDisplay></ReviewDisplay> */}
                     </Box>
                     
 

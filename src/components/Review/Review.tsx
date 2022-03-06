@@ -5,7 +5,7 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import { Review } from '../../model/Review';
 
 type ReviewProps = {
-    review?: Review
+    review: Review
 }
 
 function ReviewDisplay({review}: ReviewProps) {
@@ -16,8 +16,8 @@ function ReviewDisplay({review}: ReviewProps) {
                     avatar={
                     <Avatar></Avatar>
                     }
-                    title="Name Surname"
-                    // title={review.authorHash}
+                   // title="Name Surname"
+                    title={review.authorHash}
                     action={
                         <ButtonGroup variant="contained" color="success" sx={{mr: 1, mt:.4}}>
                             <Button color="success"><ThumbUpIcon></ThumbUpIcon></Button>
@@ -27,8 +27,8 @@ function ReviewDisplay({review}: ReviewProps) {
                 />
                 <CardContent>
                     <Typography variant="body2" color="text.secondary">
-                        {/* {review.content} */}
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed erat ligula. Maecenas ut gravida lacus. Suspendisse mollis magna at dui tempus euismod. Phasellus luctus condimentum turpis, blandit viverra ligula condimentum vel.
+                        {review.content}
+                        {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed erat ligula. Maecenas ut gravida lacus. Suspendisse mollis magna at dui tempus euismod. Phasellus luctus condimentum turpis, blandit viverra ligula condimentum vel. */}
                     </Typography>
                 </CardContent>
             </Card>
