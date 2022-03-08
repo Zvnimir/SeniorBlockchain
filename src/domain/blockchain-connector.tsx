@@ -64,7 +64,12 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
             const result: Type = await contract.methods.register("emal", "firstname", "lastname", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida neque arcu, non aliquam lectus aliquet a. Suspendisse placerat mi at erat pellentesque venenatis. Mauris eget congue libero. Aenean viverra tincidunt massa a ultrices.", "password", "0x7b61FC9AbeB0ac95a66E04F8AE69f1DAA842A451").call({ from: accounts[0] })
             return result
         }
-
+        
+        //upload document to approve user
+         case "requestAuthentication": {
+            const result: Type = await contract.methods.requestAuthentication("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83","url").call({ from: accounts[0] })
+            return result
+        }
         default: {
             return null
         }
