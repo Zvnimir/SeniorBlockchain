@@ -8,6 +8,7 @@ import { Document, Page } from 'react-pdf';
 import SinglePage from '../../domain/singe-page-pdf';
 import { loadBlockchainData } from '../../domain/blockchain-connector';
 import ReviewDisplay from '../Review/Review';
+import { retrieveFiles } from '../../domain/web3-storage-client';
 
 const SMART_CONTRACT_ABI = require('../config');
 const SMART_CONTRACT_ADDRESS = require('../config');
@@ -29,7 +30,7 @@ function PaperDisplay({paper, reviews}: PaperProps) {
     const[reviewsState, setReviewssState] = useState(reviews)
 
     //State for pdf disply
-    const [file, setFile] = useState('./sample.pdf');
+    const [file, setFile] = useState<Promise<any>>();
     const [numPages, setNumPages] = useState(null);
 
     const [loading, setLoading] = useState(true);
@@ -45,21 +46,33 @@ function PaperDisplay({paper, reviews}: PaperProps) {
                 setPaperState(result)
             } 
         }).finally(() => {
-            setLoading(false)
+            //setLoading(false)
             console.log(paperState)
+
+            loadBlockchainData<Review[]>("paperReviews").then(result => {
+                if(result) {
+                    setReviewssState(result)
+                } 
+            }).finally(() => {
+                //setLoading(false)
+                console.log(reviewsState)
+
+                retrieveFiles('bafybeigcvfby7bcpfp2rkeeotqjck2slvliqsi7pjzgbtjlxag2wclyayy').then(result => {
+                    if(result) {
+                        setFile(result)
+                    }
+                }).finally(() => {
+                    setLoading(false)
+                    console.log(file)
+                })
+            })
+    
         })
 
        // displaying the reviews
-        loadBlockchainData<Review[]>("paperReviews").then(result => {
-            if(result) {
-                setReviewssState(result)
-            } 
-        }).finally(() => {
-            setLoading(false)
-            console.log(reviewsState)
-        })
-
-
+        
+        //testing the retrieval of files from web3 storage
+        
     }, [])
 
     function onDocumentLoadSuccess({ numPages: nextNumPages }: any) {
@@ -108,9 +121,9 @@ function PaperDisplay({paper, reviews}: PaperProps) {
                         </Grid>
                     </Grid>
 
-                    {/* <Box sx={{ justifyContent: 'center', mb: 2 }}>
+                    <Box sx={{ justifyContent: 'center', mb: 2 }}>
                         <SinglePage pdf={file}></SinglePage>
-                    </Box> */}
+                    </Box>
 
                     <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", mt: 4 }}>
                         

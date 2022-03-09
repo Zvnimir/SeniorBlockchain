@@ -2,6 +2,7 @@ import { Box, Button, Container, styled, TextField, Typography } from '@mui/mate
 import React, { ChangeEvent, ChangeEventHandler, useState } from 'react'
 import ArticleIcon from '@mui/icons-material/Article';
 import { loadBlockchainData } from '../../domain/blockchain-connector';
+import { storeFiles } from '../../domain/web3-storage-client'
 
 const Input = styled('input')({
     display: 'none',
@@ -14,6 +15,7 @@ function UploadPaper() {
     const[abstractState, setAbstractState] = useState("")
     //we will divide "numberOfWordsState" with the average reading speed (250) to get "minuteRead"
     const[numberOfWordsState, setNumberOfWordsState] = useState("")
+    const[fileState, setFileState] = useState<FileList>()
 
     const handleChangeTitle = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setTitleState(e.target.value)
@@ -29,6 +31,12 @@ function UploadPaper() {
 
     const handleChangeNumberOfWords = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setNumberOfWordsState(e.target.value)
+    }
+
+    const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        if(e.target.files) {
+            setFileState(e.target.files)
+        }
     }
 
     return (
@@ -52,7 +60,7 @@ function UploadPaper() {
                     <TextField id="numberOfWords" label="Number of words" variant="standard" type="number" fullWidth={true} onChange={handleChangeNumberOfWords}/>
                     
                     <label htmlFor="contained-button-file" >
-                        <Input accept="application/pdf" id="contained-button-file" multiple type="file" />
+                        <Input accept="application/pdf" id="contained-button-file" multiple type="file" onChange={handleFileSelected} />
                         <Button sx={{ mt: 2 }} variant="contained" endIcon={<ArticleIcon />} component="span">
                             Attach Paper
                         </Button>
@@ -65,8 +73,12 @@ function UploadPaper() {
                         justifyContent="center">
                         <Button variant="contained" component="span" 
                             onClick={() => {
-                                loadBlockchainData("uploadPaper", [titleState, categoryState, abstractState, (Number.parseInt(numberOfWordsState) / 250)])
-                        }}>
+                                // commented while testing file uplodaing to web3 storage
+                                //loadBlockchainData("uploadPaper", [titleState, categoryState, abstractState, (Number.parseInt(numberOfWordsState) / 250)])
+                                if(fileState) {
+                                    storeFiles(fileState)
+                                }
+                            }}>
                             Publish
                         </Button>
                     </Box>
