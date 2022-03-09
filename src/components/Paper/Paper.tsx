@@ -49,7 +49,7 @@ function PaperDisplay({paper, reviews}: PaperProps) {
             console.log(paperState)
         })
 
-        // displaying the reviews
+       // displaying the reviews
         loadBlockchainData<Review[]>("paperReviews").then(result => {
             if(result) {
                 setReviewssState(result)
@@ -74,7 +74,9 @@ function PaperDisplay({paper, reviews}: PaperProps) {
                 <Container maxWidth="md" sx={{ mt: 4 }}>
                     <Typography variant="h4" component="div">
                         { 
-                            paperState.title
+                        //IMPORTANT!!!!!!!!!!
+                        // This is currently the only way to access varaibles becasuse the tuple gets messed up in contract to contaract communication
+                            paperState[1]
                         }
                         
                     </Typography>
@@ -82,13 +84,13 @@ function PaperDisplay({paper, reviews}: PaperProps) {
                         <Grid item xs={8}>
                             <Typography variant="body1" component="div">
                                 { 
-                                    paperState.category 
+                                    paperState[2] 
                                 }
                                 
                             </Typography>
                             <Typography variant="body1" component="div" sx={{ mt: 1 }}>
                                 { 
-                                    paperState.paperAbstract
+                                    paperState[3] 
                                 }
                             </Typography>
                         </Grid>
@@ -96,7 +98,7 @@ function PaperDisplay({paper, reviews}: PaperProps) {
                         <Grid item xs={2}>
                             <Typography variant="body1" component="div">
                                 { 
-                                    paperState.authorHash
+                                    paperState[0]
                                 }
                                 
                             </Typography>  
