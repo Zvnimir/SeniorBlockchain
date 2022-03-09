@@ -3,6 +3,7 @@ import loginImage from "../../undraw_login_re_4vu2.svg"
 import './Register.css';
 import { loadBlockchainData } from '../../domain/blockchain-connector';
 import React, { ChangeEvent, ChangeEventHandler, useState } from 'react'
+import ArticleIcon from '@mui/icons-material/Article';
 
 function Register() {
 
@@ -73,9 +74,7 @@ function Register() {
                     sx={{
                         '& > :not(style)': { m: 1 },
                     }}
-                    noValidate
-
-                >
+                    noValidate>
                     <TextField id="firstname" label="First Name" variant="standard" fullWidth={true} onChange={handleChangeFirstName} />
                     <TextField id="lastname" label="Last Name" variant="standard" fullWidth={true} onChange={handleChangeLastName} />
                     <TextField id="email" label="Email" variant="standard" fullWidth={true} onChange={handleChangeEmail} />
@@ -83,7 +82,25 @@ function Register() {
                     <TextField id="confirmpassword" label="Confirm Password" variant="standard" fullWidth={true} />
 
                     <br></br>
+                    
+              <Grid container style={{ gap: 90 }}>
+               <Grid item xs={6}>
 
+               <Typography variant="body2" color="text.secondary">
+                          In order to register, user should upload a document approval. 
+                          User will be inform via email for the approval.
+                        </Typography>
+                 
+               </Grid>
+
+               <Grid item xs="auto">
+               <Button sx={{ mt: 3 }} variant="contained" endIcon={<ArticleIcon />} component="span" onClick={() => {
+                                loadBlockchainData("requestAuthentication").then(result => { console.log(result) })
+                            }}>
+                            Attach Paper
+                        </Button>
+               </Grid>
+            </Grid>
                     <Box display="flex"
                         alignItems="center"
                         justifyContent="center">
@@ -101,4 +118,5 @@ function Register() {
     );
 }
 export default Register
+
 
