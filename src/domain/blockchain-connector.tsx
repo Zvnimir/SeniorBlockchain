@@ -89,6 +89,12 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
             return result
         }
 
+        case "addDegree": {
+            const result: Type = await contract.methods.addDegree("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83", "Computer Science").send({ from: accounts[0] })
+            console.log(result)
+            return result
+        }
+
         default: {
             return null
         }
