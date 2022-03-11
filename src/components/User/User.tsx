@@ -24,18 +24,23 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import ArticleIcon from "@mui/icons-material/Article";
+import {styled} from '@mui/material'
+import { storeFiles } from '../../domain/web3-storage-client'
 
 type UserProps = {
   user: User;
   papers: Paper[];
 };
+const Input = styled('input')({
+  display: 'none',
+});
 
 function UserDisplay({ user, papers }: UserProps) {
   const [open, setOpen] = React.useState(false);
   const [userState, setUserState] = useState(user);
   const [loading, setLoading] = useState(true);
   const [paperState, setPaperState] = useState(papers);
-
+  const[fileState, setFileState] = useState<FileList>()
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -43,6 +48,12 @@ function UserDisplay({ user, papers }: UserProps) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    if(e.target.files) {
+        setFileState(e.target.files)
+    }
+}
 
   useEffect(() => {
     //gets data from blockchain
@@ -188,25 +199,20 @@ function UserDisplay({ user, papers }: UserProps) {
                       In order for user to gain more privileges, it should
                       upload degrees related to the specific fields
                     </DialogContentText>
-                    <Button
-                      sx={{ mt: 3 }}
-                      variant="contained"
-                      endIcon={<ArticleIcon />}
-                      component="span"
-                      onClick={() => {
-                        loadBlockchainData("requestAuthentication").then(
-                          (result) => {
-                            console.log(result);
-                          }
-                        );
-                      }}
-                    >
-                      Attach document
-                    </Button>
+                    <label htmlFor="contained-button-file" >
+                        <Input accept="application/pdf" id="contained-button-file" multiple type="file" onChange={handleFileSelected} />
+                        <Button sx={{ mt: 2 }} variant="contained" endIcon={<ArticleIcon />} component="span">
+                            Attach Paper
+                        </Button>
+                    </label>
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Ok</Button>
+                    <Button onClick={() => {
+                               if(fileState) {
+                                    storeFiles(fileState)};
+                                    setOpen(false)
+                                   }}>Ok</Button>
                   </DialogActions>
                 </Dialog>
               </CardActions>

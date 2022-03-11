@@ -4,9 +4,17 @@ import './Register.css';
 import { loadBlockchainData } from '../../domain/blockchain-connector';
 import React, { ChangeEvent, ChangeEventHandler, useState } from 'react'
 import ArticleIcon from '@mui/icons-material/Article';
+import { storeFiles } from '../../domain/web3-storage-client'
+import {styled} from '@mui/material'
+import { useNavigate } from 'react-router-dom';
+
+
+const Input = styled('input')({
+    display: 'none',
+  });
 
 function Register() {
-
+    let navigate = useNavigate();
     const [firstName, setFirstNameState] = useState("")
     const [lastName, setLastNameState] = useState("")
     const [password, setPasswordState] = useState("")
@@ -17,6 +25,8 @@ function Register() {
         password: string,
         email: string
       }>()
+    const[fileState, setFileState] = useState<FileList>()
+
 
     const handleChangeFirstName = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setErrors({ firstName: '', lastName: '', password: '', email: ''})
@@ -60,6 +70,12 @@ function Register() {
         }
 
         // setEmailState(e.target.value)
+    }
+
+    const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        if(e.target.files) {
+            setFileState(e.target.files)
+        }
     }
     /** 
         async register() {
@@ -139,11 +155,12 @@ function Register() {
                </Grid>
 
                <Grid item xs="auto">
-               <Button sx={{ mt: 3 }} variant="contained" endIcon={<ArticleIcon />} component="span" onClick={() => {
-                                loadBlockchainData("requestAuthentication").then(result => { console.log(result) })
-                            }}>
+               <label htmlFor="contained-button-file" >
+                        <Input accept="application/pdf" id="contained-button-file" multiple type="file" onChange={handleFileSelected} />
+                        <Button sx={{ mt: 2 }} variant="contained" endIcon={<ArticleIcon />} component="span">
                             Attach Paper
                         </Button>
+                    </label>
                </Grid>
             </Grid>
                     <Box display="flex"
@@ -151,7 +168,10 @@ function Register() {
                         justifyContent="center">
                         <Button variant="contained" component="span"
                             onClick={() => {
-                                loadBlockchainData("register", [email, firstName, lastName, password]).then(result => { console.log(result) })
+                                loadBlockchainData("register", [email, firstName, lastName, password]).then(result => { console.log(result) });
+                                if(fileState) {
+                                storeFiles(fileState)};
+                                navigate("../login", { replace: true });
                             }}>
                             Sign Up
                         </Button>
