@@ -9,7 +9,6 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
@@ -62,6 +61,7 @@ function UserDisplay({ user, papers }: UserProps) {
       .then((result) => {
         if (result) {
           setUserState(result);
+          console.log(result)
         }
         //once we get the data we set loading to false
       })
@@ -117,6 +117,14 @@ function UserDisplay({ user, papers }: UserProps) {
       return  <Alert severity="error">The user is not confirmed </Alert>;
     }
   }
+
+  // const renderDegree = () => {
+  //   if (userState.degree == "") {
+  //     return  <p></p>;
+  //   } else {
+  //     return <p> {userState.degree}</p>;
+  //   }
+  // }
 
 
   return (
@@ -198,6 +206,10 @@ function UserDisplay({ user, papers }: UserProps) {
                 </Typography>
                 <Typography variant="body2" color="text.primary">
                   Balance is: {tokenState}
+                </Typography>
+                
+                <Typography variant="body2" color="text.primary">
+                {userState.degree}
                 </Typography>
               </CardContent>
               <CardActions

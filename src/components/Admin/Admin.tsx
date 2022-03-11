@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, Card, CardContent, Container, Modal, TableCell, TableRow } from "@mui/material";
-// import Popup from './Popup';
 import React, { useEffect, useState } from "react";
+import { Button, Card, CardContent, Container, Modal, TableCell, TableRow } from "@mui/material";
+
 import { styled } from '@mui/material/styles';
 import Typography from "@mui/material/Typography";
 import Dialog from '@mui/material/Dialog';
@@ -83,6 +83,7 @@ function Admin({ users }: AdminProps) {
     })
       .finally(() => {
         setLoading(false);
+        console.log(usersState);
       });
 
   }, []);
@@ -147,15 +148,19 @@ function Admin({ users }: AdminProps) {
                 </TableCell>
                 <TableCell>
 
-                  {user.confirmed ? <p className="">Basic  </p> : <p className="">Some degree  </p>}
-
+                  {user.confirmed && user.degree == "" ? <p className=""> Some degree </p> : <p className="">Basic  </p>}
 
                 </TableCell>
                 <TableCell>
+
                   <Button variant="contained" color="success"
                     onClick={() => {
-                      loadBlockchainData("confirmUser", []).then(result => { console.log(result) });
 
+                      if(user.confirmed && user.degree == ""){
+                        loadBlockchainData("addDegree", []).then(result => { console.log(result) });
+                      } else {
+                        loadBlockchainData("confirmUser", []).then(result => { console.log(result) });
+                      }
                     }}>
                     Approve
                   </Button>
@@ -164,7 +169,7 @@ function Admin({ users }: AdminProps) {
                 <TableCell>
                   <Button variant="contained" color="error"
                     onClick={() => {
-                      loadBlockchainData("rejectUser", []).then(result => { console.log(result) });
+                      loadBlockchainData("confirmUser", []).then(result => { console.log(result) });
 
                     }}>
                     Reject
