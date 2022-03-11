@@ -41,6 +41,7 @@ function UserDisplay({ user, papers }: UserProps) {
   const [loading, setLoading] = useState(true);
   const [paperState, setPaperState] = useState(papers);
   const [fileState, setFileState] = useState<FileList>()
+  const [tokenState, setTokenState] = useState(0);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -89,6 +90,7 @@ function UserDisplay({ user, papers }: UserProps) {
       .then((result) => {
         if (result) {
           // userState.balance = result;
+          setTokenState(result)
           console.log(result);
           //result.forEach((person) => { console.log(person); });
           // userState.balance = result;
@@ -196,12 +198,14 @@ function UserDisplay({ user, papers }: UserProps) {
                   Nullam aliquet nunc blandit ultricies sodales. Nulla nec lacus
                   id diam finibus porttitor.
                 </Typography>
+                <Typography variant="body2" color="text.primary">
+                  Balance is: {tokenState}
+                </Typography>
               </CardContent>
               <CardActions
                 className="buttons"
-                style={{ display: "flex", justifyContent: "flex-end" }}
+                style={{ display: "flex", justifyContent: "center" }}
               >
-                <Button size="small">View Balnce</Button>
                 <Button size="small">Edit</Button>
                 <Button size="small" onClick={handleClickOpen}>
                   Add deegre
