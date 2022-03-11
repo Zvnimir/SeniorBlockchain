@@ -9,7 +9,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
     const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
-    contract.options.address =  '0x5874e65C7d574Db28af64238B30D2226AdBa176A'
+    contract.options.address =  '0x7D9b040B2159beAA0B2ABEF45258Fd252A7B2769'
     
     switch(dataType) {
         //user
@@ -67,9 +67,16 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         
         //upload document to approve user
          case "requestAuthentication": {
-            const result: Type = await contract.methods.requestAuthentication("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83","url").call({ from: accounts[0] })
+            const result: Type = await contract.methods.requestAuthentication("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83","url").send({ from: accounts[0] })
             return result
         }
+
+        case "unconfiredUsers": {
+            const result: Type = await contract.methods.getUsers().call({ from: accounts[0] })
+            console.log(result)
+            return result
+        }
+
         default: {
             return null
         }

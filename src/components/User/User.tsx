@@ -24,7 +24,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import ArticleIcon from "@mui/icons-material/Article";
-import {styled} from '@mui/material'
+import { styled } from '@mui/material'
 import { storeFiles } from '../../domain/web3-storage-client'
 
 type UserProps = {
@@ -40,7 +40,7 @@ function UserDisplay({ user, papers }: UserProps) {
   const [userState, setUserState] = useState(user);
   const [loading, setLoading] = useState(true);
   const [paperState, setPaperState] = useState(papers);
-  const[fileState, setFileState] = useState<FileList>()
+  const [fileState, setFileState] = useState<FileList>()
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -50,10 +50,10 @@ function UserDisplay({ user, papers }: UserProps) {
   };
 
   const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    if(e.target.files) {
-        setFileState(e.target.files)
+    if (e.target.files) {
+      setFileState(e.target.files)
     }
-}
+  }
 
   useEffect(() => {
     //gets data from blockchain
@@ -108,6 +108,17 @@ function UserDisplay({ user, papers }: UserProps) {
     return <p>Data is loading...</p>;
   }
 
+
+
+  const renderAuthButton = () => {
+    if (userState.confirmed) {
+      return <button>Confirmed</button>;
+    } else {
+      return <button>NOT confirmed</button>;
+    }
+  }
+
+
   return (
     <div className="App">
       <Typography variant="h3" component="div">
@@ -159,7 +170,10 @@ function UserDisplay({ user, papers }: UserProps) {
 
           <Grid item xs="auto">
             <Card sx={{ maxWidth: 345 }}>
-              <Alert severity="error">The user is not confirmed</Alert>
+
+
+              <Alert severity="error">The user is not confirmed </Alert>
+              {renderAuthButton()}
 
               <Avatar
                 alt="The image"
@@ -200,19 +214,20 @@ function UserDisplay({ user, papers }: UserProps) {
                       upload degrees related to the specific fields
                     </DialogContentText>
                     <label htmlFor="contained-button-file" >
-                        <Input accept="application/pdf" id="contained-button-file" multiple type="file" onChange={handleFileSelected} />
-                        <Button sx={{ mt: 2 }} variant="contained" endIcon={<ArticleIcon />} component="span">
-                            Attach Paper
-                        </Button>
+                      <Input accept="application/pdf" id="contained-button-file" multiple type="file" onChange={handleFileSelected} />
+                      <Button sx={{ mt: 2 }} variant="contained" endIcon={<ArticleIcon />} component="span">
+                        Attach Paper
+                      </Button>
                     </label>
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={() => {
-                               if(fileState) {
-                                    storeFiles(fileState)};
-                                    setOpen(false)
-                                   }}>Ok</Button>
+                      if (fileState) {
+                        storeFiles(fileState)
+                      };
+                      setOpen(false)
+                    }}>Ok</Button>
                   </DialogActions>
                 </Dialog>
               </CardActions>

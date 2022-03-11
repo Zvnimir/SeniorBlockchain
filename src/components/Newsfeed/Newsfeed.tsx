@@ -17,10 +17,6 @@ import { loadBlockchainData } from '../../domain/blockchain-connector';
 
 
 
-
-const SMART_CONTRACT_ABI = require('../config');
-const SMART_CONTRACT_ADDRESS = require('../config');
-
 const bull = (
     <Box
         component="span"
@@ -47,6 +43,7 @@ function Newsfeed({ papers }: PapersProps) {
         console.log("Someting")
         loadBlockchainData<Paper[]>("papers").then(result => {
             if (result) {
+                console.log(result)
                 setPaperState(result)
             }
             //once we get the data we set loading to false

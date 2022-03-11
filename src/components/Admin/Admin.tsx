@@ -1,6 +1,6 @@
 import { Box, Button, Card, CardContent, Container, Modal, TableCell, TableRow } from "@mui/material";
 // import Popup from './Popup';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from '@mui/material/styles';
 
 import Dialog from '@mui/material/Dialog';
@@ -10,7 +10,15 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import SinglePage from '../../domain/singe-page-pdf';
 
+import { User } from "../../model/User";
+import { loadBlockchainData } from "../../domain/blockchain-connector";
 
+type AdminProps = {
+  users: User[];
+};
+const Input = styled('input')({
+  display: 'none',
+});
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -53,14 +61,36 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 };
 
 
-function Admin() {
+function Admin({ users }: AdminProps) {
 
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
+  // const [numPages, setNumPages] = useState(null);
+  // const [pageNumber, setPageNumber] = useState(1);
 
+  const [usersState, setUsersState] = useState(users);
+  const [loading, setLoading] = useState(true);
   //   function onDocumentLoadSuccess({ numPages }) {
   //     setNumPages(numPages);
   //   }
+
+
+  useEffect(() => {
+    //gets data from blockchain
+    loadBlockchainData<User[]>("unconfiredUsers").then((result) => {
+      if (result) {
+        console.log(result);
+        setUsersState(result);
+        console.log(usersState);
+      }
+      //once we get the data we set loading to false
+    })
+      .finally(() => {
+        setLoading(false);
+      });
+
+  }, []);
+
+  //makes sure that undefined states dont throw errors
+
 
   const [open, setOpen] = React.useState(false);
 
@@ -72,7 +102,10 @@ function Admin() {
   };
 
 
-
+  //makes sure that undefined states dont throw errors
+  if (loading) {
+    return <p>Data is loading...</p>;
+  }
 
   return (
 
@@ -83,7 +116,7 @@ function Admin() {
           <div className="header">Users waiting for verification</div>
           <Container>
             <TableRow>
-            <TableCell>
+              <TableCell>
                 <p className="">Username </p>
               </TableCell>
               <TableCell>

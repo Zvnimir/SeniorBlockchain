@@ -1,4 +1,4 @@
-export const SMART_CONTRACT_ADDRESS = '0x5874e65C7d574Db28af64238B30D2226AdBa176A'
+export const SMART_CONTRACT_ADDRESS = '0x7D9b040B2159beAA0B2ABEF45258Fd252A7B2769'
 
 export const SMART_CONTRACT_ABI = [{
         "inputs": [],
@@ -331,6 +331,78 @@ export const SMART_CONTRACT_ABI = [{
                 }
             ],
             "internalType": "struct Structs.Paper[]",
+            "name": "",
+            "type": "tuple[]"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getUnaprovedUsers",
+        "outputs": [{
+            "components": [{
+                    "internalType": "string",
+                    "name": "email",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "firstName",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "lastName",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "passwordHash",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "biography",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "degree",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "profession",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "balance",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "userAddress",
+                    "type": "address"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "confirmed",
+                    "type": "bool"
+                },
+                {
+                    "internalType": "string",
+                    "name": "postedPapersID",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "writtenReviewsListID",
+                    "type": "string"
+                }
+            ],
+            "internalType": "struct Structs.User[]",
             "name": "",
             "type": "tuple[]"
         }],

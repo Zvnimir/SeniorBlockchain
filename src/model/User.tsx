@@ -6,13 +6,17 @@ export interface User {
     email: String //c
     firstName: String
     lastName: String
+
     passwordHash: String
     biography: String //c
+    degree: String //c
+    profession: String
+    
     balance: number
     userAddress: String
     confirmed: Boolean
-    postedPapers: Paper[] 
-    writtenReviews: Review[]
+    //postedPapers: Paper[] 
+    //writtenReviews: Review[]
     // degree: String //c
     // profession: String //c
     // notifications: Notification[]
