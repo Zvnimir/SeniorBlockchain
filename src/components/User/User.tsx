@@ -66,27 +66,21 @@ function UserDisplay({ user, papers }: UserProps) {
         //once we get the data we set loading to false
       })
       .finally(() => {
-        setLoading(false);
-      });
-
-    loadBlockchainData<Paper[]>("userPapers")
-      .then((result) => {
-        if (result) {
-          setPaperState(result);
-          // console.log(result);
-          result.forEach((person) => {
-            console.log(person);
-          });
-
-          //console.log(paperState[0].title);
-        }
-        //once we get the data we set loading to false
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-
-    loadBlockchainData_token<number>("balance")
+        loadBlockchainData<Paper[]>("userPapers")
+        .then((result) => {
+          if (result) {
+            setPaperState(result);
+            // console.log(result);
+            result.forEach((person) => {
+              console.log(person);
+            });
+  
+            //console.log(paperState[0].title);
+          }
+          //once we get the data we set loading to false
+        })
+        .finally(() => {
+          loadBlockchainData_token<number>("balance")
       .then((result) => {
         if (result) {
           // userState.balance = result;
@@ -103,6 +97,10 @@ function UserDisplay({ user, papers }: UserProps) {
       .finally(() => {
         setLoading(false);
       });
+        });
+      });
+
+    
   }, []);
 
   //makes sure that undefined states dont throw errors
