@@ -168,7 +168,8 @@ function Register() {
                         justifyContent="center">
                         <Button variant="contained" component="span"
                             onClick={() => {
-                                loadBlockchainData("register", [email, firstName, lastName, password]).then(result => { console.log(result) });
+                                // loadBlockchainData("register", [email, firstName, lastName, password]).then(result => { console.log(result) });
+                                loadBlockchainData("requestAuthentication", []).then(result => { console.log(result) });
                                 if(fileState) {
                                 storeFiles(fileState)};
                                 navigate("../login", { replace: true });

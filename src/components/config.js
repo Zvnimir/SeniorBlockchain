@@ -1,4 +1,4 @@
-export const SMART_CONTRACT_ADDRESS = '0x7D9b040B2159beAA0B2ABEF45258Fd252A7B2769'
+export const SMART_CONTRACT_ADDRESS = '0xd86BD99da142fB0303273f7a9D1D090f43F0261e'
 
 export const SMART_CONTRACT_ABI = [{
         "inputs": [],
@@ -390,16 +390,6 @@ export const SMART_CONTRACT_ABI = [{
                     "internalType": "bool",
                     "name": "confirmed",
                     "type": "bool"
-                },
-                {
-                    "internalType": "string",
-                    "name": "postedPapersID",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "writtenReviewsListID",
-                    "type": "string"
                 }
             ],
             "internalType": "struct Structs.User[]",
@@ -462,16 +452,6 @@ export const SMART_CONTRACT_ABI = [{
                     "internalType": "bool",
                     "name": "confirmed",
                     "type": "bool"
-                },
-                {
-                    "internalType": "string",
-                    "name": "postedPapersID",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "writtenReviewsListID",
-                    "type": "string"
                 }
             ],
             "internalType": "struct Structs.User[]",
@@ -549,16 +529,6 @@ export const SMART_CONTRACT_ABI = [{
                     "internalType": "bool",
                     "name": "confirmed",
                     "type": "bool"
-                },
-                {
-                    "internalType": "string",
-                    "name": "postedPapersID",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "writtenReviewsListID",
-                    "type": "string"
                 }
             ],
             "internalType": "struct Structs.User",
@@ -651,21 +621,26 @@ export const SMART_CONTRACT_ABI = [{
                     "internalType": "bool",
                     "name": "confirmed",
                     "type": "bool"
-                },
-                {
-                    "internalType": "string",
-                    "name": "postedPapersID",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "writtenReviewsListID",
-                    "type": "string"
                 }
             ],
             "internalType": "struct Structs.User",
             "name": "",
             "type": "tuple"
+        }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "address",
+            "name": "_userAdress",
+            "type": "address"
+        }],
+        "name": "rejectUser",
+        "outputs": [{
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
         }],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -747,16 +722,6 @@ export const SMART_CONTRACT_ABI = [{
                 "internalType": "bool",
                 "name": "confirmed",
                 "type": "bool"
-            },
-            {
-                "internalType": "string",
-                "name": "postedPapersID",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "writtenReviewsListID",
-                "type": "string"
             }
         ],
         "stateMutability": "view",

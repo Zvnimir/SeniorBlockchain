@@ -9,7 +9,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
     const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
-    contract.options.address =  '0x7D9b040B2159beAA0B2ABEF45258Fd252A7B2769'
+    contract.options.address =  '0xd86BD99da142fB0303273f7a9D1D090f43F0261e'
     
     switch(dataType) {
         //user
@@ -72,7 +72,19 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         }
 
         case "unconfiredUsers": {
-            const result: Type = await contract.methods.getUsers().call({ from: accounts[0] })
+            const result: Type = await contract.methods.getUnaprovedUsers().call({ from: accounts[0] })
+            console.log(result)
+            return result
+        }
+
+        case "confirmUser": {
+            const result: Type = await contract.methods.approveUser("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").send({ from: accounts[0] })
+            console.log(result)
+            return result
+        }
+
+        case "rejectUser": {
+            const result: Type = await contract.methods.rejectUser("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").send({ from: accounts[0] })
             console.log(result)
             return result
         }

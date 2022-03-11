@@ -1,8 +1,9 @@
-import { Box, Button, Card, CardContent, Container, Modal, TableCell, TableRow } from "@mui/material";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Button, Card, CardContent, Container, Modal, TableCell, TableRow } from "@mui/material";
 // import Popup from './Popup';
 import React, { useEffect, useState } from "react";
 import { styled } from '@mui/material/styles';
-
+import Typography from "@mui/material/Typography";
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -16,9 +17,6 @@ import { loadBlockchainData } from "../../domain/blockchain-connector";
 type AdminProps = {
   users: User[];
 };
-const Input = styled('input')({
-  display: 'none',
-});
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -111,13 +109,16 @@ function Admin({ users }: AdminProps) {
 
     <div className="App">
 
+
+
       <Card>
         <CardContent>
           <div className="header">Users waiting for verification</div>
+
           <Container>
             <TableRow>
               <TableCell>
-                <p className="">Username </p>
+                <Typography>User name</Typography>
               </TableCell>
               <TableCell>
                 <p className="">Document </p>
@@ -132,32 +133,50 @@ function Admin({ users }: AdminProps) {
                 <p className=""> </p>
               </TableCell>
             </TableRow>
-            <TableRow>
-              <TableCell>
-                <p className="">User name... </p>
-              </TableCell>
-              <TableCell>
 
-                <button type="button" className="btn" onClick={handleClickOpen} >View Document</button>
+            {usersState.map((user) => (
 
-              </TableCell>
-              <TableCell>
-                <p className="">Basic </p>
-              </TableCell>
-              <TableCell>
-                <Button variant="contained" color="success">
-                  Approve
-                </Button>
+              <TableRow>
+                <TableCell>
+                  <p className="">{user.firstName}</p>
+                </TableCell>
+                <TableCell>
 
-              </TableCell>
-              <TableCell>
-                <Button variant="contained" color="error">
-                  Reject
-                </Button>
-              </TableCell>
-            </TableRow>
+                  <button type="button" className="btn" onClick={handleClickOpen} >View Document</button>
 
-            <TableRow>
+                </TableCell>
+                <TableCell>
+
+                  {user.confirmed ? <p className="">Basic  </p> : <p className="">Some degree  </p>}
+
+
+                </TableCell>
+                <TableCell>
+                  <Button variant="contained" color="success"
+                    onClick={() => {
+                      loadBlockchainData("confirmUser", []).then(result => { console.log(result) });
+
+                    }}>
+                    Approve
+                  </Button>
+
+                </TableCell>
+                <TableCell>
+                  <Button variant="contained" color="error"
+                    onClick={() => {
+                      loadBlockchainData("rejectUser", []).then(result => { console.log(result) });
+
+                    }}>
+                    Reject
+                  </Button>
+                </TableCell>
+              </TableRow>
+
+            ))}
+
+
+
+            {/* <TableRow>
               <TableCell>
                 <p className="header">User name... </p>
               </TableCell>
@@ -178,7 +197,7 @@ function Admin({ users }: AdminProps) {
                   Reject
                 </Button>
               </TableCell>
-            </TableRow>
+            </TableRow> */}
 
           </Container>
         </CardContent>

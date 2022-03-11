@@ -112,9 +112,9 @@ function UserDisplay({ user, papers }: UserProps) {
 
   const renderAuthButton = () => {
     if (userState.confirmed) {
-      return <button>Confirmed</button>;
+      return  <Alert severity="success">The user is confirmed </Alert>;
     } else {
-      return <button>NOT confirmed</button>;
+      return  <Alert severity="error">The user is not confirmed </Alert>;
     }
   }
 
@@ -172,7 +172,7 @@ function UserDisplay({ user, papers }: UserProps) {
             <Card sx={{ maxWidth: 345 }}>
 
 
-              <Alert severity="error">The user is not confirmed </Alert>
+             
               {renderAuthButton()}
 
               <Avatar
