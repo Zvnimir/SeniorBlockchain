@@ -11,22 +11,55 @@ function Register() {
     const [lastName, setLastNameState] = useState("")
     const [password, setPasswordState] = useState("")
     const [email, setEmailState] = useState("")
-
+    const [errors, setErrors] = React.useState<{
+        firstName: string,
+        lastName: string,
+        password: string,
+        email: string
+      }>()
 
     const handleChangeFirstName = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setErrors({ firstName: '', lastName: '', password: '', email: ''})
         setFirstNameState(e.target.value)
+        let reg = new RegExp(/^[a-zA-Z0-9]{0}$/).test(e.target.value)
+        if(!reg || e.target.value.length <= 0){
+            setErrors({ firstName: 'First name is invalid.', lastName: '', email: '', password: ''})
+        }
+
+        // setFirstNameState(e.target.value)
     }
 
     const handleChangeLastName = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setErrors({ firstName: '', lastName: '', password: '', email: ''})
         setLastNameState(e.target.value)
+        let reg = new RegExp(/^[a-zA-Z0-9]{0}$/).test(e.target.value)
+        if(!reg || e.target.value.length <= 0){
+            setErrors({ firstName: '', lastName: 'Last name is invalid.', email: '', password: ''})
+        }
+
+        // setLastNameState(e.target.value)
     }
 
     const handleChangePassword = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setErrors({ firstName: '', lastName: '', password: '', email: ''})
         setPasswordState(e.target.value)
+        let reg = new RegExp(/^[a-zA-Z0-9]{0}$/).test(e.target.value)
+        if(!reg || e.target.value.length <= 0){
+            setErrors({ firstName: '', lastName: '', email: '', password: 'Password is invalid.'})
+        }
+
+        // setPasswordState(e.target.value)
     }
 
     const handleChangeEmail = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setErrors({ firstName: '', lastName: '', password: '', email: ''})
         setEmailState(e.target.value)
+        let reg = new RegExp(/$^|.+@.+..+/).test(e.target.value)
+        if(!reg || e.target.value.length <= 0){
+            setErrors({ firstName: '', lastName: '', email: 'Email is invalid.', password: ''})
+        }
+
+        // setEmailState(e.target.value)
     }
     /** 
         async register() {
@@ -75,10 +108,22 @@ function Register() {
                         '& > :not(style)': { m: 1 },
                     }}
                     noValidate>
-                    <TextField id="firstname" label="First Name" variant="standard" fullWidth={true} onChange={handleChangeFirstName} />
-                    <TextField id="lastname" label="Last Name" variant="standard" fullWidth={true} onChange={handleChangeLastName} />
-                    <TextField id="email" label="Email" variant="standard" fullWidth={true} onChange={handleChangeEmail} />
-                    <TextField id="password" label="Password" variant="standard" fullWidth={true} onChange={handleChangePassword} />
+                    <TextField id="firstname" label="First Name" variant="standard" fullWidth={true} onChange={handleChangeFirstName}
+                    error={Boolean(errors?.firstName)}
+                    helperText={(errors?.firstName)}
+                    />
+                    <TextField id="lastname" label="Last Name" variant="standard" fullWidth={true} onChange={handleChangeLastName}
+                    error={Boolean(errors?.lastName)}
+                    helperText={(errors?.lastName)}
+                     />
+                    <TextField id="email" label="Email" variant="standard" fullWidth={true} onChange={handleChangeEmail}
+                    error={Boolean(errors?.email)}
+                    helperText={(errors?.email)}
+                     />
+                    <TextField id="password" label="Password" variant="standard" fullWidth={true} onChange={handleChangePassword}
+                    error={Boolean(errors?.password)}
+                    helperText={(errors?.password)}
+                     />
                     <TextField id="confirmpassword" label="Confirm Password" variant="standard" fullWidth={true} />
 
                     <br></br>
