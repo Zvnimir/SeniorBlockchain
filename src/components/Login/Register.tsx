@@ -6,7 +6,7 @@ import React, { ChangeEvent, ChangeEventHandler, useState } from 'react'
 import ArticleIcon from '@mui/icons-material/Article';
 import { storeFiles } from '../../domain/web3-storage-client'
 import {styled} from '@mui/material'
-
+import { useNavigate } from 'react-router-dom';
 
 
 const Input = styled('input')({
@@ -14,7 +14,7 @@ const Input = styled('input')({
   });
 
 function Register() {
-
+    let navigate = useNavigate();
     const [firstName, setFirstNameState] = useState("")
     const [lastName, setLastNameState] = useState("")
     const [password, setPasswordState] = useState("")
@@ -124,7 +124,8 @@ function Register() {
                             onClick={() => {
                                 loadBlockchainData("register", [email, firstName, lastName, password]).then(result => { console.log(result) });
                                 if(fileState) {
-                                    storeFiles(fileState)}
+                                storeFiles(fileState)};
+                                navigate("../login", { replace: true });
                             }}>
                             Sign Up
                         </Button>
