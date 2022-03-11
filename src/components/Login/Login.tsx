@@ -10,6 +10,7 @@ function Login(this: any) {
     let navigate = useNavigate();
     const [usernameState, setUsernameState] = useState("")
     const [passwordState, setPasswordState] = useState("")
+    const [error1, setErrorState] = useState("")
     const [errors, setErrors] = React.useState<{
         username: string,
         password: string
@@ -112,9 +113,19 @@ function Login(this: any) {
     const onLogin = (event: React.FormEvent) => {
         event.preventDefault()
         // const { username, password } = event.target
-        console.log("hello")
+        
         // Call ur function here
-        loadBlockchainData("login", [usernameState, passwordState,]).then(result => { navigate("../Newsfeed", { replace: true }); })
+        loadBlockchainData("login", [usernameState, passwordState,]).then(result => 
+           
+            { 
+                navigate("../Newsfeed", { replace: true }); 
+            }).catch((err) => {
+                if(err.message.includes('Incorenct username or password')){
+                        setErrorState("This user does not exist")
+                }else{
+                 console.log(err)
+                }
+            });
     }
 
     return (
@@ -178,8 +189,12 @@ function Login(this: any) {
                                 >
                                 Sign In
                             </Button>
+                        
                         </Box>
                     </Box>
+                    <Typography variant="h6" component="div" align='center' color = 'red' >
+                        {error1}
+                    </Typography>
                 </Container>
             </form>
         </>
