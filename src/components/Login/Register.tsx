@@ -7,7 +7,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 import { storeFiles } from '../../domain/web3-storage-client'
 import {styled} from '@mui/material'
 import { useNavigate } from 'react-router-dom';
-
+//import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 const Input = styled('input')({
     display: 'none',
@@ -23,60 +23,75 @@ function Register() {
         firstName: string,
         lastName: string,
         password: string,
-        email: string
+        email: string,
+        confirmedPassword: string
       }>()
     const[fileState, setFileState] = useState<FileList>()
+    const [valid, setValid] = useState('');
 
+    
 
     const handleChangeFirstName = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setErrors({ firstName: '', lastName: '', password: '', email: ''})
-        setFirstNameState(e.target.value)
-        let reg = new RegExp(/^[a-zA-Z0-9]{0}$/).test(e.target.value)
-        if(!reg || e.target.value.length <= 0){
-            setErrors({ firstName: 'First name is invalid.', lastName: '', email: '', password: ''})
+       setFirstNameState(e.target.value)
+       if(e.target.value.match(new RegExp(/^[a-zA-Z]+$/))){
+        setErrors({ firstName: '', lastName: '', email: '', password: '', confirmedPassword: ''})
+        }else{
+        setErrors({ firstName: 'Invalid format of name. Name should include only letters', lastName: '', email: '', password: '', confirmedPassword: ''})
+        //setValid('Invalid format of name. Name should include only letters')
         }
-
-        // setFirstNameState(e.target.value)
     }
 
     const handleChangeLastName = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setErrors({ firstName: '', lastName: '', password: '', email: ''})
         setLastNameState(e.target.value)
-        let reg = new RegExp(/^[a-zA-Z0-9]{0}$/).test(e.target.value)
-        if(!reg || e.target.value.length <= 0){
-            setErrors({ firstName: '', lastName: 'Last name is invalid.', email: '', password: ''})
-        }
-
-        // setLastNameState(e.target.value)
+        if(e.target.value.match(new RegExp(/^[a-zA-Z]+$/))){
+            setErrors({ firstName: '', lastName: '', email: '', password: '', confirmedPassword: ''})
+            }else{
+                setErrors({ firstName: '', lastName: 'Invalid format of last name. Last Name should include only letters', email: '', password: '', confirmedPassword: ''})
+            //setValid('Invalid format of last name. Last Name should include only letters')
+            }
     }
 
     const handleChangePassword = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setErrors({ firstName: '', lastName: '', password: '', email: ''})
         setPasswordState(e.target.value)
-        let reg = new RegExp(/^[a-zA-Z0-9]{0}$/).test(e.target.value)
-        if(!reg || e.target.value.length <= 0){
-            setErrors({ firstName: '', lastName: '', email: '', password: 'Password is invalid.'})
+        if(e.target.value.match(new RegExp(/(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/))){
+            setErrors({ firstName: '', lastName: '', email: '', password: '', confirmedPassword: ''})
+            }else{
+                setErrors({ firstName: '', lastName: '', email: '', password: 'Invalid password. Minimum eight characters, at least one letter and one number', confirmedPassword: ''})
+            }
         }
-
-        // setPasswordState(e.target.value)
-    }
 
     const handleChangeEmail = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setErrors({ firstName: '', lastName: '', password: '', email: ''})
         setEmailState(e.target.value)
-        let reg = new RegExp(/$^|.+@.+..+/).test(e.target.value)
-        if(!reg || e.target.value.length <= 0){
-            setErrors({ firstName: '', lastName: '', email: 'Email is invalid.', password: ''})
-        }
+        if(e.target.value.match(new RegExp(/$^|.+@.+..+/))){
+            setErrors({ firstName: '', lastName: '', email: '', password: '', confirmedPassword: ''})
+            }else{
+            setErrors({ firstName: '', lastName: '', email: 'Invalid format of last email', password: '', confirmedPassword: ''})
+           }
+      }
 
-        // setEmailState(e.target.value)
-    }
+    const handleMatchedPassword = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        if(password === e.target.value){
+            setErrors({ firstName: '', lastName: '', email: '', password: '', confirmedPassword: ''})
+        }else{
+            setErrors({ firstName: '', lastName: '', email: '', password: '', confirmedPassword: 'Passwords do not match'})
+        }
+       }
 
     const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
         if(e.target.files) {
             setFileState(e.target.files)
         }
     }
+
+    const onRegister = (event: React.FormEvent) => {
+        event.preventDefault()
+        if(fileState) {
+        storeFiles(fileState)};
+        navigate("../login", { replace: true });
+        loadBlockchainData("register", [email, firstName, lastName, password]).then(result => { console.log(result) });
+    }
+
+    
     /** 
         async register() {
             //result;
@@ -100,12 +115,12 @@ function Register() {
         */
 
     return (
-
-        <>
+       
             <Container maxWidth="sm" sx={{ mt: 4, pt: 2 }} >
                 <Typography variant="h5" component="div" align='center' >
                     Create new account
                 </Typography>
+                
                 <Box
                     margin="auto"
                     display="flex"
@@ -123,24 +138,31 @@ function Register() {
                     sx={{
                         '& > :not(style)': { m: 1 },
                     }}
-                    noValidate>
+                    onSubmit={onRegister}>
                     <TextField id="firstname" label="First Name" variant="standard" fullWidth={true} onChange={handleChangeFirstName}
-                    error={Boolean(errors?.firstName)}
-                    helperText={(errors?.firstName)}
+                     error={Boolean(errors?.firstName)}
+                     helperText={(errors?.firstName)}
+                    required
                     />
                     <TextField id="lastname" label="Last Name" variant="standard" fullWidth={true} onChange={handleChangeLastName}
-                    error={Boolean(errors?.lastName)}
-                    helperText={(errors?.lastName)}
+                     error={Boolean(errors?.lastName)}
+                     helperText={(errors?.lastName)}
+                    required
                      />
                     <TextField id="email" label="Email" variant="standard" fullWidth={true} onChange={handleChangeEmail}
                     error={Boolean(errors?.email)}
                     helperText={(errors?.email)}
+                    required
                      />
                     <TextField id="password" label="Password" variant="standard" fullWidth={true} onChange={handleChangePassword}
                     error={Boolean(errors?.password)}
                     helperText={(errors?.password)}
+                    required
                      />
-                    <TextField id="confirmpassword" label="Confirm Password" variant="standard" fullWidth={true} />
+                    <TextField id="confirmpassword" label="Confirm Password" variant="standard" fullWidth={true}  onChange={handleMatchedPassword} 
+                     error={Boolean(errors?.confirmedPassword)}
+                     helperText={(errors?.confirmedPassword)}
+                    required/>
 
                     <br></br>
                     
@@ -166,22 +188,13 @@ function Register() {
                     <Box display="flex"
                         alignItems="center"
                         justifyContent="center">
-                        <Button variant="contained" component="span"
-                            onClick={() => {
-                                // loadBlockchainData("register", [email, firstName, lastName, password]).then(result => { console.log(result) });
-                                loadBlockchainData("requestAuthentication", []).then(result => { console.log(result) });
-                                if(fileState) {
-                                storeFiles(fileState)};
-                                navigate("../login", { replace: true });
-                            }}>
-                            Sign Up
+                        <Button type="submit" variant="contained" disabled={Boolean(errors?.firstName) || Boolean(errors?.lastName) || Boolean(errors?.email) || Boolean(errors?.password) || Boolean(errors?.confirmedPassword)}>
+                                Sign Up
                         </Button>
                     </Box>
                 </Box>
             </Container>
-
-        </>
-    );
+        );
 }
 export default Register
 
