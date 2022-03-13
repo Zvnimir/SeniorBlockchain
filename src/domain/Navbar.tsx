@@ -113,7 +113,7 @@ anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 <MenuItem onClick={() => {navigate("../user", { replace: true });}}>
   <Avatar /> User page
 </MenuItem>
-<MenuItem>
+<MenuItem  onClick={() => {navigate("../edit", { replace: true });}}>
   <ListItemIcon>
     <Settings fontSize="small" />
   </ListItemIcon>
