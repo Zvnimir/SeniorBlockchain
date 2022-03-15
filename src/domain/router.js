@@ -7,6 +7,7 @@ import PaperDisplay from '../components/Paper/Paper';
 import UserDisplay from '../components/User/User';
 import Admin from '../components/Admin/Admin';
 import Navbar from '../domain/Navbar'
+import Edit from '../components/Edit/Edit';
 import { AppBar, Avatar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +19,8 @@ function Router() {
 
 
     return ( <
-            >
+        
+    >
 
             <
             Navbar / >
@@ -55,6 +57,12 @@ function Router() {
                                 domain = { "Domain" }
                                 description = { "Description" }
                                 />} / >
+                                <
+                                Route exact path = "/edit"
+                                element = { < Edit title = { "Test edit" }
+                                    domain = { "Domain" }
+                                    description = { "Description" }
+                                    />} / >
                                 <
                                 Route exact path = '/admin'
                                 element = { < Admin > < /Admin>} / >
