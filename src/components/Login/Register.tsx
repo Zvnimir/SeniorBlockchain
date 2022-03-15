@@ -87,8 +87,12 @@ function Register() {
         event.preventDefault()
         if(fileState) {
         storeFiles(fileState)};
-        navigate("../login", { replace: true });
         loadBlockchainData("register", [email, firstName, lastName, password]).then(result => { console.log(result) });
+        navigate("../login", { replace: true });
+    // requestAuthentication
+       // loadBlockchainData("requestAuthentication", [email, firstName, lastName, password]).then(result => { console.log(result) });
+
+    
     }
 
     

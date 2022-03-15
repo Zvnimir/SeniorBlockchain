@@ -13,6 +13,8 @@ import SinglePage from '../../domain/singe-page-pdf';
 
 import { User } from "../../model/User";
 import { loadBlockchainData } from "../../domain/blockchain-connector";
+import { loadBlockchainData_token } from "../../domain/blockchain-connector_token";
+
 
 type AdminProps = {
   users: User[];
@@ -158,8 +160,11 @@ function Admin({ users }: AdminProps) {
 
                       if(user.confirmed && user.degree == ""){
                         loadBlockchainData("addDegree", []).then(result => { console.log(result) });
+                        loadBlockchainData_token("sendDegreeTokens", []).then(result => { console.log(result) });
+
                       } else {
                         loadBlockchainData("confirmUser", []).then(result => { console.log(result) });
+                        loadBlockchainData_token("sendIntialTokens", []).then(result => { console.log(result) });
                       }
                     }}>
                     Approve
@@ -169,8 +174,7 @@ function Admin({ users }: AdminProps) {
                 <TableCell>
                   <Button variant="contained" color="error"
                     onClick={() => {
-                      loadBlockchainData("confirmUser", []).then(result => { console.log(result) });
-
+                      loadBlockchainData("rejectUser", []).then(result => { console.log(result) });
                     }}>
                     Reject
                   </Button>

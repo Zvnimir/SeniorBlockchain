@@ -2,6 +2,7 @@ import Web3 from 'web3'
 import { Paper } from '../model/Paper';
 import { User } from '../model/User';
 
+
 const SMART_CONTRACT_ABI = require('../components/config');
 const SMART_CONTRACT_ADDRESS = require('../components/config');
 
@@ -9,7 +10,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
     const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
-    contract.options.address =  '0xd86BD99da142fB0303273f7a9D1D090f43F0261e'
+    contract.options.address =  '0xDFB2093B1404624Fd9963e856D6B4144bbc4999b'
     
     switch(dataType) {
         //user
@@ -61,13 +62,13 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
             return result
         }
         case "register": {
-            const result: Type = await contract.methods.register("emal", "firstname", "lastname", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida neque arcu, non aliquam lectus aliquet a. Suspendisse placerat mi at erat pellentesque venenatis. Mauris eget congue libero. Aenean viverra tincidunt massa a ultrices.", "password", "0x7b61FC9AbeB0ac95a66E04F8AE69f1DAA842A451").call({ from: accounts[0] })
+            const result: Type = await contract.methods.register("emal", "firstname", "lastname", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida neque arcu, non aliquam lectus aliquet a. Suspendisse placerat mi at erat pellentesque venenatis. Mauris eget congue libero. Aenean viverra tincidunt massa a ultrices.", "password", "0x38Ab464C60318955c21f2d019715a3E4636645c5", "document url").send({ from: accounts[0] })
             return result
         }
         
         //upload document to approve user
          case "requestAuthentication": {
-            const result: Type = await contract.methods.requestAuthentication("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83","url").send({ from: accounts[0] })
+            const result: Type = await contract.methods.requestAuthentication("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d","url").send({ from: accounts[0] })
             return result
         }
 
@@ -78,19 +79,19 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         }
 
         case "confirmUser": {
-            const result: Type = await contract.methods.approveUser("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").send({ from: accounts[0] })
+            const result: Type = await contract.methods.approveUser("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d").send({ from: accounts[0] })
             console.log(result)
             return result
         }
 
         case "rejectUser": {
-            const result: Type = await contract.methods.rejectUser("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").send({ from: accounts[0] })
+            const result: Type = await contract.methods.rejectUser("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d").send({ from: accounts[0] })
             console.log(result)
             return result
         }
 
         case "addDegree": {
-            const result: Type = await contract.methods.addDegree("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83", "Computer Science").send({ from: accounts[0] })
+            const result: Type = await contract.methods.addDegree("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d", "Computer Science").send({ from: accounts[0] })
             console.log(result)
             return result
         }

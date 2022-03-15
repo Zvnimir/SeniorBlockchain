@@ -18,6 +18,18 @@ export async function loadBlockchainData_token<Type>(dataType: String, data?: Ar
             console.log(result)
             return result
         }
+
+        case "sendIntialTokens": {
+            const result: Type = await contract.methods.transfer("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d", 100).send({ from: accounts[0] })
+            console.log(result)
+            return result
+        }
+        case "sendDegreeTokens": {
+            const result: Type = await contract.methods.transfer("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d", 200).send({ from: accounts[0] })
+            console.log(result)
+            return result
+        }
+
         
         default: {
             return null

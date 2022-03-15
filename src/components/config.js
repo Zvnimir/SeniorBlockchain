@@ -1,4 +1,4 @@
-export const SMART_CONTRACT_ADDRESS = '0xd86BD99da142fB0303273f7a9D1D090f43F0261e'
+export const SMART_CONTRACT_ADDRESS = '0xDFB2093B1404624Fd9963e856D6B4144bbc4999b'
 
 export const SMART_CONTRACT_ABI = [{
         "inputs": [],
@@ -568,6 +568,11 @@ export const SMART_CONTRACT_ABI = [{
                 "internalType": "address",
                 "name": "_address",
                 "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "_documnetLink",
+                "type": "string"
             }
         ],
         "name": "register",
