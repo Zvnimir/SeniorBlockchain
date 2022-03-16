@@ -112,9 +112,9 @@ function UserDisplay({ user, papers }: UserProps) {
 
   const renderAuthButton = () => {
     if (userState.confirmed) {
-      return  <Alert severity="success">The user is confirmed </Alert>;
+      return  <Alert severity="success">The user is verified </Alert>;
     } else {
-      return  <Alert severity="error">The user is not confirmed </Alert>;
+      return  <Alert severity="error">The user is not verified </Alert>;
     }
   }
 
@@ -129,53 +129,9 @@ function UserDisplay({ user, papers }: UserProps) {
 
   return (
     <div className="App">
-      <Typography variant="h3" component="div">
-        User Page
-      </Typography>
       <div className="centered">
         <Grid container spacing={20}>
-          <Grid item xs={6}>
-            <List
-              sx={{
-                width: "100%",
-                maxWidth: 360,
-                bgcolor: "background.paper",
-                overflow: "auto",
-                maxHeight: 350,
-                "& ul": { padding: 0 },
-              }}
-            >
-              {paperState.map((paper) => (
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/1.jpg"
-                    />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={paper.title}
-                    secondary={
-                      <React.Fragment>
-                        <Typography
-                          sx={{ display: "inline" }}
-                          component="span"
-                          variant="body2"
-                          color="text.primary"
-                        >
-                          {paper.category}
-                        </Typography>
-                        {
-                          "- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquet nunc blandit ultricies sodales Nulla nec lacus id diam finibus porttitor."
-                        }
-                      </React.Fragment>
-                    }
-                  />
-                </ListItem>
-              ))}
-            </List>
-          </Grid>
-
+        
           <Grid item xs="auto">
             <Card sx={{ maxWidth: 345 }}>
 
@@ -249,6 +205,53 @@ function UserDisplay({ user, papers }: UserProps) {
               </CardActions>
             </Card>
           </Grid>
+
+          <Grid item xs={6}>
+            <Card sx={{ width: 345, maxHeight: 462 }}>
+
+              <Alert severity="info">Papers: </Alert>
+
+              <List
+                sx={{
+                  width: "100%",
+                  bgcolor: "background.paper",
+                  overflow: "auto",
+                  height: 414,
+                  "& ul": { padding: 0 },
+                }}
+              >
+                {paperState.map((paper) => (
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="/static/images/avatar/1.jpg"
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={paper.title}
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            sx={{ display: "inline" }}
+                            component="span"
+                            variant="body2"
+                            color="text.primary"
+                          >
+                            {paper.category}
+                          </Typography>
+                          {
+                            "- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquet nunc blandit ultricies sodales Nulla nec lacus id diam finibus porttitor."
+                          }
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Card>
+          </Grid>
+
         </Grid>
       </div>
     </div>

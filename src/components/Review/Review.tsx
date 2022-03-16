@@ -11,13 +11,13 @@ type ReviewProps = {
 function ReviewDisplay({review}: ReviewProps) {
 
     return(
-            <Card sx={{ maxWidth: 450, mb: 4}} elevation={4} >
+            <Card sx={{ width: 450, mb: 4}} elevation={4} >
                 <CardHeader
                     avatar={
                     <Avatar></Avatar>
                     }
                    // title="Name Surname"
-                    title={review.authorHash}
+                    title={review.content}
                     action={
                         <ButtonGroup variant="contained" color="success" sx={{mr: 1, mt:.4}}>
                             <Button color="success"><ThumbUpIcon></ThumbUpIcon></Button>

@@ -175,7 +175,7 @@ function Register() {
 
                <Typography variant="body2" color="text.secondary">
                           In order to register, user should upload a document approval. 
-                          User will be inform via email for the approval.
+                          User will be informed via email for the approval.
                         </Typography>
                  
                </Grid>

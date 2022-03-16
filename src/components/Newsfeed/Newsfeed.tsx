@@ -6,7 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import { Card, Button, CardActions, CardContent, Grid, Box } from "@mui/material";
+import { Card, Button, CardActions, CardContent, Grid, Box, TextField, Select, MenuItem, InputLabel, FormControl, SelectChangeEvent } from "@mui/material";
 import { Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -38,6 +38,17 @@ function Newsfeed({ papers }: PapersProps) {
     const [paperState, setPaperState] = useState(papers)
     const [loading, setLoading] = useState(true);
 
+    const [category, setCategory] = React.useState('');
+    const [sort, setSort] = React.useState(10);
+
+    const handleCategory = (event: SelectChangeEvent) => {
+        setCategory(event.target.value);
+    };
+
+    const handleSort = (event: SelectChangeEvent) => {
+        setSort(event.target.value);
+    };
+
     useEffect(() => {
         //gets data from blockchain
         console.log("Someting")
@@ -60,19 +71,53 @@ function Newsfeed({ papers }: PapersProps) {
 
     return (
 
-
-
-
         <div>
-            <Container maxWidth="md">
+            <Container maxWidth="md" sx={{ marginTop: 3 }}>
+
+            <FormControl variant="standard" sx={{ m: 2, minWidth: 120, marginBottom: 3 }}>
+                <TextField id="standard-basic" label="Search" variant="standard" />
+            </FormControl>
+
+            <FormControl variant="standard" sx={{ m: 2, minWidth: 120 }}>        
+                <InputLabel id="demo-simple-select-standard-label">Category</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-standard-label"
+                    id="demo-simple-select-standard"
+                    value={category}
+                    onChange={handleCategory}
+                    label="Age"
+                    >
+                    <MenuItem value="">
+                        <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={10}>Computer Science</MenuItem>
+                    <MenuItem value={20}>Philosophy</MenuItem>
+                    <MenuItem value={30}>Psychology</MenuItem>
+                    </Select>
+            </FormControl>
+
+            <FormControl variant="standard" sx={{ m: 2, minWidth: 120 }}>        
+                <InputLabel id="demo-simple-select-standard-label">Sort</InputLabel>
+                        <Select
+                        labelId="demo-simple-select-standard-label"
+                        id="demo-simple-select-standard"
+                        value={sort}
+                        onChange={handleSort}
+                        label="Age"
+                        >
+                        <MenuItem value={10}>Recent</MenuItem>
+                        <MenuItem value={20}>Top Rated</MenuItem>
+                        <MenuItem value={20}>Controversial</MenuItem>
+                    </Select>
+            </FormControl>
 
                 {
                     paperState.map(paper => (
 
 
-                        < Card sx={{ minWidth: 275, marginTop: 2 }}>
+                        < Card sx={{ minWidth: 275, marginTop: 2, marginBottom: 3 }}>
                             <CardContent>
-                                <Typography sx={{ fontSize: 14, backgroundColor: 'success.main', borderRadius: 5, maxWidth: 150, padding: 1, textAlign: 'center', color: 'white' }} gutterBottom>
+                                <Typography sx={{ fontSize: 14, backgroundColor: '#4db6ac', borderRadius: 5, maxWidth: 150, padding: 1, textAlign: 'center', color: 'white' }} gutterBottom>
                                     {
                                         paper.category
                                     }

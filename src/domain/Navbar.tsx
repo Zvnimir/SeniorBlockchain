@@ -52,18 +52,18 @@ function Navbar() {
                 </IconButton>
 
                 
-                <Button
+                {/* <Button
                     // onClick={() => {
                     //     navigate("../user", { replace: true });
                     // }}
                 >
                   
-                </Button>
+                </Button> */}
 
                   <IconButton
                     onClick={handleClick}
                         size="small"
-                        sx={{ ml: 2 }}
+                        sx={{ ml: 1 }}
                         aria-controls={open ? 'account-menu' : undefined}
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
