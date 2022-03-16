@@ -30,6 +30,7 @@ function Edit() {
           sx={{ m: 1, width: '24ch' }}
           label="First Name"
           defaultValue="Jon"
+          variant="standard"
         />
     </div>
     <div>
@@ -37,11 +38,12 @@ function Edit() {
           id="outlined"
           sx={{ m: 1, width: '24ch' }}
           label="Last Name"
+          variant="standard"
           defaultValue="Doe"
         />
     </div>
 
-    <div>
+    {/* <div>
     <FormControl sx={{ m: 1, width: '50ch' }}  variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
@@ -57,38 +59,33 @@ function Edit() {
                 //   onMouseDown={handleMouseDownPassword}
                   edge="end"
                 >
-                  {/* {values.showPassword ? <VisibilityOff /> : <Visibility />} */}
+                  {/* {values.showPassword ? <VisibilityOff /> : <Visibility />} 
                 </IconButton>
               </InputAdornment>
             }
             label="Password"
           />
         </FormControl>
-    </div>
+    </div> */}
 
     <div>
         <TextField
           id="outlined"
           sx={{ m: 1, width: '50ch' }}
           label="Email"
+          variant="standard"
           defaultValue="jondoe@gmail.com"
         />
     </div>
 
     <div>
-    <TextField
-          id="outlined-multiline-static"
-          sx={{ m: 1, width: '50ch' }}
-          label="Bibliography"
-          multiline
-          rows={4}
-          defaultValue="Bibliography ..."
-        />
+    <TextField  sx={{ m: 1, width: '50ch' }} defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non vestibulum dolor, non dapibus dui. Vivamus non urna urna.  " id="abstract" label="Bibliography" variant="standard" multiline maxRows={4} fullWidth={true}/>
     </div>
+      
+      
+      <Button variant="contained" size="medium"  sx={{ m: 1, width: '5ch' }}>Save</Button>
     
-    <Button variant="contained" size="medium"  sx={{ m: 1, width: '5ch' }}>Save</Button>
-   
-    </Box>
+      </Box>
  
 
     </div>
