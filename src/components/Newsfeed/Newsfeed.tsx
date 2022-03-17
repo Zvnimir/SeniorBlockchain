@@ -39,7 +39,7 @@ function Newsfeed({ papers }: PapersProps) {
     const [loading, setLoading] = useState(true);
 
     const [category, setCategory] = React.useState('');
-    const [sort, setSort] = React.useState(10);
+    const [sort, setSort] = React.useState('10');
 
     const handleCategory = (event: SelectChangeEvent) => {
         setCategory(event.target.value);
