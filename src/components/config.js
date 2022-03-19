@@ -1,4 +1,4 @@
-export const SMART_CONTRACT_ADDRESS = '0xDFB2093B1404624Fd9963e856D6B4144bbc4999b'
+export const SMART_CONTRACT_ADDRESS = '0x09Ab59e282E40F6224Be1148c7113ecc8baDA853'
 
 export const SMART_CONTRACT_ABI = [{
         "inputs": [],
@@ -118,6 +118,11 @@ export const SMART_CONTRACT_ABI = [{
         "name": "getAuthoredPapers",
         "outputs": [{
             "components": [{
+                    "internalType": "uint256",
+                    "name": "id",
+                    "type": "uint256"
+                },
+                {
                     "internalType": "string",
                     "name": "authorHash",
                     "type": "string"
@@ -149,6 +154,11 @@ export const SMART_CONTRACT_ABI = [{
                 },
                 {
                     "components": [{
+                            "internalType": "uint256",
+                            "name": "id",
+                            "type": "uint256"
+                        },
+                        {
                             "internalType": "string",
                             "name": "authorHash",
                             "type": "string"
@@ -200,6 +210,11 @@ export const SMART_CONTRACT_ABI = [{
         }],
         "name": "getPaper",
         "outputs": [{
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            },
+            {
                 "internalType": "string",
                 "name": "",
                 "type": "string"
@@ -242,6 +257,11 @@ export const SMART_CONTRACT_ABI = [{
         "name": "getPaperReviews",
         "outputs": [{
             "components": [{
+                    "internalType": "uint256",
+                    "name": "id",
+                    "type": "uint256"
+                },
+                {
                     "internalType": "string",
                     "name": "authorHash",
                     "type": "string"
@@ -274,6 +294,11 @@ export const SMART_CONTRACT_ABI = [{
         "name": "getPapers",
         "outputs": [{
             "components": [{
+                    "internalType": "uint256",
+                    "name": "id",
+                    "type": "uint256"
+                },
+                {
                     "internalType": "string",
                     "name": "authorHash",
                     "type": "string"
@@ -305,6 +330,11 @@ export const SMART_CONTRACT_ABI = [{
                 },
                 {
                     "components": [{
+                            "internalType": "uint256",
+                            "name": "id",
+                            "type": "uint256"
+                        },
+                        {
                             "internalType": "string",
                             "name": "authorHash",
                             "type": "string"
