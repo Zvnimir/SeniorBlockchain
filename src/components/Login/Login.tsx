@@ -191,10 +191,26 @@ function Login(this: any) {
                             </Button>
                         
                         </Box>
+
                     </Box>
                     <Typography variant="h6" component="div" align='center' color = 'red' >
                         {error1}
                     </Typography>
+
+                    <Box display="flex"
+                        justifyContent="center"
+                        sx={{ marginTop: 2}}>
+                        
+                        <Typography>New to SeniorProject? 
+                            <Button variant="text" 
+                                onClick={() => {
+                                    navigate("../register")
+                                }}>
+                                Create an account.
+                            </Button>
+                        </Typography>
+                        
+                    </Box>
                 </Container>
             </form>
         </>

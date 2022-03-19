@@ -140,7 +140,7 @@ function Newsfeed({ papers }: PapersProps) {
                             <CardActions>
                                 <Button size="small"
                                     onClick={() => {
-                                        navigate("../paper", { replace: true });
+                                        navigate("../paper", { state: {paperId: paper.id} });
                                     }}>Learn More</Button>
                             </CardActions>
                         </Card>

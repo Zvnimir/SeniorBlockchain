@@ -197,6 +197,21 @@ function Register() {
                         </Button>
                     </Box>
                 </Box>
+                
+                <Box display="flex"
+                    justifyContent="center"
+                    sx={{ marginTop: 2}}>
+                        
+                        <Typography>Already have an account? 
+                                <Button variant="text" 
+                                    onClick={() => {
+                                        navigate("../login")
+                                    }}>
+                                    Log In.
+                                </Button>
+                        </Typography>
+                </Box>
+
             </Container>
         );
 }

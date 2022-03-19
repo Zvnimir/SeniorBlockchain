@@ -9,6 +9,7 @@ import SinglePage from '../../domain/singe-page-pdf';
 import { loadBlockchainData } from '../../domain/blockchain-connector';
 import ReviewDisplay from '../Review/Review';
 import { retrieveFiles } from '../../domain/web3-storage-client';
+import { useLocation } from 'react-router-dom';
 
 const SMART_CONTRACT_ABI = require('../config');
 const SMART_CONTRACT_ADDRESS = require('../config');
@@ -19,9 +20,12 @@ type PaperProps = {
     reviews: Review[]
 }
 
-
+type LocationState = { paperId: string }
 
 function PaperDisplay({paper, reviews}: PaperProps) {
+
+    const location = useLocation();
+    const {paperId} = location.state as LocationState
 
     const[paperState, setPaperState] = useState(paper)
 
@@ -40,8 +44,10 @@ function PaperDisplay({paper, reviews}: PaperProps) {
     }
 
     useEffect( () => {
+        console.log(paperId)
+
         // display paper data
-        loadBlockchainData<Paper>("paper").then(result => {
+        loadBlockchainData<Paper>("paper", [paperId]).then(result => {
             if(result) {
                 setPaperState(result)
             } 
@@ -89,7 +95,7 @@ function PaperDisplay({paper, reviews}: PaperProps) {
                         { 
                         //IMPORTANT!!!!!!!!!!
                         // This is currently the only way to access varaibles becasuse the tuple gets messed up in contract to contaract communication
-                            paperState[1]
+                            paperState[2]
                         }
                         
                     </Typography>
@@ -97,13 +103,13 @@ function PaperDisplay({paper, reviews}: PaperProps) {
                         <Grid item xs={8}>
                             <Typography variant="body1" component="div">
                                 { 
-                                    paperState[2] 
+                                    paperState[3] 
                                 }
                                 
                             </Typography>
                             <Typography variant="body1" component="div" sx={{ mt: 1 }}>
                                 { 
-                                    paperState[3] 
+                                    paperState[4] 
                                 }
                             </Typography>
                         </Grid>
@@ -111,7 +117,7 @@ function PaperDisplay({paper, reviews}: PaperProps) {
                         <Grid item xs={2}>
                             <Typography variant="body1" component="div">
                                 { 
-                                    paperState[0]
+                                    paperState[1]
                                 }
                                 
                             </Typography>  
