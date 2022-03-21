@@ -19,7 +19,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
     .then(res=>{
            console.log(res) 
            account = res[0]
-           console.log("ff",account) 
+           console.log("account",account) 
     })
 
     switch(dataType) {
