@@ -113,11 +113,12 @@ function Login(this: any) {
     const onLogin = (event: React.FormEvent) => {
         event.preventDefault()
         // const { username, password } = event.target
-        
+        console.log(usernameState)
         // Call ur function here
-        loadBlockchainData("login", [usernameState, passwordState,]).then(result => 
+        loadBlockchainData("login", [usernameState, passwordState]).then(result => 
            
             { 
+          
                 navigate("../Newsfeed", { replace: true }); 
             }).catch((err) => {
                 if(err.message.includes('Incorenct username or password')){

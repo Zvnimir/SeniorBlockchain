@@ -5,13 +5,23 @@ import { User } from '../model/User';
 
 const SMART_CONTRACT_ABI = require('../components/config');
 const SMART_CONTRACT_ADDRESS = require('../components/config');
-
+//const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
+declare let window: any;
+//const account = 0;
 export async function loadBlockchainData<Type>(dataType: String, data?: Array<any>): Promise<Type | null>{
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
     const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
     contract.options.address =  '0x09Ab59e282E40F6224Be1148c7113ecc8baDA853'
+    var account = 0
     
+    window.ethereum.request({method:'eth_requestAccounts'})
+    .then(res=>{
+           console.log(res) 
+           account = res[0]
+           console.log("ff",account) 
+    })
+
     switch(dataType) {
         //user
         case "user": {
@@ -68,7 +78,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         
         //upload document to approve user
          case "requestAuthentication": {
-            const result: Type = await contract.methods.requestAuthentication("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d",data[0]).send({ from: accounts[0] })
+            const result: Type = await contract.methods.requestAuthentication("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d","url").send({ from: accounts[0] })
             return result
         }
 
@@ -101,3 +111,5 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         }
     }
  }
+
+
