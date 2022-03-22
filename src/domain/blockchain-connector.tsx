@@ -5,22 +5,24 @@ import { User } from '../model/User';
 
 const SMART_CONTRACT_ABI = require('../components/config');
 const SMART_CONTRACT_ADDRESS = require('../components/config');
-//const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
+
 declare let window: any;
-//const account = 0;
+
 export async function loadBlockchainData<Type>(dataType: String, data?: Array<any>): Promise<Type | null>{
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
     const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
     contract.options.address =  '0x09Ab59e282E40F6224Be1148c7113ecc8baDA853'
-    var account = 0
-    
-    window.ethereum.request({method:'eth_requestAccounts'})
-    .then(res=>{
-           console.log(res) 
-           account = res[0]
-           console.log("account",account) 
-    })
+    const account = await readAddress()
+   
+    async function readAddress() {
+        
+        window.ethereum.request({method:'eth_requestAccounts'})
+         .then(res=>{
+            console.log(res) 
+           })
+         return accounts[0];
+     }
 
     switch(dataType) {
         //user
@@ -68,11 +70,11 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         
         //login & regsiter
         case "login": {
-            const result: Type = await contract.methods.login(data[0],data[1],"0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").call({ from: accounts[0] })
+            const result: Type = await contract.methods.login(data[0],data[1],account).call({ from: accounts[0] })
             return result
         }
         case "register": {
-            const result: Type = await contract.methods.register(data[0], data[1], data[2], "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida neque arcu, non aliquam lectus aliquet a. Suspendisse placerat mi at erat pellentesque venenatis. Mauris eget congue libero. Aenean viverra tincidunt massa a ultrices.", data[3], "0x38Ab464C60318955c21f2d019715a3E4636645c5", "document url").call({ from: accounts[0] })
+            const result: Type = await contract.methods.register(data[0], data[1], data[2], "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida neque arcu, non aliquam lectus aliquet a. Suspendisse placerat mi at erat pellentesque venenatis. Mauris eget congue libero. Aenean viverra tincidunt massa a ultrices.", data[3], account, "document url").call({ from: accounts[0] })
             return result
         }
         
