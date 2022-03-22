@@ -74,7 +74,7 @@ function UploadPaper() {
                         <Button variant="contained" component="span" 
                             onClick={() => {
                                 // commented while testing file uplodaing to web3 storage
-                                //loadBlockchainData("uploadPaper", [titleState, categoryState, abstractState, (Number.parseInt(numberOfWordsState) / 250)])
+                                loadBlockchainData("uploadPaper", [titleState, categoryState, abstractState, (Number.parseInt(numberOfWordsState) / 250)])
                                 if(fileState) {
                                     storeFiles(fileState)
                                 }
