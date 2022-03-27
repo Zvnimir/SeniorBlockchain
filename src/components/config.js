@@ -1,4 +1,4 @@
-export const SMART_CONTRACT_ADDRESS = '0x09Ab59e282E40F6224Be1148c7113ecc8baDA853'
+export const SMART_CONTRACT_ADDRESS = '0x563072B9a104c0a4D4d3046fDC43aCcCf1971826'
 
 export const SMART_CONTRACT_ABI = [{
         "inputs": [],
@@ -111,6 +111,43 @@ export const SMART_CONTRACT_ABI = [{
     },
     {
         "inputs": [{
+                "internalType": "string",
+                "name": "_userEmial",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_fname",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_lname",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_biography",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_passwordHash",
+                "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "_address",
+                "type": "address"
+            }
+        ],
+        "name": "editUser",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
             "internalType": "address",
             "name": "_authorAddress",
             "type": "address"
@@ -166,6 +203,16 @@ export const SMART_CONTRACT_ABI = [{
                         {
                             "internalType": "uint256",
                             "name": "paperReviwed",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "likes",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "dislikes",
                             "type": "uint256"
                         },
                         {
@@ -272,6 +319,16 @@ export const SMART_CONTRACT_ABI = [{
                     "type": "uint256"
                 },
                 {
+                    "internalType": "uint256",
+                    "name": "likes",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "dislikes",
+                    "type": "uint256"
+                },
+                {
                     "internalType": "string",
                     "name": "content",
                     "type": "string"
@@ -342,6 +399,16 @@ export const SMART_CONTRACT_ABI = [{
                         {
                             "internalType": "uint256",
                             "name": "paperReviwed",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "likes",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "dislikes",
                             "type": "uint256"
                         },
                         {
@@ -698,6 +765,33 @@ export const SMART_CONTRACT_ABI = [{
             "name": "",
             "type": "bool"
         }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+                "internalType": "uint256",
+                "name": "paperId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "reviewId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "userAddress",
+                "type": "address"
+            }
+        ],
+        "name": "sendReaction",
+        "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },
