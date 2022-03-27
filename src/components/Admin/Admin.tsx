@@ -159,12 +159,12 @@ function Admin({ users }: AdminProps) {
                     onClick={() => {
 
                       if(user.confirmed && user.degree == ""){
-                        loadBlockchainData("addDegree", []).then(result => { console.log(result) });
-                        loadBlockchainData_token("sendDegreeTokens", []).then(result => { console.log(result) });
+                        loadBlockchainData("addDegree", [user.userAddress]).then(result => { console.log(result) });
+                        //loadBlockchainData_token("sendDegreeTokens", []).then(result => { console.log(result) });
 
                       } else {
-                        loadBlockchainData("confirmUser", []).then(result => { console.log(result) });
-                        loadBlockchainData_token("sendIntialTokens", []).then(result => { console.log(result) });
+                        loadBlockchainData("confirmUser", [user.userAddress]).then(result => { console.log(result) });
+                        //loadBlockchainData_token("sendIntialTokens", []).then(result => { console.log(result) });
                       }
                     }}>
                     Approve

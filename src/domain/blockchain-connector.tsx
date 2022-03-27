@@ -27,11 +27,11 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
     switch(dataType) {
         //user
         case "user": {
-            const result: Type = await contract.methods.users("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").call({ from: accounts[0] })
+            const result: Type = await contract.methods.users(account).call({ from: accounts[0] })
             return result
         }
         case "userPapers": {
-            const result: Type = await contract.methods.getAuthoredPapers("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").call({ from: accounts[0] })
+            const result: Type = await contract.methods.getAuthoredPapers(account).call({ from: accounts[0] })
             return result
         }
 
@@ -49,7 +49,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         }
         case "uploadPaper": {
             if(data != undefined) {
-                const result: Type = await contract.methods.addPaper(3, "#000", data[0], data[1], data[2], data[3], "0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").send({ from: accounts[0] })
+                const result: Type = await contract.methods.addPaper(4, "#000", data[0], data[1], data[2], data[3], account).send({ from: accounts[0] })
                 return result
             }
             return null
@@ -74,13 +74,13 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
             return result
         }
         case "register": {
-            const result: Type = await contract.methods.register(data[0], data[1], data[2], "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida neque arcu, non aliquam lectus aliquet a. Suspendisse placerat mi at erat pellentesque venenatis. Mauris eget congue libero. Aenean viverra tincidunt massa a ultrices.", data[3], account, "document url").call({ from: accounts[0] })
+            const result: Type = await contract.methods.register(data[0], data[1], data[2], "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida neque arcu, non aliquam lectus aliquet a. Suspendisse placerat mi at erat pellentesque venenatis. Mauris eget congue libero. Aenean viverra tincidunt massa a ultrices.", data[3], account, "document url").send({ from: accounts[0] })
             return result
         }
         
         //upload document to approve user
          case "requestAuthentication": {
-            const result: Type = await contract.methods.requestAuthentication("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d","url").send({ from: accounts[0] })
+            const result: Type = await contract.methods.requestAuthentication(account,"url").send({ from: accounts[0] })
             return result
         }
 
@@ -91,19 +91,19 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         }
 
         case "confirmUser": {
-            const result: Type = await contract.methods.approveUser("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d").send({ from: accounts[0] })
+            const result: Type = await contract.methods.approveUser(data[0]).send({ from: accounts[0] })
             console.log(result)
             return result
         }
 
         case "rejectUser": {
-            const result: Type = await contract.methods.rejectUser("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d").send({ from: accounts[0] })
+            const result: Type = await contract.methods.rejectUser(data[0]).send({ from: accounts[0] })
             console.log(result)
             return result
         }
 
         case "addDegree": {
-            const result: Type = await contract.methods.addDegree("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d", "Computer Science").send({ from: accounts[0] })
+            const result: Type = await contract.methods.addDegree(account, "Computer Science").send({ from: accounts[0] })
             console.log(result)
             return result
         }
