@@ -108,6 +108,12 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
             return result
         }
 
+        case "editUser": {
+            const result: Type = await contract.methods.editUser(data[0],data[1],data[2], data[3], data[4],account).send({ from: accounts[0] })
+            console.log(result)
+            return result
+        }
+
         default: {
             return null
         }
