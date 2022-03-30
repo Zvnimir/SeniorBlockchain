@@ -56,7 +56,7 @@ function UserDisplay({ user, papers }: UserProps) {
   }
 
   useEffect(() => {
-    //gets data from blockchain
+   //gets data from blockchain
     loadBlockchainData<User>("user")
       .then((result) => {
         if (result) {
@@ -156,9 +156,7 @@ function UserDisplay({ user, papers }: UserProps) {
                 </Typography>
 
                 <Typography variant="body2" color="text.secondary">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam aliquet nunc blandit ultricies sodales. Nulla nec lacus
-                  id diam finibus porttitor.
+                {userState.biography}
                 </Typography>
                 <Typography variant="body2" color="text.primary">
                   Balance is: {tokenState}

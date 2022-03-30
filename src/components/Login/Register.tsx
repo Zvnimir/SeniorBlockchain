@@ -19,6 +19,7 @@ function Register() {
     const [lastName, setLastNameState] = useState("")
     const [password, setPasswordState] = useState("")
     const [email, setEmailState] = useState("")
+    const [biography, setBiographyState] = useState("")
     const [errors, setErrors] = React.useState<{
         firstName: string,
         lastName: string,
@@ -27,9 +28,12 @@ function Register() {
         confirmedPassword: string
       }>()
     const[fileState, setFileState] = useState<FileList>()
-    const [valid, setValid] = useState('');
+    //const [valid, setValid] = useState('');
 
     
+  const handleChange = (e) => {
+    e.preventDefault();
+  };
 
     const handleChangeFirstName = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
        setFirstNameState(e.target.value)
@@ -69,6 +73,10 @@ function Register() {
            }
       }
 
+      const handleChangeBiography = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setBiographyState(e.target.value)
+       }
+
     const handleMatchedPassword = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         if(password === e.target.value){
             setErrors({ firstName: '', lastName: '', email: '', password: '', confirmedPassword: ''})
@@ -87,7 +95,7 @@ function Register() {
         event.preventDefault()
         if(fileState) {
         storeFiles(fileState)};
-        loadBlockchainData("register", [email, firstName, lastName, password]).then(result => { console.log(result) });
+        loadBlockchainData("register", [email, firstName, lastName, biography, password]).then(result => { console.log(result) });
         navigate("../login", { replace: true });
     // requestAuthentication
        // loadBlockchainData("requestAuthentication", [email, firstName, lastName, password]).then(result => { console.log(result) });
@@ -158,12 +166,14 @@ function Register() {
                     helperText={(errors?.email)}
                     required
                      />
-                    <TextField id="password" label="Password" variant="standard" fullWidth={true} onChange={handleChangePassword}
+                    <TextField id="biography" label="Biography" variant="standard" fullWidth={true} onChange={handleChangeBiography}
+                    multiline rows={3} maxRows={5} required/>
+                    <TextField id="password" label="Password" variant="standard" type="password" fullWidth={true} onChange={handleChangePassword}
                     error={Boolean(errors?.password)}
                     helperText={(errors?.password)}
                     required
                      />
-                    <TextField id="confirmpassword" label="Confirm Password" variant="standard" fullWidth={true}  onChange={handleMatchedPassword} 
+                    <TextField id="confirmpassword" label="Confirm Password" variant="standard" type="password" fullWidth={true}   onPaste={handleChange} onChange={handleMatchedPassword} 
                      error={Boolean(errors?.confirmedPassword)}
                      helperText={(errors?.confirmedPassword)}
                     required/>
