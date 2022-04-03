@@ -59,17 +59,24 @@ function PaperDisplay({paper, reviews}: PaperProps) {
                 if(result) {
                     setReviewssState(result)
                 } 
+                console.log(result)
             }).finally(() => {
                 //setLoading(false)
-                console.log(reviewsState)
-
+            
                 retrieveFiles('bafybeigcvfby7bcpfp2rkeeotqjck2slvliqsi7pjzgbtjlxag2wclyayy').then(result => {
                     if(result) {
                         setFile(result)
                     }
                 }).finally(() => {
                     setLoading(false)
-                    console.log(file)
+                    //console.log(file)
+                  // console.log(reviewContentState[0])
+                  //reviewsState.map(review => (
+                                
+                    //console.log("review",review[0])
+                     //))
+                   
+                  
                 })
             })
     
@@ -171,9 +178,9 @@ function PaperDisplay({paper, reviews}: PaperProps) {
 
                        {
                             reviewsState.map(review => (
-                               
-                                <ReviewDisplay review={review}></ReviewDisplay>
-                            ))
+                                
+                                <ReviewDisplay review={review}></ReviewDisplay> 
+                                ))
                        }
 
                         

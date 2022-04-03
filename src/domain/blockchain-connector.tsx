@@ -114,6 +114,12 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
             return result
         }
 
+        case "sendReaction": {
+            const result: Type = await contract.methods.sendReaction(data[0],data[1],data[2],account).send({ from: accounts[0] })
+            console.log(result)
+            return result
+        }
+
         default: {
             return null
         }
