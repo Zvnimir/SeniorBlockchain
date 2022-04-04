@@ -15,10 +15,18 @@ import { User } from "../../model/User";
 import { loadBlockchainData } from "../../domain/blockchain-connector";
 import { loadBlockchainData_token } from "../../domain/blockchain-connector_token";
 
+import { useRef } from "react";
+import emailjs, { init } from "@emailjs/browser";
+
 
 type AdminProps = {
   users: User[];
 };
+
+type sendEmail = {
+  email: string;
+};
+
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -63,6 +71,8 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 
 function Admin({ users }: AdminProps) {
 
+
+
   // const [numPages, setNumPages] = useState(null);
   // const [pageNumber, setPageNumber] = useState(1);
 
@@ -102,6 +112,23 @@ function Admin({ users }: AdminProps) {
     setOpen(false);
   };
 
+  init("1UTO4rF8fpJlpA6_q");
+var templateParams = {
+  email : "vegahaklicka@gmail.com",
+};
+
+const handleApprove = (e) => {
+  e.preventDefault();
+  emailjs.send("service_sq7d1pf", "template_nujhwum", templateParams , "1UTO4rF8fpJlpA6_q").then(
+    (result) => {
+      alert("Message Sent Successfully");
+      console.log(result.text);
+    },
+    (error) => {
+      console.log(error.text);
+    }
+  );
+}
 
   //makes sure that undefined states dont throw errors
   if (loading) {
@@ -139,6 +166,8 @@ function Admin({ users }: AdminProps) {
 
             {usersState.map((user) => (
 
+           
+              
               <TableRow>
                 <TableCell>
                   <p className="">{user.firstName}</p>
@@ -161,10 +190,12 @@ function Admin({ users }: AdminProps) {
                       if(user.confirmed && user.degree == ""){
                         loadBlockchainData("addDegree", [user.userAddress]).then(result => { console.log(result) });
                         //loadBlockchainData_token("sendDegreeTokens", []).then(result => { console.log(result) });
-
+                       
                       } else {
                         loadBlockchainData("confirmUser", [user.userAddress]).then(result => { console.log(result) });
                         //loadBlockchainData_token("sendIntialTokens", []).then(result => { console.log(result) });
+                         
+
                       }
                     }}>
                     Approve
@@ -179,7 +210,15 @@ function Admin({ users }: AdminProps) {
                     Reject
                   </Button>
                 </TableCell>
+                <TableCell>
+                <button type="button" className="btn" onClick={handleApprove} >Send </button>
+
+                 
+            
+
+                </TableCell>
               </TableRow>
+              
 
             ))}
 
