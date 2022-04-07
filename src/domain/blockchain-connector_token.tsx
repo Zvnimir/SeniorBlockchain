@@ -28,12 +28,14 @@ export async function loadBlockchainData_token<Type>(dataType: String, data?: Ar
             return result
         }
         case "uploadPaper": {
+            // DONT CHANGE THE ADRESS - IT SHOULD BE THE CREATOR
             // transfers tokens to the creators account or later staking pool - the entered address is the creators
             const result: Type = await contract.methods.transfer("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83", 100).send({ from: accounts[0] })
             console.log(result)
             return result
         }
         case "uploadReview": {
+            // DONT CHANGE THE ADRESS - IT SHOULD BE THE CREATOR
             // transfers tokens from sender to recipent - parameters (sender adress, recipent adress, number of tokens)
             const result: Type = await contract.methods.transfer("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83", 10).send({ from: accounts[0] })
             console.log(result)

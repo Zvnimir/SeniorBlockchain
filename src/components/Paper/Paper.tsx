@@ -163,6 +163,7 @@ function PaperDisplay({paper, reviews}: PaperProps) {
                                     onClick={() => {
                                         loadBlockchainData_token("uploadReview")
 
+                                        //TODO: after the first one is complete
                                         loadBlockchainData("uploadReview", ["#000", "0", reviewContentState])
                                 }}>
                                     Post
