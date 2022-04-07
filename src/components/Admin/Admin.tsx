@@ -23,9 +23,45 @@ type AdminProps = {
   users: User[];
 };
 
-type sendEmail = {
-  email: string;
-};
+
+// init("1UTO4rF8fpJlpA6_q");
+//   var templateParams = {
+//     email : emailAddres,
+//   };
+  
+//   const handleApprove = (e) => {
+//     e.preventDefault();
+//     emailjs.send("service_sq7d1pf", "template_nujhwum", templateParams , "1UTO4rF8fpJlpA6_q").then(
+//       (result) => {
+//         alert("Message Sent Successfully");
+//         console.log(result.text);
+//       },
+//       (error) => {
+//         console.log(error.text);
+//       }
+//     );
+//   }
+
+
+  function handleApprove(emailAddres,stateVerification,usernameVer) {
+    init("1UTO4rF8fpJlpA6_q");
+    var templateParams = {
+      email : emailAddres,
+      state : stateVerification,
+      username : usernameVer
+    };
+
+    // e.preventDefault();
+    emailjs.send("service_sq7d1pf", "template_nujhwum", templateParams , "1UTO4rF8fpJlpA6_q").then(
+      (result) => {
+        alert("Message Sent Successfully");
+        console.log(result.text);
+      },
+      (error) => {
+        console.log(error.text);
+      }
+    );
+  }
 
 
 
@@ -112,23 +148,6 @@ function Admin({ users }: AdminProps) {
     setOpen(false);
   };
 
-  init("1UTO4rF8fpJlpA6_q");
-var templateParams = {
-  email : "vegahaklicka@gmail.com",
-};
-
-const handleApprove = (e) => {
-  e.preventDefault();
-  emailjs.send("service_sq7d1pf", "template_nujhwum", templateParams , "1UTO4rF8fpJlpA6_q").then(
-    (result) => {
-      alert("Message Sent Successfully");
-      console.log(result.text);
-    },
-    (error) => {
-      console.log(error.text);
-    }
-  );
-}
 
   //makes sure that undefined states dont throw errors
   if (loading) {
@@ -194,8 +213,7 @@ const handleApprove = (e) => {
                       } else {
                         loadBlockchainData("confirmUser", [user.userAddress]).then(result => { console.log(result) });
                         //loadBlockchainData_token("sendIntialTokens", []).then(result => { console.log(result) });
-                         
-                        // send confirmation email to user
+                         handleApprove(user.email,"approved",user.lastName);
 
                         console.log(user.email)
                       }
@@ -208,18 +226,11 @@ const handleApprove = (e) => {
                   <Button variant="contained" color="error"
                     onClick={() => {
                       loadBlockchainData("rejectUser", []).then(result => { console.log(result) });
-                    // send rejection email to suer
-                    
+                      handleApprove(user.email,"rejected", user.lastName);
+
                     }}>
                     Reject
                   </Button>
-                </TableCell>
-                <TableCell>
-                <button type="button" className="btn" onClick={handleApprove} >Send </button>
-
-                 
-            
-
                 </TableCell>
               </TableRow>
               
