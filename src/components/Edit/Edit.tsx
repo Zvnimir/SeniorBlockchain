@@ -1,20 +1,10 @@
 //import * as React from 'react';
 import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Typography from '@mui/material/Typography';
 import Button from "@mui/material/Button";
 import { User } from "../../model/User";
-import React, { useEffect, useState, ChangeEvent } from "react";
+import { useEffect, useState, ChangeEvent } from "react";
 import { loadBlockchainData } from "../../domain/blockchain-connector";
 
 type UserProps = {
@@ -66,12 +56,7 @@ useEffect(() => {
   const handleChangeBiography= (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setBiographyState(e.target.value)
   }
- 
 
-  const onSave = () => {
-    //loadBlockchainData("editUser", [emailState, firstNameState, lastNameState, biographyState]).then(result => { console.log(result) });
-    console.log("hello")
-  }
 return (
     <div className="App">
   
@@ -99,32 +84,7 @@ return (
           onChange={handleChangeLastName}
         />
    
-    {/* <div>
-    <FormControl sx={{ m: 1, width: '50ch' }}  variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-password"
-            // type={values.showPassword ? 'text' : 'password'}
-            // value={values.password}
-            // onChange={handleChange('password')}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                //   onClick={handleClickShowPassword}
-                //   onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {/* {values.showPassword ? <VisibilityOff /> : <Visibility />} 
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Password"
-          />
-        </FormControl>
-    </div> */}
-
-   
+      
         <TextField
           id="outlined"
           sx={{ m: 1, width: '50ch' }}
@@ -143,10 +103,7 @@ return (
       <Button variant="contained" size="medium"  sx={{ m: 1, width: '5ch' }}onClick={() => {
                                         loadBlockchainData("editUser", [emailState, firstNameState, lastNameState, biographyState, userState.passwordHash]).then(result => { console.log(result) });
                                     }}>Save</Button>
-    
       </Box>
- 
- 
     </div>
 
   );

@@ -1,7 +1,4 @@
 import Web3 from 'web3'
-import { Paper } from '../model/Paper';
-import { User } from '../model/User';
-
 
 const SMART_CONTRACT_ABI = require('../components/config');
 const SMART_CONTRACT_ADDRESS = require('../components/config');

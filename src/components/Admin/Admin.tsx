@@ -195,7 +195,9 @@ const handleApprove = (e) => {
                         loadBlockchainData("confirmUser", [user.userAddress]).then(result => { console.log(result) });
                         //loadBlockchainData_token("sendIntialTokens", []).then(result => { console.log(result) });
                          
+                        // send confirmation email to user
 
+                        console.log(user.email)
                       }
                     }}>
                     Approve
@@ -206,6 +208,8 @@ const handleApprove = (e) => {
                   <Button variant="contained" color="error"
                     onClick={() => {
                       loadBlockchainData("rejectUser", []).then(result => { console.log(result) });
+                    // send rejection email to suer
+                    
                     }}>
                     Reject
                   </Button>
@@ -222,41 +226,9 @@ const handleApprove = (e) => {
 
             ))}
 
-
-
-            {/* <TableRow>
-              <TableCell>
-                <p className="header">User name... </p>
-              </TableCell>
-              <TableCell>
-                <button type="button" className="btn" onClick={handleClickOpen} >View Document</button>
-              </TableCell>
-              <TableCell>
-                <p className="">Degree in X Catrgory </p>
-              </TableCell>
-              <TableCell>
-                <Button variant="contained" color="success">
-                  Approve
-                </Button>
-
-              </TableCell>
-              <TableCell>
-                <Button variant="contained" color="error">
-                  Reject
-                </Button>
-              </TableCell>
-            </TableRow> */}
-
           </Container>
         </CardContent>
       </Card>
-
-
-
-
-
-
-
 
 
       <BootstrapDialog

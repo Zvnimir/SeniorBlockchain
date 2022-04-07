@@ -7,6 +7,7 @@ import { Review } from '../../model/Review'
 import { Document, Page } from 'react-pdf';
 import SinglePage from '../../domain/singe-page-pdf';
 import { loadBlockchainData } from '../../domain/blockchain-connector';
+import { loadBlockchainData_token } from "../../domain/blockchain-connector_token";
 import ReviewDisplay from '../Review/Review';
 import { retrieveFiles } from '../../domain/web3-storage-client';
 import { useLocation } from 'react-router-dom';
@@ -160,6 +161,8 @@ function PaperDisplay({paper, reviews}: PaperProps) {
                             >
                                 <Button variant="contained" component="span" 
                                     onClick={() => {
+                                        loadBlockchainData_token("uploadReview")
+
                                         loadBlockchainData("uploadReview", ["#000", "0", reviewContentState])
                                 }}>
                                     Post

@@ -1,6 +1,4 @@
 import Web3 from 'web3'
-import { Paper } from '../model/Paper';
-import { User } from '../model/User';
 
 const SMART_CONTRACT_ABI = require('../components/config_token');
 const SMART_CONTRACT_ADDRESS = require('../components/config_token');
@@ -14,23 +12,33 @@ export async function loadBlockchainData_token<Type>(dataType: String, data?: Ar
     switch(dataType) {
         //user
         case "balance": {
-            const result: Type = await contract.methods.balanceOf("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83").call({ from: accounts[0] })
+            const result: Type = await contract.methods.balanceOf("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d").call({ from: accounts[0] })
             console.log(result)
             return result
         }
 
         case "sendIntialTokens": {
-            const result: Type = await contract.methods.transfer("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d", 100).send({ from: accounts[0] })
+            const result: Type = await contract.methods.transfer("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d", 1000).send({ from: accounts[0] })
             console.log(result)
             return result
         }
         case "sendDegreeTokens": {
-            const result: Type = await contract.methods.transfer("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d", 200).send({ from: accounts[0] })
+            const result: Type = await contract.methods.transfer("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d", 2000).send({ from: accounts[0] })
             console.log(result)
             return result
         }
-
-        
+        case "uploadPaper": {
+            // transfers tokens to the creators account or later staking pool - the entered address is the creators
+            const result: Type = await contract.methods.transfer("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83", 100).send({ from: accounts[0] })
+            console.log(result)
+            return result
+        }
+        case "uploadReview": {
+            // transfers tokens from sender to recipent - parameters (sender adress, recipent adress, number of tokens)
+            const result: Type = await contract.methods.transfer("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83", 10).send({ from: accounts[0] })
+            console.log(result)
+            return result
+        }
         default: {
             return null
         }
