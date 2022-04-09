@@ -19,8 +19,17 @@ function makeStorageClient() {
 export async function storeFiles(filePath: FileList) {
     const client = makeStorageClient()
     const cid = await client.put(filePath)
+    const res = await client.get(cid)
     console.log('stored files with cid:', cid)
-    return cid
+    console.log('Url:', res.url)
+   return cid
+}
+
+export async function getUrl(filePath: FileList) {
+  const client = makeStorageClient()
+  const cid = await client.put(filePath)
+  const res = await client.get(cid)
+  return res.url
 }
 
 export async function retrieveFiles(cid: string) {

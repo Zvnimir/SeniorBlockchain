@@ -16,9 +16,9 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         
         window.ethereum.request({method:'eth_requestAccounts'})
          .then(res=>{
-            console.log(res) 
+            console.log("account",res)  
            })
-         return accounts[0];
+         return  accounts[0];
      }
 
     switch(dataType) {
@@ -55,7 +55,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         //review
         case "uploadReview": {
             if(data != undefined) {
-                const result: Type = await contract.methods.addReview("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83", data[1], data[2]).send({ from: accounts[0] })
+                const result: Type = await contract.methods.addReview(account, data[1], data[2]).send({ from: accounts[0] })
                 return result
             }
             return null
@@ -77,7 +77,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         
         //upload document to approve user
          case "requestAuthentication": {
-            const result: Type = await contract.methods.requestAuthentication(account,"url").send({ from: accounts[0] })
+            const result: Type = await contract.methods.requestAuthentication(account,data[0]).send({ from: accounts[0] })
             return result
         }
 
