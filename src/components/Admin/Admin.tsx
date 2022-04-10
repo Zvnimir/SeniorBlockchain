@@ -225,7 +225,7 @@ function Admin({ users }: AdminProps) {
                 <TableCell>
                   <Button variant="contained" color="error"
                     onClick={() => {
-                      loadBlockchainData("rejectUser", []).then(result => { console.log(result) });
+                      loadBlockchainData("rejectUser", [user.userAddress]).then(result => { console.log(result) });
                       handleApprove(user.email,"rejected", user.lastName);
 
                     }}>

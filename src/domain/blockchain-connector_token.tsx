@@ -7,7 +7,7 @@ export async function loadBlockchainData_token<Type>(dataType: String, data?: Ar
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
     const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
-    contract.options.address =  '0x391FeFB1F69743999cb6102bDEB15bF2DA8099FC'
+    contract.options.address =  '0x0A2eaD28469f8Ae961189Bc26CC8DC047c9dF853'
     const account = await readAddress()
    
     async function readAddress() {
@@ -22,6 +22,7 @@ export async function loadBlockchainData_token<Type>(dataType: String, data?: Ar
         //user
         case "balance": {
             const result: Type = await contract.methods.balanceOf(account).call({ from: accounts[0] })
+            console.log(account)
             console.log(result)
             return result
         }

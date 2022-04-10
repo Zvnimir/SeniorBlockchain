@@ -1,11 +1,6 @@
-export const SMART_CONTRACT_ADDRESS = '0x563072B9a104c0a4D4d3046fDC43aCcCf1971826'
+export const SMART_CONTRACT_ADDRESS = '0x1B669cf856738cbd68412c5B53276e525E711459'
 
 export const SMART_CONTRACT_ABI = [{
-        "inputs": [],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-    },
-    {
         "inputs": [{
                 "internalType": "address",
                 "name": "_userAdress",
@@ -145,6 +140,171 @@ export const SMART_CONTRACT_ABI = [{
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
+    },
+    {
+        "inputs": [{
+                "internalType": "string",
+                "name": "_userEmial",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_fname",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_lname",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_biografy",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_passwordHash",
+                "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "_address",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "_documnetLink",
+                "type": "string"
+            }
+        ],
+        "name": "register",
+        "outputs": [{
+            "components": [{
+                    "internalType": "string",
+                    "name": "email",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "firstName",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "lastName",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "passwordHash",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "biography",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "degree",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "profession",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "balance",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "userAddress",
+                    "type": "address"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "confirmed",
+                    "type": "bool"
+                }
+            ],
+            "internalType": "struct Structs.User",
+            "name": "",
+            "type": "tuple"
+        }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "address",
+            "name": "_userAdress",
+            "type": "address"
+        }],
+        "name": "rejectUser",
+        "outputs": [{
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+        }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+                "internalType": "address",
+                "name": "_userAdress",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "_linkToDocument",
+                "type": "string"
+            }
+        ],
+        "name": "requestAuthentication",
+        "outputs": [{
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+        }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+                "internalType": "uint256",
+                "name": "paperId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "reviewId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "userAddress",
+                "type": "address"
+            }
+        ],
+        "name": "sendReaction",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
     },
     {
         "inputs": [{
@@ -633,166 +793,6 @@ export const SMART_CONTRACT_ABI = [{
             "type": "tuple"
         }],
         "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [{
-                "internalType": "string",
-                "name": "_userEmial",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_fname",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_lname",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_biografy",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_passwordHash",
-                "type": "string"
-            },
-            {
-                "internalType": "address",
-                "name": "_address",
-                "type": "address"
-            },
-            {
-                "internalType": "string",
-                "name": "_documnetLink",
-                "type": "string"
-            }
-        ],
-        "name": "register",
-        "outputs": [{
-            "components": [{
-                    "internalType": "string",
-                    "name": "email",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "firstName",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "lastName",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "passwordHash",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "biography",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "degree",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "profession",
-                    "type": "string"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "balance",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "address",
-                    "name": "userAddress",
-                    "type": "address"
-                },
-                {
-                    "internalType": "bool",
-                    "name": "confirmed",
-                    "type": "bool"
-                }
-            ],
-            "internalType": "struct Structs.User",
-            "name": "",
-            "type": "tuple"
-        }],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [{
-            "internalType": "address",
-            "name": "_userAdress",
-            "type": "address"
-        }],
-        "name": "rejectUser",
-        "outputs": [{
-            "internalType": "bool",
-            "name": "",
-            "type": "bool"
-        }],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [{
-                "internalType": "address",
-                "name": "_userAdress",
-                "type": "address"
-            },
-            {
-                "internalType": "string",
-                "name": "_linkToDocument",
-                "type": "string"
-            }
-        ],
-        "name": "requestAuthentication",
-        "outputs": [{
-            "internalType": "bool",
-            "name": "",
-            "type": "bool"
-        }],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [{
-                "internalType": "uint256",
-                "name": "paperId",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "reviewId",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "value",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "userAddress",
-                "type": "address"
-            }
-        ],
-        "name": "sendReaction",
-        "outputs": [],
-        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
