@@ -40,7 +40,7 @@ export default function SinglePage(props) {
       </Box>
       
       <Box sx={{display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-        <Typography variant="body1" component="div" sx={{mt: 2, mb: 2}}>
+        <Typography variant="body1" component="div" sx={{mt: 2, mb: 1.3}}>
           {pageNumber || (numPages ? 1 : "--")} / {numPages || "--"}
         </Typography>
         <Box>

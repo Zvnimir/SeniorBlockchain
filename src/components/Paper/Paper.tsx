@@ -108,22 +108,22 @@ function PaperDisplay({ paper, reviews }: PaperProps) {
                     }
                 </Typography>
             </Box>
-            <Grid container spacing={2} sx={{ m: 2 }}>
+            <Grid container sx={{ m: 2, display: 'flex', flexDirection: "column", }}>
 
-                    <Typography fontWeight={'light'} sx={{ fontSize: 14, backgroundColor: '#4db6ac', borderRadius: 5, maxWidth: 150, padding: 1, textAlign: 'center', color: 'white', boxShadow: 2 }}>
+                    <Typography fontWeight={'light'} sx={{ fontSize: 14, backgroundColor: '#4db6ac', maxWidth: 150 ,borderRadius: 5, padding: 1, textAlign: 'center', color: 'white', boxShadow: 2 }}>
                         {
                             paperState[3]
                         }
                     </Typography>
-                    <Typography variant="body1" component="div" sx={{ mt: 2.5 }}>
+                    <Typography fontWeight={'light'} variant="body1" component="div" sx={{ mt: 2.5 }}>
                         {
                             paperState[4]
                         }
                     </Typography>
             </Grid>
 
-            <Box sx={{display: 'flex', justifyContent: 'center', mb: 2, width: '100%', height: 838 }}>
-                <Box sx={{backgroundColor: '#F3EDF7', borderRadius: 5, padding: '3em', boxShadow: 3, width: 420}}>
+            <Box sx={{display: 'flex', justifyContent: 'center', mb: 2, width: '100%', height: 800, mt: 5 }}>
+                <Box sx={{backgroundColor: '#F3EDF7', borderRadius: 5, padding: '2.5em', boxShadow: 3, width: 420}}>
                     <SinglePage pdf={file}></SinglePage>
                 </Box>
             </Box>
@@ -138,8 +138,8 @@ function PaperDisplay({ paper, reviews }: PaperProps) {
                     }}
                     noValidate
                 >
-                    <Typography variant="body2" color="text.secondary">
-                        Post a review as <Link href="user">Username</Link>
+                    <Typography fontWeight={'light'} variant="body2" color="text.secondary">
+                        Post a review
                     </Typography>
 
                     <TextField id="review" hiddenLabel placeholder="What are your thoughts?" multiline rows={6} fullWidth={true} variant="filled" onChange={handleChangeReview} />
