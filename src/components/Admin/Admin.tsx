@@ -115,13 +115,13 @@ function Admin({ users }: AdminProps) {
 
   const [usersState, setUsersState] = useState(users);
   const [loading, setLoading] = useState(true);
-  //const [fileUrl, setUrl] = useState("");
+  const [fileUrl, setUrl] = useState("");
   //   function onDocumentLoadSuccess({ numPages }) {
   //     setNumPages(numPages);
   //   }
 
 
-  useEffect(() => {
+useEffect(() => {
     //gets data from blockchain
     loadBlockchainData<User[]>("unconfiredUsers").then((result) => {
       if (result) {
@@ -143,8 +143,9 @@ function Admin({ users }: AdminProps) {
 
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (url: String) => {
     setOpen(true);
+    setUrl(url.toString());
   };
   const handleClose = () => {
     setOpen(false);
@@ -195,7 +196,7 @@ function Admin({ users }: AdminProps) {
                 </TableCell>
                 <TableCell>
 
-                  <button type="button" className="btn" onClick={handleClickOpen} >View Document</button>
+                  <button type="button" className="btn" onClick={() => handleClickOpen(user.fileUrl)} >View Document</button>
 
                 </TableCell>
                 <TableCell>
@@ -243,7 +244,7 @@ function Admin({ users }: AdminProps) {
         </CardContent>
       </Card>
 
-      {usersState.map((user) => (
+     
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -254,7 +255,7 @@ function Admin({ users }: AdminProps) {
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <div>
-              <SinglePage pdf={user.fileUrl}></SinglePage>
+              <SinglePage pdf={fileUrl}></SinglePage>
           </div>
 
 
@@ -266,7 +267,7 @@ function Admin({ users }: AdminProps) {
           </Button>
         </DialogActions>
       </BootstrapDialog>
-))}
+
 
 
      </div>
