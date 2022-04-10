@@ -56,7 +56,7 @@ function UserDisplay({ user, papers }: UserProps) {
   }
 
   useEffect(() => {
-   //gets data from blockchain
+    //gets data from blockchain
     loadBlockchainData<User>("user")
       .then((result) => {
         if (result) {
@@ -67,40 +67,40 @@ function UserDisplay({ user, papers }: UserProps) {
       })
       .finally(() => {
         loadBlockchainData<Paper[]>("userPapers")
-        .then((result) => {
-          if (result) {
-            setPaperState(result);
-            // console.log(result);
-            result.forEach((person) => {
-              console.log(person);
-            });
-  
-            //console.log(paperState[0].title);
-          }
-          //once we get the data we set loading to false
-        })
-        .finally(() => {
-          loadBlockchainData_token<number>("balance")
-      .then((result) => {
-        if (result) {
-          // userState.balance = result;
-          setTokenState(result)
-          console.log(result);
-          //result.forEach((person) => { console.log(person); });
-          // userState.balance = result;
-          //console.log(paperState[0].title);
-        } else {
-          console.log("Sipak");
-        }
-        //once we get the data we set loading to false
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-        });
+          .then((result) => {
+            if (result) {
+              setPaperState(result);
+              // console.log(result);
+              result.forEach((person) => {
+                console.log(person);
+              });
+
+              //console.log(paperState[0].title);
+            }
+            //once we get the data we set loading to false
+          })
+          .finally(() => {
+            loadBlockchainData_token<number>("balance")
+              .then((result) => {
+                if (result) {
+                  // userState.balance = result;
+                  setTokenState(result)
+                  console.log(result);
+                  //result.forEach((person) => { console.log(person); });
+                  // userState.balance = result;
+                  //console.log(paperState[0].title);
+                } else {
+                  console.log("Sipak");
+                }
+                //once we get the data we set loading to false
+              })
+              .finally(() => {
+                setLoading(false);
+              });
+          });
       });
 
-    
+
   }, []);
 
   //makes sure that undefined states dont throw errors
@@ -112,9 +112,9 @@ function UserDisplay({ user, papers }: UserProps) {
 
   const renderAuthButton = () => {
     if (userState.confirmed) {
-      return  <Alert severity="success">The user is verified </Alert>;
+      return <Alert severity="success">The user is verified </Alert>;
     } else {
-      return  <Alert severity="error">The user is not verified </Alert>;
+      return <Alert severity="error">The user is not verified </Alert>;
     }
   }
 
@@ -131,12 +131,10 @@ function UserDisplay({ user, papers }: UserProps) {
     <div className="App">
       <div className="centered">
         <Grid container spacing={20}>
-        
+
           <Grid item xs="auto">
             <Card sx={{ maxWidth: 345 }}>
 
-
-             
               {renderAuthButton()}
 
               <Avatar
@@ -156,14 +154,14 @@ function UserDisplay({ user, papers }: UserProps) {
                 </Typography>
 
                 <Typography variant="body2" color="text.secondary">
-                {userState.biography}
+                  {userState.biography}
                 </Typography>
                 <Typography variant="body2" color="text.primary">
                   Balance is: {tokenState}
                 </Typography>
-                
+
                 <Typography variant="body2" color="text.primary">
-                {userState.degree}
+                  {userState.degree}
                 </Typography>
               </CardContent>
               <CardActions

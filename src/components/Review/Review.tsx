@@ -1,5 +1,4 @@
 import { Avatar, Box, Button, ButtonGroup, Card, CardContent, CardHeader, Container, Grid, Typography } from '@mui/material'
-//import React from 'react'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import { Review } from '../../model/Review';
@@ -10,15 +9,20 @@ import { loadBlockchainData } from "../../domain/blockchain-connector";
 type ReviewProps = {
     review: Review
 }
+
 type LocationState = { paperId: string }
+
 function ReviewDisplay({review}: ReviewProps) {
+
     const location = useLocation();
     const {paperId} = location.state as LocationState
     const [disable, setDisable] = React.useState(false);
+
     useEffect( () => {
         console.log("id of paper",paperId)
         console.log("id of review",review.reviewId)
     }) 
+
     return(
             <Card sx={{ width: 450, mb: 4}} elevation={4} >
                 <CardHeader
