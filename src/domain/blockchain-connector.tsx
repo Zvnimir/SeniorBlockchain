@@ -81,6 +81,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         //upload document to approve user
          case "requestAuthentication": {
             const result: Type = await contract.methods.requestAuthentication(account,data[0]).send({ from: accounts[0] })
+            console.log(data[0])
             return result
         }
 

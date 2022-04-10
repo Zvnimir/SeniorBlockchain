@@ -43,6 +43,7 @@ function UserDisplay({ user, papers }: UserProps) {
   const [fileState, setFileState] = useState<FileList>()
   const [tokenState, setTokenState] = useState(0);
   const [fileUrl, setUrl] = useState("");
+  
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -51,20 +52,24 @@ function UserDisplay({ user, papers }: UserProps) {
     setOpen(false);
   };
 
-  const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
+const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target.files) {
-      setFileState(e.target.files)
+     // setFileState(e.target.files)
+     console.log("heo")
       getUrl(e.target.files).then((result) => {
         if (result) {
           setUrl(result);
            console.log(result)
+           //setCondition(true)
           } else {
           console.log("url is not loading");
         }
         //once we get the data we set loading to false
       })
+      setFileState(e.target.files)
       
     }
+    
   }
 
   useEffect(() => {
@@ -200,11 +205,22 @@ function UserDisplay({ user, papers }: UserProps) {
                   <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={() => {
-                      console.log(fileUrl)
-                      loadBlockchainData("requestAuthentication", [fileUrl]).then(result => { console.log(result) });
+                 //loadBlockchainData("requestAuthentication", ["https://api.web3.storage/car/bafybeibtas472lw5up3k52pk4kei6jhcfll6bb2nqroxaf4ggfuljnjrva"]).then(result => { console.log(result) });
+                     // console.log(fileUrl)
                       if (fileState) {
                        storeFiles(fileState)
+                      // setUrl(fileUrl)
+                      console.log(fileUrl)
                       };
+                     
+                     
+                      //loadBlockchainData("requestAuthentication", [fileUrl]).then(result => { console.log(result) });
+                     //console.log("hello",fileUrl)
+                      //if(fileUrl){
+                      //loadBlockchainData("requestAuthentication", [fileUrl]).then(result => { console.log(result) });
+                      //}
+                      //console.log(fileUrl)
+                      //loadBlockchainData("requestAuthentication", [fileUrl]).then(result => { console.log(result) });
                       //getUrl(fileState)
                        setOpen(false)
                     }}>Ok</Button>

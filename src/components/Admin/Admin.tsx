@@ -243,7 +243,7 @@ function Admin({ users }: AdminProps) {
         </CardContent>
       </Card>
 
-
+      {usersState.map((user) => (
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -254,9 +254,7 @@ function Admin({ users }: AdminProps) {
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <div>
-          {usersState.map((user) => (
               <SinglePage pdf={user.fileUrl}></SinglePage>
-              ))}
           </div>
 
 
@@ -268,10 +266,10 @@ function Admin({ users }: AdminProps) {
           </Button>
         </DialogActions>
       </BootstrapDialog>
+))}
 
 
-
-    </div>
+     </div>
 
 
   );
