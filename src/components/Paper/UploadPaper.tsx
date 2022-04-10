@@ -82,7 +82,7 @@ function UploadPaper() {
 
                                  //}
                                })
-                            //TODO: Call this method after the tokens have been transfered
+                               //TODO: Call this method after the tokens have been transfered
                                 //loadBlockchainData("uploadPaper", [titleState, categoryState, abstractState, (Number.parseInt(numberOfWordsState) / 250)])
                                 if(fileState) {
                                     storeFiles(fileState)

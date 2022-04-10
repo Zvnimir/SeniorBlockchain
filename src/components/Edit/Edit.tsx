@@ -24,6 +24,7 @@ function Edit({ user }: UserProps) {
   const [open, setOpen] = useState(false);
   const [fileUrl, setUrl] = useState("");
   const [fileState, setFileState] = useState<FileList>()
+  const [tester, setCondition] = useState(false);
 
   const Input = styled('input')({
     display: 'none',
@@ -45,9 +46,8 @@ function Edit({ user }: UserProps) {
         if (result) {
           setUrl(result);
           console.log(result)
-          // send the request from here]
-
-          
+          console.log(fileUrl)
+          loadBlockchainData("requestAuthentication", [result]).then(result => { console.log(result) });
         } else {
           console.log("url is not loading");
         }
@@ -153,8 +153,9 @@ function Edit({ user }: UserProps) {
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
             <Button onClick={() => {
+              
               console.log(fileUrl)
-              loadBlockchainData("requestAuthentication", [fileUrl]).then(result => { console.log(result) });
+              //loadBlockchainData("requestAuthentication", [fileUrl]).then(result => { console.log(result) });
               if (fileState) {
                 storeFiles(fileState)
               };

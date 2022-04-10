@@ -115,13 +115,13 @@ function Admin({ users }: AdminProps) {
 
   const [usersState, setUsersState] = useState(users);
   const [loading, setLoading] = useState(true);
-  //const [fileUrl, setUrl] = useState("");
+  const [fileUrl, setUrl] = useState("");
   //   function onDocumentLoadSuccess({ numPages }) {
   //     setNumPages(numPages);
   //   }
 
 
-  useEffect(() => {
+useEffect(() => {
     //gets data from blockchain
     loadBlockchainData<User[]>("unconfiredUsers").then((result) => {
       if (result) {
@@ -143,8 +143,9 @@ function Admin({ users }: AdminProps) {
 
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (url: String) => {
     setOpen(true);
+    setUrl(url.toString());
   };
   const handleClose = () => {
     setOpen(false);
@@ -194,9 +195,8 @@ function Admin({ users }: AdminProps) {
                   <p className="">{user.firstName}</p>
                 </TableCell>
                 <TableCell>
-                  {/* // change the url in the model based on the clicked */}
-                  
-                  <button type="button" className="btn" onClick={handleClickOpen} >View Document</button>
+
+                  <button type="button" className="btn" onClick={() => handleClickOpen(user.fileUrl)} >View Document</button>
 
                 </TableCell>
                 <TableCell>
@@ -205,7 +205,6 @@ function Admin({ users }: AdminProps) {
 
                 </TableCell>
                 <TableCell>
-
                   <Button variant="contained" color="success"
                     onClick={() => {
 
@@ -244,7 +243,7 @@ function Admin({ users }: AdminProps) {
         </CardContent>
       </Card>
 
-
+     
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -255,9 +254,7 @@ function Admin({ users }: AdminProps) {
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <div>
-          {usersState.map((user) => (
-              <SinglePage pdf={user.fileUrl}></SinglePage>
-              ))}
+              <SinglePage pdf={fileUrl}></SinglePage>
           </div>
 
 
@@ -272,7 +269,7 @@ function Admin({ users }: AdminProps) {
 
 
 
-    </div>
+     </div>
 
 
   );
