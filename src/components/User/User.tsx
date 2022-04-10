@@ -23,8 +23,13 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import ArticleIcon from "@mui/icons-material/Article";
-import { styled } from '@mui/material'
-import { storeFiles,  getUrl} from '../../domain/web3-storage-client'
+import { Box, Container, styled } from '@mui/material'
+import { storeFiles, getUrl } from '../../domain/web3-storage-client'
+import FeedRoundedIcon from '@mui/icons-material/FeedRounded';
+import CurrencyBitcoinRoundedIcon from '@mui/icons-material/CurrencyBitcoinRounded';
+import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded';
+import PaperCard from "../Paper/PaperCard";
+import { blue } from "@mui/material/colors";
 
 type UserProps = {
   user: User;
@@ -62,12 +67,13 @@ const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
            console.log(result)
            //setCondition(true)
           } else {
-          console.log("url is not loading");
-        }
+          console.log(result)
+        } 
         //once we get the data we set loading to false
       })
       setFileState(e.target.files)
       
+
     }
     
   }
@@ -112,7 +118,7 @@ const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
                 //once we get the data we set loading to false
               }).finally(() => {
                 setLoading(false);
-               });
+              });
           });
       });
 
@@ -144,8 +150,59 @@ const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
 
 
   return (
-    <div className="App">
-      <div className="centered">
+    <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Grid container spacing={1} sx={{mb: 4}}>
+        <Grid item xs={5}>
+          <Box sx={{ display: 'flex', alignItems: 'left', mt: 6, mb: 4 }}>
+
+            <Avatar
+              src={"user.png"}
+              className="userPicture"
+              style={{
+                width: 120,
+                height: 120,
+              }}
+              sx={{ mr: 6 }}
+            />
+
+            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+
+              <Typography fontWeight={'light'} variant="h5" component="div" sx={{ mb: 1, display: 'flex', alignItems: 'center' }}>
+                {userState.firstName} {userState.lastName} {(userState.confirmed == true) ? <VerifiedRoundedIcon sx={{ml: 1, color: blue[300]}}/> : ''}
+              </Typography>
+
+              <Typography fontWeight={'light'} variant="body1" color="text.secondary" sx={{ mb: .7 }}>
+                {(userState.degree != "") ? userState.degree : "No degree"}
+              </Typography>
+
+              <Box sx={{ display: 'flex' }}>
+                <Typography fontWeight={'light'} variant="body1" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', mr: 1.5 }}>
+                  <CurrencyBitcoinRoundedIcon /> {tokenState}
+                </Typography>
+                <Typography fontWeight={'light'} variant="body1" color="text.secondary" sx={{ display: 'flex', alignItems: 'center' }}>
+                  <FeedRoundedIcon /> {paperState.length}
+                </Typography>
+              </Box>
+
+            </Box>
+          </Box>
+        </Grid>
+
+        <Grid item xs={7}>
+          <Box sx={{ display: 'flex', alignItems: 'center', height: '100%', padding: 1 }}>
+            <Typography fontWeight={'light'} variant="body1" color="text.secondary">
+              {userState.biography}
+            </Typography>
+          </Box>
+        </Grid>
+      </Grid> 
+        
+      {
+        paperState.map(paper => (
+          <PaperCard paper={paper}></PaperCard>
+        ))}
+
+      {/* <div className="centered">
         <Grid container spacing={20}>
 
           <Grid item xs="auto">
@@ -153,32 +210,16 @@ const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
 
               {renderAuthButton()}
 
-              <Avatar
-                alt="The image"
-                src={"user.png"}
-                className="userPicture"
-                style={{
-                  width: 150,
-                  height: 150,
-                  margin: "auto",
-                  marginTop: 25,
-                }}
-              />
+
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                   {userState.firstName} {userState.lastName}
                 </Typography>
 
-                <Typography variant="body2" color="text.secondary">
-                  {userState.biography}
-                </Typography>
-                <Typography variant="body2" color="text.primary">
-                  Balance is: {tokenState}
-                </Typography>
+                
+                
 
-                <Typography variant="body2" color="text.primary">
-                  {userState.degree}
-                </Typography>
+                
               </CardContent>
               <CardActions
                 className="buttons"
@@ -211,6 +252,7 @@ const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
                        storeFiles(fileState)
                       // setUrl(fileUrl)
                       console.log(fileUrl)
+                        storeFiles(fileState)
                       };
                      
                      
@@ -222,7 +264,7 @@ const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
                       //console.log(fileUrl)
                       //loadBlockchainData("requestAuthentication", [fileUrl]).then(result => { console.log(result) });
                       //getUrl(fileState)
-                       setOpen(false)
+                      setOpen(false)
                     }}>Ok</Button>
                   </DialogActions>
                 </Dialog>
@@ -277,8 +319,8 @@ const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
           </Grid>
 
         </Grid>
-      </div>
-    </div>
+      </div> */}
+    </Container>
   );
 }
 
