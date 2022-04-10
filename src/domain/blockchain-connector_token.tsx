@@ -28,12 +28,12 @@ export async function loadBlockchainData_token<Type>(dataType: String, data?: Ar
         }
 
         case "sendIntialTokens": {
-            const result: Type = await contract.methods.transfer(account, 1000).send({ from: accounts[0] })
+            const result: Type = await contract.methods.transfer(data[0], 1000).send({ from: accounts[0] })
             console.log(result)
             return result
         }
         case "sendDegreeTokens": {
-            const result: Type = await contract.methods.transfer(account, 2000).send({ from: accounts[0] })
+            const result: Type = await contract.methods.transfer(data[0], 2000).send({ from: accounts[0] })
             console.log(result)
             return result
         }

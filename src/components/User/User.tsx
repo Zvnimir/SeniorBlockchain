@@ -193,7 +193,7 @@ function UserDisplay({ user, papers }: UserProps) {
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={() => {
                       
-                      //loadBlockchainData("requestAuthentication", [""]).then(result => { console.log(result) });
+                      loadBlockchainData("requestAuthentication", [""]).then(result => { console.log(result) });
                       if (fileState) {
                        storeFiles(fileState)
                       };

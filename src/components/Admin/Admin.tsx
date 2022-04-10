@@ -208,11 +208,11 @@ function Admin({ users }: AdminProps) {
 
                       if(user.confirmed && user.degree == ""){
                         loadBlockchainData("addDegree", [user.userAddress]).then(result => { console.log(result) });
-                        //loadBlockchainData_token("sendDegreeTokens", []).then(result => { console.log(result) });
+                        loadBlockchainData_token("sendDegreeTokens", [user.userAddress]).then(result => { console.log(result) });
                        
                       } else {
                         loadBlockchainData("confirmUser", [user.userAddress]).then(result => { console.log(result) });
-                         loadBlockchainData_token("sendIntialTokens", []).then(result => { console.log(result) });
+                         loadBlockchainData_token("sendIntialTokens", [user.userAddress]).then(result => { console.log(result) });
                          handleApprove(user.email,"approved",user.lastName);
 
                         console.log(user.email)
