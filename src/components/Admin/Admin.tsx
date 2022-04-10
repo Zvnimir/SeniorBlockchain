@@ -194,7 +194,8 @@ function Admin({ users }: AdminProps) {
                   <p className="">{user.firstName}</p>
                 </TableCell>
                 <TableCell>
-
+                  {/* // change the url in the model based on the clicked */}
+                  
                   <button type="button" className="btn" onClick={handleClickOpen} >View Document</button>
 
                 </TableCell>

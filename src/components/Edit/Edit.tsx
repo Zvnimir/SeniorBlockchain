@@ -45,6 +45,9 @@ function Edit({ user }: UserProps) {
         if (result) {
           setUrl(result);
           console.log(result)
+          // send the request from here]
+
+          
         } else {
           console.log("url is not loading");
         }
