@@ -29,6 +29,7 @@ import { storeFiles,  getUrl} from '../../domain/web3-storage-client'
 type UserProps = {
   user: User;
   papers: Paper[];
+  //file: FileList;
 };
 const Input = styled('input')({
   display: 'none',
@@ -41,7 +42,7 @@ function UserDisplay({ user, papers }: UserProps) {
   const [paperState, setPaperState] = useState(papers);
   const [fileState, setFileState] = useState<FileList>()
   const [tokenState, setTokenState] = useState(0);
-  const [fileUrl, getUrl] = useState<FileList>()
+  const [fileUrl, setUrl] = useState("");
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -53,7 +54,15 @@ function UserDisplay({ user, papers }: UserProps) {
   const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target.files) {
       setFileState(e.target.files)
-      getUrl(e.target.files)
+      getUrl(e.target.files).then((result) => {
+        if (result) {
+          setUrl(result);
+           console.log(result)
+          } else {
+          console.log("url is not loading");
+        }
+        //once we get the data we set loading to false
+      })
       
     }
   }
@@ -88,7 +97,7 @@ function UserDisplay({ user, papers }: UserProps) {
                 if (result) {
                   // userState.balance = result;
                   setTokenState(result)
-                  console.log(result);
+                  //console.log(result);
                   //result.forEach((person) => { console.log(person); });
                   // userState.balance = result;
                   //console.log(paperState[0].title);
@@ -96,10 +105,9 @@ function UserDisplay({ user, papers }: UserProps) {
                   console.log("Sipak");
                 }
                 //once we get the data we set loading to false
-              })
-              .finally(() => {
+              }).finally(() => {
                 setLoading(false);
-              });
+               });
           });
       });
 
@@ -192,12 +200,12 @@ function UserDisplay({ user, papers }: UserProps) {
                   <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={() => {
-                      
-                      loadBlockchainData("requestAuthentication", [""]).then(result => { console.log(result) });
+                      console.log(fileUrl)
+                      loadBlockchainData("requestAuthentication", [fileUrl]).then(result => { console.log(result) });
                       if (fileState) {
                        storeFiles(fileState)
                       };
-                      getUrl(fileState)
+                      //getUrl(fileState)
                        setOpen(false)
                     }}>Ok</Button>
                   </DialogActions>

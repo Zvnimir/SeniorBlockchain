@@ -17,6 +17,7 @@ import { loadBlockchainData_token } from "../../domain/blockchain-connector_toke
 
 import { useRef } from "react";
 import emailjs, { init } from "@emailjs/browser";
+//import {  getUrl} from '../../domain/web3-storage-client'
 
 
 type AdminProps = {
@@ -114,6 +115,7 @@ function Admin({ users }: AdminProps) {
 
   const [usersState, setUsersState] = useState(users);
   const [loading, setLoading] = useState(true);
+  //const [fileUrl, setUrl] = useState("");
   //   function onDocumentLoadSuccess({ numPages }) {
   //     setNumPages(numPages);
   //   }
@@ -252,7 +254,9 @@ function Admin({ users }: AdminProps) {
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <div>
-            <SinglePage pdf="sample.pdf"></SinglePage>
+          {usersState.map((user) => (
+              <SinglePage pdf={user.fileUrl}></SinglePage>
+              ))}
           </div>
 
 

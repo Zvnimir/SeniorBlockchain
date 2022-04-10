@@ -25,7 +25,7 @@ export async function storeFiles(filePath: FileList) {
    return cid
 }
 
-export async function getUrl(filePath: FileList) {
+export async function getUrl (filePath: FileList): Promise<string> {
   const client = makeStorageClient()
   const cid = await client.put(filePath)
   const res = await client.get(cid)
