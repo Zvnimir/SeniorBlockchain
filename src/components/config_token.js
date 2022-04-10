@@ -1,15 +1,6 @@
-export const SMART_CONTRACT_ADDRESS = '0x391FeFB1F69743999cb6102bDEB15bF2DA8099FC'
+export const SMART_CONTRACT_ADDRESS = '0x0A2eaD28469f8Ae961189Bc26CC8DC047c9dF853'
 
 export const SMART_CONTRACT_ABI = [{
-        "inputs": [{
-            "internalType": "uint256",
-            "name": "total",
-            "type": "uint256"
-        }],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-    },
-    {
         "anonymous": false,
         "inputs": [{
                 "indexed": true,
@@ -32,48 +23,6 @@ export const SMART_CONTRACT_ABI = [{
         ],
         "name": "Approval",
         "type": "event"
-    },
-    {
-        "inputs": [{
-                "internalType": "address",
-                "name": "delegate",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "numTokens",
-                "type": "uint256"
-            }
-        ],
-        "name": "approve",
-        "outputs": [{
-            "internalType": "bool",
-            "name": "",
-            "type": "bool"
-        }],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [{
-                "internalType": "address",
-                "name": "receiver",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "numTokens",
-                "type": "uint256"
-            }
-        ],
-        "name": "transfer",
-        "outputs": [{
-            "internalType": "bool",
-            "name": "",
-            "type": "bool"
-        }],
-        "stateMutability": "nonpayable",
-        "type": "function"
     },
     {
         "anonymous": false,
@@ -107,33 +56,7 @@ export const SMART_CONTRACT_ABI = [{
             },
             {
                 "internalType": "address",
-                "name": "buyer",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "numTokens",
-                "type": "uint256"
-            }
-        ],
-        "name": "transferFrom",
-        "outputs": [{
-            "internalType": "bool",
-            "name": "",
-            "type": "bool"
-        }],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [{
-                "internalType": "address",
-                "name": "owner",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "delegate",
+                "name": "spender",
                 "type": "address"
             }
         ],
@@ -148,8 +71,29 @@ export const SMART_CONTRACT_ABI = [{
     },
     {
         "inputs": [{
+                "internalType": "address",
+                "name": "spender",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "approve",
+        "outputs": [{
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+        }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
             "internalType": "address",
-            "name": "tokenOwner",
+            "name": "account",
             "type": "address"
         }],
         "name": "balanceOf",
@@ -163,39 +107,6 @@ export const SMART_CONTRACT_ABI = [{
     },
     {
         "inputs": [],
-        "name": "decimals",
-        "outputs": [{
-            "internalType": "uint8",
-            "name": "",
-            "type": "uint8"
-        }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "name",
-        "outputs": [{
-            "internalType": "string",
-            "name": "",
-            "type": "string"
-        }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "symbol",
-        "outputs": [{
-            "internalType": "string",
-            "name": "",
-            "type": "string"
-        }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
         "name": "totalSupply",
         "outputs": [{
             "internalType": "uint256",
@@ -203,6 +114,53 @@ export const SMART_CONTRACT_ABI = [{
             "type": "uint256"
         }],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+                "internalType": "address",
+                "name": "recipient",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "transfer",
+        "outputs": [{
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+        }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "recipient",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "transferFrom",
+        "outputs": [{
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+        }],
+        "stateMutability": "nonpayable",
         "type": "function"
     }
 ]

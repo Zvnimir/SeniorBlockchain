@@ -92,13 +92,10 @@ function Register() {
         storeFiles(fileState)};
 
         // register method also request initial authentification on the contract side
-        loadBlockchainData("register", [email, firstName, lastName, biography, password]).then(result => { console.log(result) });
-       
-        //TODO: display message that the account is being created and it might take a couple of minutes
-        //TODO: wait for the confirmation from metamamsk and then redirect the user
-        navigate("../login", { replace: true });
-    
-    }
+        loadBlockchainData("register", [email, firstName, lastName, biography, password]).then(result => { 
+            navigate("../login", { replace: true });
+            console.log(result) });
+       }
 
     return (
        

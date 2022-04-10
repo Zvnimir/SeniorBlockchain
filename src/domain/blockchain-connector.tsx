@@ -9,16 +9,16 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
     const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
-    contract.options.address =  '0x563072B9a104c0a4D4d3046fDC43aCcCf1971826'
+    contract.options.address =  '0x1B669cf856738cbd68412c5B53276e525E711459'
     const account = await readAddress()
-   
+   // 0x0A2eaD28469f8Ae961189Bc26CC8DC047c9dF853
     async function readAddress() {
         
         window.ethereum.request({method:'eth_requestAccounts'})
          .then(res=>{
-            console.log(res) 
+            console.log("account",res)  
            })
-         return accounts[0];
+         return  accounts[0];
      }
 
     switch(dataType) {
@@ -55,7 +55,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         //review
         case "uploadReview": {
             if(data != undefined) {
-                const result: Type = await contract.methods.addReview("0xE0B6e5538CE13841B19A022cA671a1177a3B7d83", data[1], data[2]).send({ from: accounts[0] })
+                const result: Type = await contract.methods.addReview(account, data[1], data[2]).send({ from: accounts[0] })
                 return result
             }
             return null
@@ -77,7 +77,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         
         //upload document to approve user
          case "requestAuthentication": {
-            const result: Type = await contract.methods.requestAuthentication(account,"url").send({ from: accounts[0] })
+            const result: Type = await contract.methods.requestAuthentication(account,data[0]).send({ from: accounts[0] })
             return result
         }
 

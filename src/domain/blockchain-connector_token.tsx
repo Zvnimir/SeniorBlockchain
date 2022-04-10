@@ -7,23 +7,33 @@ export async function loadBlockchainData_token<Type>(dataType: String, data?: Ar
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
     const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
-    contract.options.address =  '0x391FeFB1F69743999cb6102bDEB15bF2DA8099FC'
-    
+    contract.options.address =  '0x0A2eaD28469f8Ae961189Bc26CC8DC047c9dF853'
+    const account = await readAddress()
+   
+    async function readAddress() {
+        
+        window.ethereum.request({method:'eth_requestAccounts'})
+         .then(res=>{
+            console.log("s",res) 
+           })
+         return accounts[0];
+     }
     switch(dataType) {
         //user
         case "balance": {
-            const result: Type = await contract.methods.balanceOf("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d").call({ from: accounts[0] })
+            const result: Type = await contract.methods.balanceOf(account).call({ from: accounts[0] })
+            console.log(account)
             console.log(result)
             return result
         }
 
         case "sendIntialTokens": {
-            const result: Type = await contract.methods.transfer("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d", 1000).send({ from: accounts[0] })
+            const result: Type = await contract.methods.transfer(account, 1000).send({ from: accounts[0] })
             console.log(result)
             return result
         }
         case "sendDegreeTokens": {
-            const result: Type = await contract.methods.transfer("0x9c78997736fA83b8b254342638CcCaF3d2b01f1d", 2000).send({ from: accounts[0] })
+            const result: Type = await contract.methods.transfer(account, 2000).send({ from: accounts[0] })
             console.log(result)
             return result
         }

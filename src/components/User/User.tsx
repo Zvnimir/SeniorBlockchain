@@ -24,7 +24,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import ArticleIcon from "@mui/icons-material/Article";
 import { styled } from '@mui/material'
-import { storeFiles } from '../../domain/web3-storage-client'
+import { storeFiles,  getUrl} from '../../domain/web3-storage-client'
 
 type UserProps = {
   user: User;
@@ -41,6 +41,7 @@ function UserDisplay({ user, papers }: UserProps) {
   const [paperState, setPaperState] = useState(papers);
   const [fileState, setFileState] = useState<FileList>()
   const [tokenState, setTokenState] = useState(0);
+  const [fileUrl, getUrl] = useState<FileList>()
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -52,6 +53,8 @@ function UserDisplay({ user, papers }: UserProps) {
   const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target.files) {
       setFileState(e.target.files)
+      getUrl(e.target.files)
+      
     }
   }
 
@@ -189,12 +192,13 @@ function UserDisplay({ user, papers }: UserProps) {
                   <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={() => {
-
-                      loadBlockchainData("requestAuthentication", []).then(result => { console.log(result) });
+                      
+                      //loadBlockchainData("requestAuthentication", [""]).then(result => { console.log(result) });
                       if (fileState) {
-                        storeFiles(fileState)
+                       storeFiles(fileState)
                       };
-                      setOpen(false)
+                      getUrl(fileState)
+                       setOpen(false)
                     }}>Ok</Button>
                   </DialogActions>
                 </Dialog>

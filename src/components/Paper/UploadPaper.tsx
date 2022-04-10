@@ -75,11 +75,15 @@ function UploadPaper() {
                         <Button variant="contained" component="span" 
                             onClick={() => {
 
-                               loadBlockchainData_token("uploadPaper")
+                               loadBlockchainData_token("uploadPaper").then(result => { console.log(result) 
+                            
+                                 //if(result.isEmpty()){
+                                    loadBlockchainData("uploadPaper", [titleState, categoryState, abstractState, (Number.parseInt(numberOfWordsState) / 250)])
 
-                               //TODO: Call this method after the tokens have been transfered
-                                loadBlockchainData("uploadPaper", [titleState, categoryState, abstractState, (Number.parseInt(numberOfWordsState) / 250)])
-
+                                 //}
+                               })
+                            //TODO: Call this method after the tokens have been transfered
+                                //loadBlockchainData("uploadPaper", [titleState, categoryState, abstractState, (Number.parseInt(numberOfWordsState) / 250)])
                                 if(fileState) {
                                     storeFiles(fileState)
                                 }
