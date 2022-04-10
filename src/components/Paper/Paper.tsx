@@ -56,7 +56,7 @@ function PaperDisplay({ paper, reviews }: PaperProps) {
             //setLoading(false)
             console.log(paperState)
 
-            loadBlockchainData<Review[]>("paperReviews").then(result => {
+            loadBlockchainData<Review[]>("paperReviews", [paperId]).then(result => {
                 if (result) {
                     setReviewssState(result)
                 }
@@ -153,7 +153,7 @@ function PaperDisplay({ paper, reviews }: PaperProps) {
                                 loadBlockchainData_token("uploadReview")
 
                                 //TODO: after the first one is complete
-                                loadBlockchainData("uploadReview", ["#000", "0", reviewContentState])
+                                loadBlockchainData("uploadReview", ["#000", paperId, reviewContentState])
                             }}>
                             Post
                         </Button>
