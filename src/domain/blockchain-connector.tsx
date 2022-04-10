@@ -9,7 +9,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
     const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
-    contract.options.address =  '0x1B669cf856738cbd68412c5B53276e525E711459'
+    contract.options.address =  '0x29c7EaF351780559edbE817c8CCb6BDb1cFbA704'
     const account = await readAddress()
    // 0x0A2eaD28469f8Ae961189Bc26CC8DC047c9dF853
     async function readAddress() {
@@ -60,8 +60,10 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
             }
             return null
         }
+
+        
         case "paperReviews": {
-            const result: Type = await contract.methods.getPaperReviews(0).call({ from: accounts[0] })
+            const result: Type = await contract.methods.getPaperReviews(data[0]).call({ from: accounts[0] })
             return result
         }
         
