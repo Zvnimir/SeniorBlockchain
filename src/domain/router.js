@@ -15,6 +15,8 @@ import UploadPaper from '../components/Paper/UploadPaper';
 import Newsfeed from '../components/Newsfeed/Newsfeed';
 import Login from '../components/Login/Login';
 import Paper from '../components/Paper/Paper'
+import Guide from '../components/Guide/Guide'
+
 
 // function Router() {
 
@@ -97,6 +99,7 @@ import Paper from '../components/Paper/Paper'
                                                     <Route exact path = '/admin' element = { <Admin />} />
                                                     <Route exact path = "/newsfeed" element = { <Newsfeed />} />
                                                     <Route exact path = "/paper" element = { <Paper />} />
+                                                    <Route exact path = "/guide" element = { <Guide />} />
                                                 </Routes> 
                                             </>
                                             );
