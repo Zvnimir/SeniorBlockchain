@@ -15,10 +15,55 @@ import { User } from "../../model/User";
 import { loadBlockchainData } from "../../domain/blockchain-connector";
 import { loadBlockchainData_token } from "../../domain/blockchain-connector_token";
 
+import { useRef } from "react";
+import emailjs, { init } from "@emailjs/browser";
+//import {  getUrl} from '../../domain/web3-storage-client'
+
 
 type AdminProps = {
   users: User[];
 };
+
+
+// init("1UTO4rF8fpJlpA6_q");
+//   var templateParams = {
+//     email : emailAddres,
+//   };
+  
+//   const handleApprove = (e) => {
+//     e.preventDefault();
+//     emailjs.send("service_sq7d1pf", "template_nujhwum", templateParams , "1UTO4rF8fpJlpA6_q").then(
+//       (result) => {
+//         alert("Message Sent Successfully");
+//         console.log(result.text);
+//       },
+//       (error) => {
+//         console.log(error.text);
+//       }
+//     );
+//   }
+
+
+  function handleApprove(emailAddres,stateVerification,usernameVer) {
+    init("1UTO4rF8fpJlpA6_q");
+    var templateParams = {
+      email : emailAddres,
+      state : stateVerification,
+      username : usernameVer
+    };
+
+    // e.preventDefault();
+    emailjs.send("service_sq7d1pf", "template_nujhwum", templateParams , "1UTO4rF8fpJlpA6_q").then(
+      (result) => {
+        alert("Message Sent Successfully");
+        console.log(result.text);
+      },
+      (error) => {
+        console.log(error.text);
+      }
+    );
+  }
+
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -63,17 +108,20 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 
 function Admin({ users }: AdminProps) {
 
+
+
   // const [numPages, setNumPages] = useState(null);
   // const [pageNumber, setPageNumber] = useState(1);
 
   const [usersState, setUsersState] = useState(users);
   const [loading, setLoading] = useState(true);
+  const [fileUrl, setUrl] = useState("");
   //   function onDocumentLoadSuccess({ numPages }) {
   //     setNumPages(numPages);
   //   }
 
 
-  useEffect(() => {
+useEffect(() => {
     //gets data from blockchain
     loadBlockchainData<User[]>("unconfiredUsers").then((result) => {
       if (result) {
@@ -95,8 +143,9 @@ function Admin({ users }: AdminProps) {
 
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (url: String) => {
     setOpen(true);
+    setUrl(url.toString());
   };
   const handleClose = () => {
     setOpen(false);
@@ -139,13 +188,15 @@ function Admin({ users }: AdminProps) {
 
             {usersState.map((user) => (
 
+           
+              
               <TableRow>
                 <TableCell>
                   <p className="">{user.firstName}</p>
                 </TableCell>
                 <TableCell>
 
-                  <button type="button" className="btn" onClick={handleClickOpen} >View Document</button>
+                  <button type="button" className="btn" onClick={() => handleClickOpen(user.fileUrl)} >View Document</button>
 
                 </TableCell>
                 <TableCell>
@@ -154,17 +205,19 @@ function Admin({ users }: AdminProps) {
 
                 </TableCell>
                 <TableCell>
-
                   <Button variant="contained" color="success"
                     onClick={() => {
 
                       if(user.confirmed && user.degree == ""){
-                        loadBlockchainData("addDegree", []).then(result => { console.log(result) });
-                        loadBlockchainData_token("sendDegreeTokens", []).then(result => { console.log(result) });
-
+                        loadBlockchainData("addDegree", [user.userAddress]).then(result => { console.log(result) });
+                        loadBlockchainData_token("sendDegreeTokens", [user.userAddress]).then(result => { console.log(result) });
+                       
                       } else {
-                        loadBlockchainData("confirmUser", []).then(result => { console.log(result) });
-                        loadBlockchainData_token("sendIntialTokens", []).then(result => { console.log(result) });
+                        loadBlockchainData("confirmUser", [user.userAddress]).then(result => { console.log(result) });
+                         loadBlockchainData_token("sendIntialTokens", [user.userAddress]).then(result => { console.log(result) });
+                         handleApprove(user.email,"approved",user.lastName);
+
+                        console.log(user.email)
                       }
                     }}>
                     Approve
@@ -174,52 +227,23 @@ function Admin({ users }: AdminProps) {
                 <TableCell>
                   <Button variant="contained" color="error"
                     onClick={() => {
-                      loadBlockchainData("rejectUser", []).then(result => { console.log(result) });
+                      loadBlockchainData("rejectUser", [user.userAddress]).then(result => { console.log(result) });
+                      handleApprove(user.email,"rejected", user.lastName);
+
                     }}>
                     Reject
                   </Button>
                 </TableCell>
               </TableRow>
+              
 
             ))}
-
-
-
-            {/* <TableRow>
-              <TableCell>
-                <p className="header">User name... </p>
-              </TableCell>
-              <TableCell>
-                <button type="button" className="btn" onClick={handleClickOpen} >View Document</button>
-              </TableCell>
-              <TableCell>
-                <p className="">Degree in X Catrgory </p>
-              </TableCell>
-              <TableCell>
-                <Button variant="contained" color="success">
-                  Approve
-                </Button>
-
-              </TableCell>
-              <TableCell>
-                <Button variant="contained" color="error">
-                  Reject
-                </Button>
-              </TableCell>
-            </TableRow> */}
 
           </Container>
         </CardContent>
       </Card>
 
-
-
-
-
-
-
-
-
+     
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -230,7 +254,7 @@ function Admin({ users }: AdminProps) {
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <div>
-            <SinglePage pdf="sample.pdf"></SinglePage>
+              <SinglePage pdf={fileUrl}></SinglePage>
           </div>
 
 
@@ -245,7 +269,7 @@ function Admin({ users }: AdminProps) {
 
 
 
-    </div>
+     </div>
 
 
   );

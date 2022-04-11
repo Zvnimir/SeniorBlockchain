@@ -6,4 +6,8 @@ export interface Review {
     authorHash: string
     paperReviwed: number
     content: number
+    likes: number
+    dislikes: number
+    id: number
+
 }

@@ -11,7 +11,9 @@ export interface User {
     biography: String //c
     degree: String //c
     profession: String
-    
+    fileUrl: String
+
+    role: number
     balance: number
     userAddress: String
     confirmed: Boolean

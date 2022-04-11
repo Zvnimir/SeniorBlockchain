@@ -2,12 +2,11 @@ import { Box, Button, Container, Grid, TextField, Typography } from "@mui/materi
 import loginImage from "../../undraw_login_re_4vu2.svg"
 import './Register.css';
 import { loadBlockchainData } from '../../domain/blockchain-connector';
-import React, { ChangeEvent, ChangeEventHandler, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import ArticleIcon from '@mui/icons-material/Article';
-import { storeFiles } from '../../domain/web3-storage-client'
+import { getUrl, storeFiles } from '../../domain/web3-storage-client';
 import {styled} from '@mui/material'
 import { useNavigate } from 'react-router-dom';
-//import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 const Input = styled('input')({
     display: 'none',
@@ -19,6 +18,7 @@ function Register() {
     const [lastName, setLastNameState] = useState("")
     const [password, setPasswordState] = useState("")
     const [email, setEmailState] = useState("")
+    const [biography, setBiographyState] = useState("")
     const [errors, setErrors] = React.useState<{
         firstName: string,
         lastName: string,
@@ -27,9 +27,11 @@ function Register() {
         confirmedPassword: string
       }>()
     const[fileState, setFileState] = useState<FileList>()
-    const [valid, setValid] = useState('');
-
-    
+    const [url, setUrl] = useState("")
+    const [buttonControl, setControl] = useState(false)
+  const handleChange = (e) => {
+    e.preventDefault();
+  };
 
     const handleChangeFirstName = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
        setFirstNameState(e.target.value)
@@ -37,7 +39,6 @@ function Register() {
         setErrors({ firstName: '', lastName: '', email: '', password: '', confirmedPassword: ''})
         }else{
         setErrors({ firstName: 'Invalid format of name. Name should include only letters', lastName: '', email: '', password: '', confirmedPassword: ''})
-        //setValid('Invalid format of name. Name should include only letters')
         }
     }
 
@@ -47,7 +48,6 @@ function Register() {
             setErrors({ firstName: '', lastName: '', email: '', password: '', confirmedPassword: ''})
             }else{
                 setErrors({ firstName: '', lastName: 'Invalid format of last name. Last Name should include only letters', email: '', password: '', confirmedPassword: ''})
-            //setValid('Invalid format of last name. Last Name should include only letters')
             }
     }
 
@@ -69,6 +69,10 @@ function Register() {
            }
       }
 
+      const handleChangeBiography = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setBiographyState(e.target.value)
+       }
+
     const handleMatchedPassword = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         if(password === e.target.value){
             setErrors({ firstName: '', lastName: '', email: '', password: '', confirmedPassword: ''})
@@ -78,45 +82,33 @@ function Register() {
        }
 
     const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        if(e.target.files) {
+        if (e.target.files) {
             setFileState(e.target.files)
-        }
+            getUrl(e.target.files).then((result) => {
+              if (result) {
+                console.log(result)
+                setUrl(result)
+                setControl(true)
+                //loadBlockchainData("requestAuthentication", [result]).then(result => { console.log(result) });
+              } else {
+                console.log("url is not loading");
+              }
+              //once we get the data we set loading to false
+            })
+      
+          }
     }
 
     const onRegister = (event: React.FormEvent) => {
         event.preventDefault()
         if(fileState) {
         storeFiles(fileState)};
-        loadBlockchainData("register", [email, firstName, lastName, password]).then(result => { console.log(result) });
-        navigate("../login", { replace: true });
-    // requestAuthentication
-       // loadBlockchainData("requestAuthentication", [email, firstName, lastName, password]).then(result => { console.log(result) });
 
-    
-    }
-
-    
-    /** 
-        async register() {
-            //result;
-            const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
-            const accounts = await web3.eth.getAccounts()
-            const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
-            contract.options.address = "0x7d28858a0e87b0a26A93830065a1f2BC47716906"
-            this.setState({ contract })
-            const userCount = await contract.methods.register(this.state.email, this.state.firstName, this.state.lastName, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida neque arcu, non aliquam lectus aliquet a. Suspendisse placerat mi at erat pellentesque venenatis. Mauris eget congue libero. Aenean viverra tincidunt massa a ultrices.", this.state.password, "0x7b61FC9AbeB0ac95a66E04F8AE69f1DAA842A451").call({ from: accounts[0] }).then((value: any) => {
-                // if(value == false){
-                console.log(value)
-    
-    
-                //}else{
-                //console.log("InValid")
-                //}
-            })
-            // this.setState({ username: userCount})
-            //console.log(this.state.username)
-        }
-        */
+        // register method also request initial authentification on the contract side
+        loadBlockchainData("register", [email, firstName, lastName, biography, password, url]).then(result => { 
+            navigate("../login", { replace: true });
+            console.log(result) });
+       }
 
     return (
        
@@ -158,12 +150,14 @@ function Register() {
                     helperText={(errors?.email)}
                     required
                      />
-                    <TextField id="password" label="Password" variant="standard" fullWidth={true} onChange={handleChangePassword}
+                    <TextField id="biography" label="Biography" variant="standard" fullWidth={true} onChange={handleChangeBiography}
+                    multiline rows={3} maxRows={5} required/>
+                    <TextField id="password" label="Password" variant="standard" type="password" fullWidth={true} onChange={handleChangePassword}
                     error={Boolean(errors?.password)}
                     helperText={(errors?.password)}
                     required
                      />
-                    <TextField id="confirmpassword" label="Confirm Password" variant="standard" fullWidth={true}  onChange={handleMatchedPassword} 
+                    <TextField id="confirmpassword" label="Confirm Password" variant="standard" type="password" fullWidth={true}   onPaste={handleChange} onChange={handleMatchedPassword} 
                      error={Boolean(errors?.confirmedPassword)}
                      helperText={(errors?.confirmedPassword)}
                     required/>
@@ -192,8 +186,8 @@ function Register() {
                     <Box display="flex"
                         alignItems="center"
                         justifyContent="center">
-                        <Button type="submit" variant="contained" disabled={Boolean(errors?.firstName) || Boolean(errors?.lastName) || Boolean(errors?.email) || Boolean(errors?.password) || Boolean(errors?.confirmedPassword)}>
-                                Sign Up
+                        <Button type="submit" variant="contained" disabled={Boolean(errors?.firstName) || Boolean(errors?.lastName) || Boolean(errors?.email) || Boolean(errors?.password) || Boolean(errors?.confirmedPassword) || buttonControl ===false }>
+                                 Sign Up
                         </Button>
                     </Box>
                 </Box>
