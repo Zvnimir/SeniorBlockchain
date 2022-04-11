@@ -20,7 +20,8 @@ function ReviewDisplay({ review }: ReviewProps) {
 
     useEffect(() => {
         console.log("id of paper", paperId)
-        console.log("id of review", review.reviewId)
+        console.log(review);
+        console.log("id of review", review.id)
     })
 
     return (
@@ -31,20 +32,22 @@ function ReviewDisplay({ review }: ReviewProps) {
                 </Typography>}
                 action={
                     <ButtonGroup color="success" sx={{ mr: 1, mt: .4 }}>
-                        <Button disabled={disable} color="success" onClick={() => {
-                            console.log(paperId, review.reviewId)
-                            loadBlockchainData("sendReaction", [paperId, review.reviewId, 1]).then(result => {
+                        <Button color="success" onClick={() => {
+                            loadBlockchainData("sendReaction", [paperId, review.id, 1]).then(result => {
                                 //disabled = {true}
                                 //setDisable(true)
+                                console.log(paperId)
+                                console.log(review.id)
                                 console.log(result)
                             });
                         }}><ThumbUpIcon></ThumbUpIcon></Button>
                         <Button color="error" onClick={() => {
-                            loadBlockchainData("sendReaction", [paperId, review.reviewId, 0]).then(result => {
+                            loadBlockchainData("sendReaction", [paperId, review.id, 2]).then(result => {
                                 //disabled = {true}
                                 //setDisable(true)
                                 console.log(result)
-                            });}}><ThumbDownIcon></ThumbDownIcon></Button>
+                            });
+                        }}><ThumbDownIcon></ThumbDownIcon></Button>
                     </ButtonGroup>
                 }
             />
@@ -52,7 +55,7 @@ function ReviewDisplay({ review }: ReviewProps) {
                 <Typography variant="body2" color="text.secondary">
                     {review.content}
                 </Typography>
-            </CardContent>
+            </CardContent> 
         </Card>
     )
 }

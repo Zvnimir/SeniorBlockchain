@@ -9,7 +9,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
     const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
-    contract.options.address =  '0x18093CACAC2D78bBbaF252e91607e65C675B26a5'
+    contract.options.address =  '0x61bfB0b25D5a6142a50061402c6F6E30948c38B0'
     const account = await readAddress()
    // 0x0A2eaD28469f8Ae961189Bc26CC8DC047c9dF853
     async function readAddress() {
@@ -110,13 +110,18 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         }
 
         case "editUser": {
+
             const result: Type = await contract.methods.editUser(data[0],data[1],data[2], data[3], data[4],account).send({ from: accounts[0] })
             console.log(result)
             return result
         }
 
         case "sendReaction": {
-            const result: Type = await contract.methods.sendReaction(data[0],data[1],data[2],account).send({ from: accounts[0] })
+            console.log(data[0])
+            console.log(data[1])
+            console.log(data[2])
+
+            const result: Type = await contract.methods.sendReaction(data[0],data[1],data[2],'0xE0B6e5538CE13841B19A022cA671a1177a3B7d83').send({ from: accounts[0] })
             console.log(result)
             return result
         }

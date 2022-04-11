@@ -8,4 +8,6 @@ export interface Review {
     content: number
     likes: number
     dislikes: number
+    id: number
+
 }
