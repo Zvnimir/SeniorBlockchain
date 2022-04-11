@@ -74,7 +74,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
             return result
         }
         case "register": {
-            const result: Type = await contract.methods.register(data[0], data[1], data[2], data[3], data[4], account, "document url").send({ from: accounts[0] })
+            const result: Type = await contract.methods.register(data[0], data[1], data[2], data[3], data[4], account, data[5]).send({ from: accounts[0] })
             return result
         }
         

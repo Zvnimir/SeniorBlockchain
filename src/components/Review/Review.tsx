@@ -48,7 +48,7 @@ function ReviewDisplay({ review }: ReviewProps) {
                                 console.log(result)
                             });
                         }}><ThumbDownIcon></ThumbDownIcon></Button>
-                    </ButtonGroup>
+                    </ButtonGroup> 
                 }
             />
             <CardContent>

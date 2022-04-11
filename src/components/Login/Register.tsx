@@ -27,7 +27,8 @@ function Register() {
         confirmedPassword: string
       }>()
     const[fileState, setFileState] = useState<FileList>()
-    
+    const [url, setUrl] = useState("")
+    const [buttonControl, setControl] = useState(false)
   const handleChange = (e) => {
     e.preventDefault();
   };
@@ -86,7 +87,9 @@ function Register() {
             getUrl(e.target.files).then((result) => {
               if (result) {
                 console.log(result)
-                loadBlockchainData("requestAuthentication", [result]).then(result => { console.log(result) });
+                setUrl(result)
+                setControl(true)
+                //loadBlockchainData("requestAuthentication", [result]).then(result => { console.log(result) });
               } else {
                 console.log("url is not loading");
               }
@@ -102,7 +105,7 @@ function Register() {
         storeFiles(fileState)};
 
         // register method also request initial authentification on the contract side
-        loadBlockchainData("register", [email, firstName, lastName, biography, password]).then(result => { 
+        loadBlockchainData("register", [email, firstName, lastName, biography, password, url]).then(result => { 
             navigate("../login", { replace: true });
             console.log(result) });
        }
@@ -183,8 +186,8 @@ function Register() {
                     <Box display="flex"
                         alignItems="center"
                         justifyContent="center">
-                        <Button type="submit" variant="contained" disabled={Boolean(errors?.firstName) || Boolean(errors?.lastName) || Boolean(errors?.email) || Boolean(errors?.password) || Boolean(errors?.confirmedPassword)}>
-                                Sign Up
+                        <Button type="submit" variant="contained" disabled={Boolean(errors?.firstName) || Boolean(errors?.lastName) || Boolean(errors?.email) || Boolean(errors?.password) || Boolean(errors?.confirmedPassword) || buttonControl ===false }>
+                                 Sign Up
                         </Button>
                     </Box>
                 </Box>
