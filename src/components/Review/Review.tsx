@@ -32,13 +32,19 @@ function ReviewDisplay({ review }: ReviewProps) {
                 action={
                     <ButtonGroup color="success" sx={{ mr: 1, mt: .4 }}>
                         <Button disabled={disable} color="success" onClick={() => {
+                            console.log(paperId, review.reviewId)
                             loadBlockchainData("sendReaction", [paperId, review.reviewId, 1]).then(result => {
                                 //disabled = {true}
                                 //setDisable(true)
                                 console.log(result)
                             });
                         }}><ThumbUpIcon></ThumbUpIcon></Button>
-                        <Button color="error"><ThumbDownIcon></ThumbDownIcon></Button>
+                        <Button color="error" onClick={() => {
+                            loadBlockchainData("sendReaction", [paperId, review.reviewId, 0]).then(result => {
+                                //disabled = {true}
+                                //setDisable(true)
+                                console.log(result)
+                            });}}><ThumbDownIcon></ThumbDownIcon></Button>
                     </ButtonGroup>
                 }
             />
