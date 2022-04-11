@@ -13,6 +13,7 @@ export interface User {
     profession: String
     fileUrl: String
 
+    role: number
     balance: number
     userAddress: String
     confirmed: Boolean

@@ -61,7 +61,6 @@ function PaperDisplay({ paper, reviews }: PaperProps) {
                     setReviewssState(result)
                 }
                 console.log(result)
-                console.log(paperState[6])
             }).finally(() => {
                 console.log(paperState[6])
                 var cid = paperState[6].replace('https://api.web3.storage/car/', '');

@@ -1,11 +1,6 @@
-export const SMART_CONTRACT_ADDRESS = '0x282D6651071E6B6A6d6D3FBe5645B4dF7b2CBF02'
+export const SMART_CONTRACT_ADDRESS = '0xF2041cC597F0367cfFEB478A84A7aF6f2156F899'
 
 export const SMART_CONTRACT_ABI = [{
-        "inputs": [],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-    },
-    {
         "inputs": [{
                 "internalType": "address",
                 "name": "_userAdress",
@@ -150,6 +145,186 @@ export const SMART_CONTRACT_ABI = [{
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
+    },
+    {
+        "inputs": [{
+                "internalType": "string",
+                "name": "_userEmial",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_fname",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_lname",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_biografy",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_passwordHash",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_role",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "_address",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "_documnetLink",
+                "type": "string"
+            }
+        ],
+        "name": "register",
+        "outputs": [{
+            "components": [{
+                    "internalType": "string",
+                    "name": "email",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "firstName",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "lastName",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "passwordHash",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "biography",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "degree",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "profession",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "fileUrl",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "role",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "balance",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "userAddress",
+                    "type": "address"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "confirmed",
+                    "type": "bool"
+                }
+            ],
+            "internalType": "struct Structs.User",
+            "name": "",
+            "type": "tuple"
+        }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "address",
+            "name": "_userAdress",
+            "type": "address"
+        }],
+        "name": "rejectUser",
+        "outputs": [{
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+        }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+                "internalType": "address",
+                "name": "_userAdress",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "_linkToDocument",
+                "type": "string"
+            }
+        ],
+        "name": "requestAuthentication",
+        "outputs": [{
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+        }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+                "internalType": "uint256",
+                "name": "paperId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "reviewId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "userAddress",
+                "type": "address"
+            }
+        ],
+        "name": "sendReaction",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
     },
     {
         "inputs": [{
@@ -500,6 +675,11 @@ export const SMART_CONTRACT_ABI = [{
                 },
                 {
                     "internalType": "uint256",
+                    "name": "role",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
                     "name": "balance",
                     "type": "uint256"
                 },
@@ -564,6 +744,11 @@ export const SMART_CONTRACT_ABI = [{
                     "internalType": "string",
                     "name": "fileUrl",
                     "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "role",
+                    "type": "uint256"
                 },
                 {
                     "internalType": "uint256",
@@ -649,105 +834,8 @@ export const SMART_CONTRACT_ABI = [{
                 },
                 {
                     "internalType": "uint256",
-                    "name": "balance",
+                    "name": "role",
                     "type": "uint256"
-                },
-                {
-                    "internalType": "address",
-                    "name": "userAddress",
-                    "type": "address"
-                },
-                {
-                    "internalType": "bool",
-                    "name": "confirmed",
-                    "type": "bool"
-                }
-            ],
-            "internalType": "struct Structs.User",
-            "name": "",
-            "type": "tuple"
-        }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [{
-                "internalType": "string",
-                "name": "_userEmial",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_fname",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_lname",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_biografy",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_passwordHash",
-                "type": "string"
-            },
-            {
-                "internalType": "address",
-                "name": "_address",
-                "type": "address"
-            },
-            {
-                "internalType": "string",
-                "name": "_documnetLink",
-                "type": "string"
-            }
-        ],
-        "name": "register",
-        "outputs": [{
-            "components": [{
-                    "internalType": "string",
-                    "name": "email",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "firstName",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "lastName",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "passwordHash",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "biography",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "degree",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "profession",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "fileUrl",
-                    "type": "string"
                 },
                 {
                     "internalType": "uint256",
@@ -769,70 +857,7 @@ export const SMART_CONTRACT_ABI = [{
             "name": "",
             "type": "tuple"
         }],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [{
-            "internalType": "address",
-            "name": "_userAdress",
-            "type": "address"
-        }],
-        "name": "rejectUser",
-        "outputs": [{
-            "internalType": "bool",
-            "name": "",
-            "type": "bool"
-        }],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [{
-                "internalType": "address",
-                "name": "_userAdress",
-                "type": "address"
-            },
-            {
-                "internalType": "string",
-                "name": "_linkToDocument",
-                "type": "string"
-            }
-        ],
-        "name": "requestAuthentication",
-        "outputs": [{
-            "internalType": "bool",
-            "name": "",
-            "type": "bool"
-        }],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [{
-                "internalType": "uint256",
-                "name": "paperId",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "reviewId",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "value",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "userAddress",
-                "type": "address"
-            }
-        ],
-        "name": "sendReaction",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -881,6 +906,11 @@ export const SMART_CONTRACT_ABI = [{
                 "internalType": "string",
                 "name": "fileUrl",
                 "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "role",
+                "type": "uint256"
             },
             {
                 "internalType": "uint256",
