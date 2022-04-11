@@ -4,7 +4,7 @@ import './Register.css';
 import { loadBlockchainData } from '../../domain/blockchain-connector';
 import React, { ChangeEvent, useState } from 'react'
 import ArticleIcon from '@mui/icons-material/Article';
-import { storeFiles } from '../../domain/web3-storage-client'
+import { getUrl, storeFiles } from '../../domain/web3-storage-client';
 import {styled} from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 
@@ -81,9 +81,19 @@ function Register() {
        }
 
     const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        if(e.target.files) {
+        if (e.target.files) {
             setFileState(e.target.files)
-        }
+            getUrl(e.target.files).then((result) => {
+              if (result) {
+                console.log(result)
+                loadBlockchainData("requestAuthentication", [result]).then(result => { console.log(result) });
+              } else {
+                console.log("url is not loading");
+              }
+              //once we get the data we set loading to false
+            })
+      
+          }
     }
 
     const onRegister = (event: React.FormEvent) => {
