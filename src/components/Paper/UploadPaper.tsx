@@ -3,8 +3,7 @@ import React, { ChangeEvent, ChangeEventHandler, useState } from 'react'
 import ArticleIcon from '@mui/icons-material/Article';
 import { loadBlockchainData } from '../../domain/blockchain-connector';
 import { loadBlockchainData_token } from "../../domain/blockchain-connector_token";
-import { storeFiles } from '../../domain/web3-storage-client'
-
+import { getUrl, storeFiles } from '../../domain/web3-storage-client';
 const Input = styled('input')({
     display: 'none',
 });
@@ -17,13 +16,14 @@ function UploadPaper() {
     //we will divide "numberOfWordsState" with the average reading speed (250) to get "minuteRead"
     const[numberOfWordsState, setNumberOfWordsState] = useState("")
     const[fileState, setFileState] = useState<FileList>()
-
+    const [url, setUrl] = useState("")
+    const [buttonControl, setControl] = useState(false)
     const handleChangeTitle = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setTitleState(e.target.value)
     }
 
     const handleChangeCategory = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setCategoryState(e.target.value)
+        setCategoryState(e.target.value) 
     }
 
     const handleChangeAbstract = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -35,9 +35,21 @@ function UploadPaper() {
     }
 
     const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        if(e.target.files) {
+        if (e.target.files) {
             setFileState(e.target.files)
-        }
+            getUrl(e.target.files).then((result) => {
+              if (result) {
+                console.log(result)
+                setUrl(result)
+                setControl(true)
+                //loadBlockchainData("requestAuthentication", [result]).then(result => { console.log(result) });
+              } else {
+                console.log("url is not loading");
+              }
+              //once we get the data we set loading to false
+            })
+      
+          }
     }
 
     return (
@@ -72,8 +84,8 @@ function UploadPaper() {
                     <Box display="flex"
                         alignItems="center"
                         justifyContent="center">
-                        <Button variant="contained" component="span" 
-                            onClick={() => {
+                        <Button variant="contained" component="span" disabled={buttonControl ===false}
+                            onClick={() => { 
 
                                loadBlockchainData_token("uploadPaper").then(result => { console.log(result) 
                             

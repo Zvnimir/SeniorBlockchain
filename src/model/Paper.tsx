@@ -8,7 +8,9 @@ export interface Paper {
     category: string
     paperAbstract: string
     minuteRead: number
+    paperLink: string
     authorAddress: string
     paperReviews: Review[]
+    
 }
 
