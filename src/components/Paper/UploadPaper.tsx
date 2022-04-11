@@ -90,7 +90,7 @@ function UploadPaper() {
                                loadBlockchainData_token("uploadPaper").then(result => { console.log(result) 
                             
                                  //if(result.isEmpty()){
-                                loadBlockchainData("uploadPaper", [titleState, categoryState, abstractState, (Number.parseInt(numberOfWordsState) / 250)])
+                                loadBlockchainData("uploadPaper", [titleState, categoryState, abstractState, (Number.parseInt(numberOfWordsState) / 250), url])
 
                                  //}
                                })

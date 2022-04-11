@@ -47,7 +47,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
         }
         case "uploadPaper": {
             if(data != undefined) {
-                const result: Type = await contract.methods.addPaper(4, "#000", data[0], data[1], data[2], data[3], account).send({ from: accounts[0] })
+                const result: Type = await contract.methods.addPaper(4, "#000", data[0], data[1], data[2], data[3], data[4], account).send({ from: accounts[0] })
                 return result
             }
             return null

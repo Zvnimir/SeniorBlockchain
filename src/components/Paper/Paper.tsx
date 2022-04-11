@@ -9,7 +9,7 @@ import SinglePage from '../../domain/singe-page-pdf';
 import { loadBlockchainData } from '../../domain/blockchain-connector';
 import { loadBlockchainData_token } from "../../domain/blockchain-connector_token";
 import ReviewDisplay from '../Review/Review';
-import { retrieveFiles } from '../../domain/web3-storage-client';
+import { retrieveFiles,  storeFiles} from '../../domain/web3-storage-client';
 import { useLocation } from 'react-router-dom';
 
 const SMART_CONTRACT_ABI = require('../config');
@@ -62,13 +62,15 @@ function PaperDisplay({ paper, reviews }: PaperProps) {
                 }
                 console.log(result)
             }).finally(() => {
-                //setLoading(false)
-
-                retrieveFiles('bafybeigcvfby7bcpfp2rkeeotqjck2slvliqsi7pjzgbtjlxag2wclyayy').then(result => {
-                    if (result) {
-                        setFile(result)
-                    }
-                }).finally(() => {
+                console.log(paperState[6])
+                var cid = paperState[6].replace('https://api.web3.storage/car/', '');
+                console.log(cid)
+                    retrieveFiles(cid).then(result => {
+                        if (result) {
+                            setFile(result) 
+                        }
+                    }) 
+                .finally(() => { 
                     setLoading(false)
                     //console.log(file)
                     // console.log(reviewContentState[0])
