@@ -48,14 +48,14 @@ function ReviewDisplay({ review }: ReviewProps) {
                                 console.log(result)
                             });
                         }}><ThumbDownIcon></ThumbDownIcon></Button>
-                    </ButtonGroup>
+                    </ButtonGroup> 
                 }
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
                     {review.content}
                 </Typography>
-            </CardContent>
+            </CardContent> 
         </Card>
     )
 }

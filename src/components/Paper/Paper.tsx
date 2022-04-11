@@ -150,11 +150,9 @@ function PaperDisplay({ paper, reviews }: PaperProps) {
                     >
                         <Button variant="contained" component="span"
                             onClick={() => {
-                                loadBlockchainData_token("uploadReview")
-
-                                //TODO: after the first one is complete
-                                loadBlockchainData("uploadReview", ["#000", paperId, reviewContentState])
-                            }}>
+                                loadBlockchainData_token("uploadReview").then(result => { 
+                                    loadBlockchainData("uploadReview", ["#000", paperId, reviewContentState]);});
+                               }}>
                             Post
                         </Button>
                     </Box>
