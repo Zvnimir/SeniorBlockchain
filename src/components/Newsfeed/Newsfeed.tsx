@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
@@ -31,7 +31,10 @@ function Newsfeed({ papers }: PapersProps) {
     let navigate = useNavigate();
 
     const [paperState, setPaperState] = useState(papers)
+    const [paperDisplayState, setPaperDisplayState] = useState<Paper[]>()
     const [loading, setLoading] = useState(true);
+
+    const [searchState, setSearchState] = useState('')
 
     const [category, setCategory] = React.useState('');
     const [sort, setSort] = React.useState('10');
@@ -58,6 +61,24 @@ function Newsfeed({ papers }: PapersProps) {
         });
     }, []);
 
+    useEffect(() => {
+        setPaperDisplayState(paperState)
+    }, [paperState])
+
+    const handleSearch = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setSearchState(e.target.value)
+    }
+
+    //wait for changes in the search state
+    useEffect(() => {
+        setPaperDisplayState(paperState)
+        if(searchState === '') return
+        let paperArr = paperDisplayState.slice()//this copies the array by reference
+        paperArr.forEach( (paper, index) => {
+            if(!paper.title.includes(searchState)) paperArr.splice(index,1);
+          });
+        setPaperDisplayState(paperArr)
+    }, [searchState])
 
     //makes sure that undefined states dont throw errors
     if (loading) {
@@ -71,7 +92,7 @@ function Newsfeed({ papers }: PapersProps) {
 
                 <Box sx={{display: 'flex', justifyContent: 'left', width: '100%'}}>
                     <FormControl variant="standard" sx={{ m: 2, minWidth: 120, marginBottom: 3 }}>
-                        <TextField id="standard-basic" label="Search" variant="standard" />
+                        <TextField  onChange={handleSearch} id="standard-basic" label="Search" variant="standard"  />
                     </FormControl>
 
                     <FormControl variant="standard" sx={{ m: 2, minWidth: 120 }}>
@@ -111,7 +132,7 @@ function Newsfeed({ papers }: PapersProps) {
 
 
                 {
-                    paperState.map(paper => (
+                    paperDisplayState.map(paper => (
                         <PaperCard paper={paper}></PaperCard>
                     ))}
 
