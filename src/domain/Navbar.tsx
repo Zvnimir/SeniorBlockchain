@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { AppBar, Avatar, Box, Button, Fab, IconButton, Toolbar, Typography } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
@@ -15,9 +15,21 @@ import Logout from '@mui/icons-material/Logout';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
 import { grey } from '@mui/material/colors';
 import HelpIcon from '@mui/icons-material/Help';
+import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import { loadBlockchainData } from './blockchain-connector';
+import { User } from '../model/User';
 
-function Navbar() {
+type NavbarProps = {
+  user: User;
+};
+
+function Navbar({user}: NavbarProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [userState, setUserState] = useState(user);
+  const [loading, setLoading] = useState(true);
+
+
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -26,7 +38,24 @@ function Navbar() {
     setAnchorEl(null);
   }
 
+  useEffect(() => {
+    loadBlockchainData<User>("user")
+      .then((result) => {
+        if (result) {
+          setUserState(result);
+          console.log(result)
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+       })
+  }, []);
+
   let navigate = useNavigate();
+
+  if (loading) {
+    return <p></p>;
+  }
 
   return (
     <>
@@ -105,6 +134,12 @@ function Navbar() {
           <MenuItem onClick={() => { navigate("../user", { replace: true }); }}>
             <Avatar /> User page
           </MenuItem>
+          {(userState.role > 2) ? <MenuItem onClick={() => { navigate("../admin", { replace: true }); }}>
+            <ListItemIcon>
+              <AdminPanelSettingsIcon fontSize="small" />
+            </ListItemIcon>
+            Admin Page
+          </MenuItem> : <></>}
           <MenuItem onClick={() => { navigate("../edit", { replace: true }); }}>
             <ListItemIcon>
               <Settings fontSize="small" />

@@ -150,7 +150,7 @@ const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
 
 
   return (
-    <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'center' }}>
+    <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
       <Grid container spacing={1} sx={{mb: 4}}>
         <Grid item xs={5}>
           <Box sx={{ display: 'flex', alignItems: 'left', mt: 6, mb: 4 }}>
@@ -196,130 +196,12 @@ const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
           </Box>
         </Grid>
       </Grid> 
-        
+
       {
         paperState.map(paper => (
           <PaperCard paper={paper}></PaperCard>
         ))}
 
-      {/* <div className="centered">
-        <Grid container spacing={20}>
-
-          <Grid item xs="auto">
-            <Card sx={{ maxWidth: 345 }}>
-
-              {renderAuthButton()}
-
-
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {userState.firstName} {userState.lastName}
-                </Typography>
-
-                
-                
-
-                
-              </CardContent>
-              <CardActions
-                className="buttons"
-                style={{ display: "flex", justifyContent: "center" }}
-              >
-                <Button size="small">Edit</Button>
-                <Button size="small" onClick={handleClickOpen}>
-                  Add deegre
-                </Button>
-                <Dialog open={open} onClose={handleClose}>
-                  <DialogTitle>Add deegre </DialogTitle>
-                  <DialogContent>
-                    <DialogContentText>
-                      In order for user to gain more privileges, it should
-                      upload degrees related to the specific fields
-                    </DialogContentText>
-                    <label htmlFor="contained-button-file" >
-                      <Input accept="application/pdf" id="contained-button-file" multiple type="file" onChange={handleFileSelected} />
-                      <Button sx={{ mt: 2 }} variant="contained" endIcon={<ArticleIcon />} component="span">
-                        Attach Paper
-                      </Button>
-                    </label>
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={() => {
-                 //loadBlockchainData("requestAuthentication", ["https://api.web3.storage/car/bafybeibtas472lw5up3k52pk4kei6jhcfll6bb2nqroxaf4ggfuljnjrva"]).then(result => { console.log(result) });
-                     // console.log(fileUrl)
-                      if (fileState) {
-                       storeFiles(fileState)
-                      // setUrl(fileUrl)
-                      console.log(fileUrl)
-                        storeFiles(fileState)
-                      };
-                     
-                     
-                      //loadBlockchainData("requestAuthentication", [fileUrl]).then(result => { console.log(result) });
-                     //console.log("hello",fileUrl)
-                      //if(fileUrl){
-                      //loadBlockchainData("requestAuthentication", [fileUrl]).then(result => { console.log(result) });
-                      //}
-                      //console.log(fileUrl)
-                      //loadBlockchainData("requestAuthentication", [fileUrl]).then(result => { console.log(result) });
-                      //getUrl(fileState)
-                      setOpen(false)
-                    }}>Ok</Button>
-                  </DialogActions>
-                </Dialog>
-              </CardActions>
-            </Card>
-          </Grid>
-
-          <Grid item xs={6}>
-            <Card sx={{ width: 345, maxHeight: 462 }}>
-
-              <Alert severity="info">Papers: </Alert>
-
-              <List
-                sx={{
-                  width: "100%",
-                  bgcolor: "background.paper",
-                  overflow: "auto",
-                  height: 414,
-                  "& ul": { padding: 0 },
-                }}
-              >
-                {paperState.map((paper) => (
-                  <ListItem alignItems="flex-start">
-                    <ListItemAvatar>
-                      <Avatar
-                        alt="Remy Sharp"
-                        src="/static/images/avatar/1.jpg"
-                      />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={paper.title}
-                      secondary={
-                        <React.Fragment>
-                          <Typography
-                            sx={{ display: "inline" }}
-                            component="span"
-                            variant="body2"
-                            color="text.primary"
-                          >
-                            {paper.category}
-                          </Typography>
-                          {
-                            "- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquet nunc blandit ultricies sodales Nulla nec lacus id diam finibus porttitor."
-                          }
-                        </React.Fragment>
-                      }
-                    />
-                  </ListItem>
-                ))}
-              </List>
-            </Card>
-          </Grid>
-
-        </Grid>
-      </div> */}
     </Container>
   );
 }

@@ -55,7 +55,7 @@ function UploadPaper() {
     return (
         <> 
             <Container maxWidth="sm" sx={{ mt: 4, pt: 2 }} >
-                <Typography variant="h5" component="div" align='center' >
+                <Typography fontWeight={'light'} variant="h5" component="div" align='center' >
                     Upload your paper
                 </Typography>
 

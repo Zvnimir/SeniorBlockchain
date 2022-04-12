@@ -98,7 +98,7 @@ function Edit({ user }: UserProps) {
   return (
     <Container sx={{display: 'flex', justifyContent: 'center', mt: 15}}>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '60ch' }}>
-        <Typography variant="h4" gutterBottom component="div" sx={{ m: 1, width: '24ch', mb: 4, textAlign: 'center' }}>
+        <Typography fontWeight={'light'} variant="h4" gutterBottom component="div" sx={{ m: 1, width: '24ch', mb: 4, textAlign: 'center' }}>
           Edit Your Data
         </Typography>
 
