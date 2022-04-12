@@ -35,7 +35,7 @@ export default function SinglePage(props) {
           onLoadSuccess={onDocumentLoadSuccess}
           renderMode={'svg'}
           >
-            <Page pageNumber={pageNumber} />
+            <Page size={'A4'} pageNumber={pageNumber} />
         </Document>
       </Box>
       

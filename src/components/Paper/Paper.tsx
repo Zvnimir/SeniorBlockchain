@@ -9,7 +9,7 @@ import SinglePage from '../../domain/singe-page-pdf';
 import { loadBlockchainData } from '../../domain/blockchain-connector';
 import { loadBlockchainData_token } from "../../domain/blockchain-connector_token";
 import ReviewDisplay from '../Review/Review';
-import { retrieveFiles,  storeFiles} from '../../domain/web3-storage-client';
+import { retrieveFiles, storeFiles } from '../../domain/web3-storage-client';
 import { useLocation } from 'react-router-dom';
 
 const SMART_CONTRACT_ABI = require('../config');
@@ -52,6 +52,13 @@ function PaperDisplay({ paper, reviews }: PaperProps) {
             if (result) {
                 setPaperState(result)
             }
+            var cid = result[6].replace('https://api.web3.storage/car/', '');
+            console.log(cid)
+            retrieveFiles(cid).then(result => {
+                if (result) {
+                    setFile(result)
+                }
+            })
         }).finally(() => {
             //setLoading(false)
             console.log(paperState)
@@ -62,27 +69,8 @@ function PaperDisplay({ paper, reviews }: PaperProps) {
                 }
                 console.log(result)
             }).finally(() => {
-                console.log(paperState[6])
-                var cid = paperState[6].replace('https://api.web3.storage/car/', '');
-                console.log(cid)
-                    retrieveFiles(cid).then(result => {
-                        if (result) {
-                            setFile(result) 
-                        }
-                    }) 
-                .finally(() => { 
-                    setLoading(false)
-                    //console.log(file)
-                    // console.log(reviewContentState[0])
-                    //reviewsState.map(review => (
-
-                    //console.log("review",review[0])
-                    //))
-
-
-                })
+                setLoading(false)
             })
-
         })
 
         // displaying the reviews
@@ -95,7 +83,6 @@ function PaperDisplay({ paper, reviews }: PaperProps) {
         setNumPages(nextNumPages);
     }
     if (loading) {
-        console.log(paperState)
         return <p>Data is loading...</p>;
     }
 
@@ -112,20 +99,20 @@ function PaperDisplay({ paper, reviews }: PaperProps) {
             </Box>
             <Grid container sx={{ m: 2, display: 'flex', flexDirection: "column", }}>
 
-                    <Typography fontWeight={'light'} sx={{ fontSize: 14, backgroundColor: '#4db6ac', maxWidth: 150 ,borderRadius: 5, padding: 1, textAlign: 'center', color: 'white', boxShadow: 2 }}>
-                        {
-                            paperState[3]
-                        }
-                    </Typography>
-                    <Typography fontWeight={'light'} variant="body1" component="div" sx={{ mt: 2.5 }}>
-                        {
-                            paperState[4]
-                        }
-                    </Typography>
+                <Typography fontWeight={'light'} sx={{ fontSize: 14, backgroundColor: '#4db6ac', maxWidth: 150, borderRadius: 5, padding: 1, textAlign: 'center', color: 'white', boxShadow: 2 }}>
+                    {
+                        paperState[3]
+                    }
+                </Typography>
+                <Typography fontWeight={'light'} variant="body1" component="div" sx={{ mt: 2.5 }}>
+                    {
+                        paperState[4]
+                    }
+                </Typography>
             </Grid>
 
-            <Box sx={{display: 'flex', justifyContent: 'center', mb: 2, width: '100%', height: 800, mt: 5 }}>
-                <Box sx={{backgroundColor: '#F3EDF7', borderRadius: 5, padding: '2.5em', boxShadow: 3, width: 420}}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2, width: '100%', height: 800, mt: 5 }}>
+                <Box sx={{ backgroundColor: '#F3EDF7', borderRadius: 5, padding: '2.5em', boxShadow: 3, width: 420 }}>
                     <SinglePage pdf={file}></SinglePage>
                 </Box>
             </Box>
@@ -152,9 +139,10 @@ function PaperDisplay({ paper, reviews }: PaperProps) {
                     >
                         <Button variant="contained" component="span"
                             onClick={() => {
-                                loadBlockchainData_token("uploadReview").then(result => { 
-                                    loadBlockchainData("uploadReview", ["#000", paperId, reviewContentState]);});
-                               }}>
+                                loadBlockchainData_token("uploadReview").then(result => {
+                                    loadBlockchainData("uploadReview", ["#000", paperId, reviewContentState]);
+                                });
+                            }}>
                             Post
                         </Button>
                     </Box>

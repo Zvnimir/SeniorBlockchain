@@ -29,7 +29,7 @@ type AdminProps = {
 //   var templateParams = {
 //     email : emailAddres,
 //   };
-  
+
 //   const handleApprove = (e) => {
 //     e.preventDefault();
 //     emailjs.send("service_sq7d1pf", "template_nujhwum", templateParams , "1UTO4rF8fpJlpA6_q").then(
@@ -121,7 +121,7 @@ function Admin({ users }: AdminProps) {
   //   }
 
 
-useEffect(() => {
+  useEffect(() => {
     //gets data from blockchain
     loadBlockchainData<User[]>("unconfiredUsers").then((result) => {
       if (result) {
@@ -158,25 +158,20 @@ useEffect(() => {
   }
 
   return (
-
-    <div className="App">
-
-
-
-      <Card>
+    <Container sx={{ display: 'flex', justifyContent: 'center', mt: 10 }}>
+      <Card sx={{boxShadow: 3}}>
         <CardContent>
-          <div className="header">Users waiting for verification</div>
-
+        <Typography fontWeight={'light'} variant="h5">Users waiting for verification</Typography>
           <Container>
             <TableRow>
               <TableCell>
-                <Typography>User name</Typography>
+                <Typography fontWeight={'light'} variant="h6">User</Typography>
               </TableCell>
               <TableCell>
-                <p className="">Document </p>
+                <Typography fontWeight={'light'} variant="h6">ID Document</Typography>
               </TableCell>
               <TableCell>
-                <p className="">Confirmation Type </p>
+                <Typography fontWeight={'light'} variant="h6">Verification Type</Typography>
               </TableCell>
               <TableCell>
                 <p className=""> </p>
@@ -188,34 +183,34 @@ useEffect(() => {
 
             {usersState.map((user) => (
 
-           
-              
               <TableRow>
                 <TableCell>
-                  <p className="">{user.firstName}</p>
+                  <Typography fontWeight={'light'} variant="body2">{user.firstName} {user.lastName}</Typography>
                 </TableCell>
                 <TableCell>
 
-                  <button type="button" className="btn" onClick={() => handleClickOpen(user.fileUrl)} >View Document</button>
+                  <Button variant="contained" onClick={() => handleClickOpen(user.fileUrl)} >View Document</Button>
 
                 </TableCell>
                 <TableCell>
-
-                  {user.confirmed && user.degree == "" ? <p className=""> Some degree </p> : <p className="">Basic  </p>}
+                  
+                <Typography fontWeight={'light'} variant="body2">
+                  {user.confirmed && user.degree == "" ? 'Some degree' : 'Basic'}
+                </Typography>
 
                 </TableCell>
                 <TableCell>
                   <Button variant="contained" color="success"
                     onClick={() => {
 
-                      if(user.confirmed && user.degree == ""){
+                      if (user.confirmed && user.degree == "") {
                         loadBlockchainData("addDegree", [user.userAddress]).then(result => { console.log(result) });
                         loadBlockchainData_token("sendDegreeTokens", [user.userAddress]).then(result => { console.log(result) });
-                       
+
                       } else {
                         loadBlockchainData("confirmUser", [user.userAddress]).then(result => { console.log(result) });
-                         loadBlockchainData_token("sendIntialTokens", [user.userAddress]).then(result => { console.log(result) });
-                         handleApprove(user.email,"approved",user.lastName);
+                        loadBlockchainData_token("sendIntialTokens", [user.userAddress]).then(result => { console.log(result) });
+                        handleApprove(user.email, "approved", user.lastName);
 
                         console.log(user.email)
                       }
@@ -228,22 +223,18 @@ useEffect(() => {
                   <Button variant="contained" color="error"
                     onClick={() => {
                       loadBlockchainData("rejectUser", [user.userAddress]).then(result => { console.log(result) });
-                      handleApprove(user.email,"rejected", user.lastName);
+                      handleApprove(user.email, "rejected", user.lastName);
 
                     }}>
                     Reject
                   </Button>
                 </TableCell>
               </TableRow>
-              
-
             ))}
-
           </Container>
         </CardContent>
       </Card>
 
-     
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -254,11 +245,8 @@ useEffect(() => {
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <div>
-              <SinglePage pdf={fileUrl}></SinglePage>
+            <SinglePage pdf={fileUrl}></SinglePage>
           </div>
-
-
-
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
@@ -267,9 +255,7 @@ useEffect(() => {
         </DialogActions>
       </BootstrapDialog>
 
-
-
-     </div>
+    </Container>
 
 
   );
