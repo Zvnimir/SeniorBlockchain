@@ -84,12 +84,12 @@ function Navbar({user}: NavbarProps) {
               <IconButton
                 onClick={handleClick}
                 size="small"
-                sx={{ ml: .5, mr: 1.5 }}
+                sx={{ ml: 1.5, mr: 1.5 }}
                 aria-controls={open ? 'account-menu' : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
               >
-                <Avatar sx={{ ml: 1 }} />
+                <Avatar />
               </IconButton>
 
             </Toolbar>
@@ -155,7 +155,8 @@ function Navbar({user}: NavbarProps) {
         </Menu>
       </React.Fragment>
 
-      <Fab aria-label="add" size="medium" sx={{position: 'fixed', bottom: 20, right: 20, color: grey[800], backgroundColor: '#F3EDF7', shadow: 3,}}>
+      <Fab aria-label="add" size="medium" sx={{position: 'fixed', bottom: 20, right: 20, color: grey[800], backgroundColor: '#F3EDF7', shadow: 3,}} 
+          onClick={() => { navigate("../guide", { replace: true }); }}>
         <HelpIcon />
       </Fab>
     </>
