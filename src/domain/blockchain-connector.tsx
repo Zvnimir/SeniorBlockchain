@@ -9,7 +9,7 @@ export async function loadBlockchainData<Type>(dataType: String, data?: Array<an
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
     const contract = new web3.eth.Contract(SMART_CONTRACT_ABI.SMART_CONTRACT_ABI, SMART_CONTRACT_ADDRESS)
-    contract.options.address =  '0xF2041cC597F0367cfFEB478A84A7aF6f2156F899'
+    contract.options.address =  '0xbEb01b0a6359e2f8f330DE4a7773cA3f8134eA09'
     const account = await readAddress()
    // 0x0A2eaD28469f8Ae961189Bc26CC8DC047c9dF853
     async function readAddress() {
