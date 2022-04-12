@@ -55,7 +55,7 @@ type AdminProps = {
     // e.preventDefault();
     emailjs.send("service_sq7d1pf", "template_nujhwum", templateParams , "1UTO4rF8fpJlpA6_q").then(
       (result) => {
-        alert("Message Sent Successfully");
+       // alert("Message Sent Successfully");
         console.log(result.text);
       },
       (error) => {
