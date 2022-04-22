@@ -1,5 +1,4 @@
 import { Filelike } from 'web3.storage'
-// ignore this error we need to use this prebuilt package because we are using webpack 4 while web3.storage is built for webpack 5 and react is stupid
 import { Web3Storage } from 'web3.storage/dist/bundle.esm.min.js'
 
 function getAccessToken() {
@@ -12,10 +11,12 @@ function getAccessToken() {
     return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDdFMDMwQUI4MDU2NzU3ODk3MzBCN2Y1ZjIxYTVEMTY0OGQ1NDQ2NTEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NDY3NzcxMDc3NDgsIm5hbWUiOiJzZW5pb3IifQ.qH6Sdki17Qibv2JujDeOZUr8SrVOivb1Y_G8klQbdh4'
 }
 
+//creates the web3 storage client
 function makeStorageClient() {
   return new Web3Storage({ token: getAccessToken() })
 }
 
+//stores the files/files that have been passed to the web3 storage
 export async function storeFiles(filePath: FileList) {
     const client = makeStorageClient()
     const cid = await client.put(filePath)
@@ -25,6 +26,7 @@ export async function storeFiles(filePath: FileList) {
    return cid
 }
 
+//gets a url for a file
 export async function getUrl (filePath: FileList): Promise<string> {
   const client = makeStorageClient()
   const cid = await client.put(filePath)
@@ -32,6 +34,7 @@ export async function getUrl (filePath: FileList): Promise<string> {
   return res.url
 }
 
+//gets a file for the specified cid
 export async function retrieveFiles(cid: string) {
     const client = makeStorageClient()
     const res = await client.get(cid)

@@ -17,33 +17,12 @@ import { loadBlockchainData_token } from "../../domain/blockchain-connector_toke
 
 import { useRef } from "react";
 import emailjs, { init } from "@emailjs/browser";
-//import {  getUrl} from '../../domain/web3-storage-client'
-
 
 type AdminProps = {
   users: User[];
 };
 
-
-// init("1UTO4rF8fpJlpA6_q");
-//   var templateParams = {
-//     email : emailAddres,
-//   };
-
-//   const handleApprove = (e) => {
-//     e.preventDefault();
-//     emailjs.send("service_sq7d1pf", "template_nujhwum", templateParams , "1UTO4rF8fpJlpA6_q").then(
-//       (result) => {
-//         alert("Message Sent Successfully");
-//         console.log(result.text);
-//       },
-//       (error) => {
-//         console.log(error.text);
-//       }
-//     );
-//   }
-
-
+//handels the approval of users
 function handleApprove(emailAddres, stateVerification, usernameVer) {
   init("1UTO4rF8fpJlpA6_q");
   var templateParams = {
@@ -52,10 +31,8 @@ function handleApprove(emailAddres, stateVerification, usernameVer) {
     username: usernameVer
   };
 
-  // e.preventDefault();
   emailjs.send("service_sq7d1pf", "template_nujhwum", templateParams, "1UTO4rF8fpJlpA6_q").then(
     (result) => {
-      alert("Message Sent Successfully");
       console.log(result.text);
     },
     (error) => {
@@ -63,8 +40,6 @@ function handleApprove(emailAddres, stateVerification, usernameVer) {
     }
   );
 }
-
-
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -107,29 +82,18 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 
 
 function Admin({ users }: AdminProps) {
-
-
-
-  // const [numPages, setNumPages] = useState(null);
-  // const [pageNumber, setPageNumber] = useState(1);
-
   const [usersState, setUsersState] = useState(users);
   const [loading, setLoading] = useState(true);
   const [fileUrl, setUrl] = useState("");
-  //   function onDocumentLoadSuccess({ numPages }) {
-  //     setNumPages(numPages);
-  //   }
 
-
+  //gets data from blockchain
   useEffect(() => {
-    //gets data from blockchain
     loadBlockchainData<User[]>("unconfiredUsers").then((result) => {
       if (result) {
         console.log(result);
         setUsersState(result);
         console.log(usersState);
       }
-      //once we get the data we set loading to false
     })
       .finally(() => {
         setLoading(false);
@@ -138,19 +102,17 @@ function Admin({ users }: AdminProps) {
 
   }, []);
 
-  //makes sure that undefined states dont throw errors
-
-
   const [open, setOpen] = React.useState(false);
 
+  //handlers for the modal
   const handleClickOpen = (url: String) => {
     setOpen(true);
     setUrl(url.toString());
   };
+
   const handleClose = () => {
     setOpen(false);
   };
-
 
   //makes sure that undefined states dont throw errors
   if (loading) {
@@ -159,9 +121,9 @@ function Admin({ users }: AdminProps) {
 
   return (
     <Container sx={{ display: 'flex', justifyContent: 'center', mt: 10 }}>
-      <Card sx={{boxShadow: 3}}>
+      <Card sx={{ boxShadow: 3 }}>
         <CardContent>
-        <Typography fontWeight={'light'} variant="h5">Users waiting for verification</Typography>
+          <Typography fontWeight={'light'} variant="h5">Users waiting for verification</Typography>
           <Container>
             <TableRow>
               <TableCell>
@@ -193,10 +155,10 @@ function Admin({ users }: AdminProps) {
 
                 </TableCell>
                 <TableCell>
-                  
-                <Typography fontWeight={'light'} variant="body2">
-                  {user.confirmed && user.degree == "" ? 'Some degree' : 'Basic'}
-                </Typography>
+
+                  <Typography fontWeight={'light'} variant="body2">
+                    {user.confirmed && user.degree == "" ? 'Some degree' : 'Basic'}
+                  </Typography>
 
                 </TableCell>
                 <TableCell>
@@ -256,8 +218,6 @@ function Admin({ users }: AdminProps) {
       </BootstrapDialog>
 
     </Container>
-
-
   );
 
 }

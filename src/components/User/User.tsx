@@ -34,7 +34,6 @@ import { blue } from "@mui/material/colors";
 type UserProps = {
   user: User;
   papers: Paper[];
-  //file: FileList;
 };
 const Input = styled('input')({
   display: 'none',
@@ -48,7 +47,7 @@ function UserDisplay({ user, papers }: UserProps) {
   const [fileState, setFileState] = useState<FileList>()
   const [tokenState, setTokenState] = useState(0);
   const [fileUrl, setUrl] = useState("");
-  
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -57,36 +56,31 @@ function UserDisplay({ user, papers }: UserProps) {
     setOpen(false);
   };
 
-const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target.files) {
-     // setFileState(e.target.files)
-     console.log("heo")
+      console.log("heo")
       getUrl(e.target.files).then((result) => {
         if (result) {
           setUrl(result);
-           console.log(result)
-           //setCondition(true)
-          } else {
           console.log(result)
-        } 
-        //once we get the data we set loading to false
+        } else {
+          console.log(result)
+        }
       })
       setFileState(e.target.files)
-      
-
     }
-    
+
   }
 
+  //gets data from blockchain
   useEffect(() => {
-    //gets data from blockchain
+    
     loadBlockchainData<User>("user")
       .then((result) => {
         if (result) {
           setUserState(result);
           console.log(result)
         }
-        //once we get the data we set loading to false
       })
       .finally(() => {
         loadBlockchainData<Paper[]>("userPapers")
@@ -97,40 +91,27 @@ const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
               result.forEach((person) => {
                 console.log(person);
               });
-
-              //console.log(paperState[0].title);
             }
-            //once we get the data we set loading to false
           })
           .finally(() => {
             loadBlockchainData_token<number>("balance")
               .then((result) => {
                 if (result) {
-                  // userState.balance = result;
                   setTokenState(result)
-                  //console.log(result);
-                  //result.forEach((person) => { console.log(person); });
-                  // userState.balance = result;
-                  //console.log(paperState[0].title);
                 } else {
                   console.log("Sipak");
                 }
-                //once we get the data we set loading to false
               }).finally(() => {
                 setLoading(false);
               });
           });
       });
-
-
   }, []);
 
   //makes sure that undefined states dont throw errors
   if (loading) {
     return <p>Data is loading...</p>;
   }
-
-
 
   const renderAuthButton = () => {
     if (userState.confirmed) {
@@ -140,18 +121,9 @@ const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
     }
   }
 
-  // const renderDegree = () => {
-  //   if (userState.degree == "") {
-  //     return  <p></p>;
-  //   } else {
-  //     return <p> {userState.degree}</p>;
-  //   }
-  // }
-
-
   return (
     <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-      <Grid container spacing={1} sx={{mb: 4}}>
+      <Grid container spacing={1} sx={{ mb: 4 }}>
         <Grid item xs={5}>
           <Box sx={{ display: 'flex', alignItems: 'left', mt: 6, mb: 4 }}>
 
@@ -168,7 +140,7 @@ const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
 
               <Typography fontWeight={'light'} variant="h5" component="div" sx={{ mb: 1, display: 'flex', alignItems: 'center' }}>
-                {userState.firstName} {userState.lastName} {(userState.confirmed == true) ? <VerifiedRoundedIcon sx={{ml: 1, color: blue[300]}}/> : ''}
+                {userState.firstName} {userState.lastName} {(userState.confirmed == true) ? <VerifiedRoundedIcon sx={{ ml: 1, color: blue[300] }} /> : ''}
               </Typography>
 
               <Typography fontWeight={'light'} variant="body1" color="text.secondary" sx={{ mb: .7 }}>
@@ -195,9 +167,10 @@ const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
             </Typography>
           </Box>
         </Grid>
-      </Grid> 
+      </Grid>
 
       {
+        //displays all papers for a user
         paperState.map(paper => (
           <PaperCard paper={paper}></PaperCard>
         ))}

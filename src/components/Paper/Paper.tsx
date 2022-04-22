@@ -44,10 +44,10 @@ function PaperDisplay({ paper, reviews }: PaperProps) {
         setReviewContentState(e.target.value)
     }
 
+    // display paper data
     useEffect(() => {
         console.log(paperId)
 
-        // display paper data
         loadBlockchainData<Paper>("paper", [paperId]).then(result => {
             if (result) {
                 setPaperState(result)
@@ -60,9 +60,7 @@ function PaperDisplay({ paper, reviews }: PaperProps) {
                 }
             })
         }).finally(() => {
-            //setLoading(false)
             console.log(paperState)
-
             loadBlockchainData<Review[]>("paperReviews", [paperId]).then(result => {
                 if (result) {
                     setReviewssState(result)
@@ -72,11 +70,6 @@ function PaperDisplay({ paper, reviews }: PaperProps) {
                 setLoading(false)
             })
         })
-
-        // displaying the reviews
-
-        //testing the retrieval of files from web3 storage
-
     }, [])
 
     function onDocumentLoadSuccess({ numPages: nextNumPages }: any) {
@@ -150,23 +143,13 @@ function PaperDisplay({ paper, reviews }: PaperProps) {
 
                 <Divider variant="middle" sx={{ width: 450, mt: 3, mb: 4 }} />
 
-                {/* Once the paperReviews are implemted in the backend we can uncomment this, same goes for the commented stuff inside the Review component*/}
-                {/* {paperState.paperReviews.map(review => (  
-                            <Review review={review}></Review>
-                        ))}   */}
-
-                {/* Add the list of Reviews from the review state */}
-
                 {
+                    //displays the reviews
                     reviewsState.map(review => (
-
                         <ReviewDisplay review={review}></ReviewDisplay>
                     ))
                 }
 
-
-                {/* <ReviewDisplay></ReviewDisplay>
-                        <ReviewDisplay></ReviewDisplay> */}
             </Box>
 
 

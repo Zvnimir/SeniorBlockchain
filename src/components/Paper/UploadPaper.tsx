@@ -9,21 +9,23 @@ const Input = styled('input')({
 });
 
 function UploadPaper() {
-    
-    const[titleState, setTitleState] = useState("")
-    const[categoryState, setCategoryState] = useState("")
-    const[abstractState, setAbstractState] = useState("")
+
+    const [titleState, setTitleState] = useState("")
+    const [categoryState, setCategoryState] = useState("")
+    const [abstractState, setAbstractState] = useState("")
     //we will divide "numberOfWordsState" with the average reading speed (250) to get "minuteRead"
-    const[numberOfWordsState, setNumberOfWordsState] = useState("")
-    const[fileState, setFileState] = useState<FileList>()
+    const [numberOfWordsState, setNumberOfWordsState] = useState("")
+    const [fileState, setFileState] = useState<FileList>()
     const [url, setUrl] = useState("")
     const [buttonControl, setControl] = useState(false)
+
+    //handlers for the form
     const handleChangeTitle = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setTitleState(e.target.value)
     }
 
     const handleChangeCategory = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setCategoryState(e.target.value) 
+        setCategoryState(e.target.value)
     }
 
     const handleChangeAbstract = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -38,22 +40,20 @@ function UploadPaper() {
         if (e.target.files) {
             setFileState(e.target.files)
             getUrl(e.target.files).then((result) => {
-              if (result) {
-                console.log(result)
-                setUrl(result)
-                setControl(true)
-                //loadBlockchainData("requestAuthentication", [result]).then(result => { console.log(result) });
-              } else {
-                console.log("url is not loading");
-              }
-              //once we get the data we set loading to false
+                if (result) {
+                    console.log(result)
+                    setUrl(result)
+                    setControl(true)
+                } else {
+                    console.log("url is not loading");
+                }
             })
-      
-          }
+
+        }
     }
 
     return (
-        <> 
+        <>
             <Container maxWidth="sm" sx={{ mt: 4, pt: 2 }} >
                 <Typography fontWeight={'light'} variant="h5" component="div" align='center' >
                     Upload your paper
@@ -65,13 +65,13 @@ function UploadPaper() {
                         '& > :not(style)': { m: 1 },
                     }}
                     noValidate
-                    
+
                 >
-                    <TextField id="title" label="Title" variant="standard" fullWidth={true} onChange={handleChangeTitle}/>
-                    <TextField id="category" label="Category" variant="standard" fullWidth={true} onChange={handleChangeCategory}/>
-                    <TextField id="abstract" label="Abstract" variant="standard" multiline maxRows={4} fullWidth={true} onChange={handleChangeAbstract}/>
-                    <TextField id="numberOfWords" label="Number of words" variant="standard" type="number" fullWidth={true} onChange={handleChangeNumberOfWords}/>
-                    
+                    <TextField id="title" label="Title" variant="standard" fullWidth={true} onChange={handleChangeTitle} />
+                    <TextField id="category" label="Category" variant="standard" fullWidth={true} onChange={handleChangeCategory} />
+                    <TextField id="abstract" label="Abstract" variant="standard" multiline maxRows={4} fullWidth={true} onChange={handleChangeAbstract} />
+                    <TextField id="numberOfWords" label="Number of words" variant="standard" type="number" fullWidth={true} onChange={handleChangeNumberOfWords} />
+
                     <label htmlFor="contained-button-file" >
                         <Input accept="application/pdf" id="contained-button-file" multiple type="file" onChange={handleFileSelected} />
                         <Button sx={{ mt: 2 }} variant="contained" endIcon={<ArticleIcon />} component="span">
@@ -84,19 +84,14 @@ function UploadPaper() {
                     <Box display="flex"
                         alignItems="center"
                         justifyContent="center">
-                        <Button variant="contained" component="span" disabled={buttonControl ===false}
-                            onClick={() => { 
-
-                               loadBlockchainData_token("uploadPaper").then(result => { console.log(result) 
-                            
-                                 //if(result.isEmpty()){
-                                loadBlockchainData("uploadPaper", [titleState, categoryState, abstractState, (Number.parseInt(numberOfWordsState) / 250), url])
-
-                                 //}
-                               })
-                               //TODO: Call this method after the tokens have been transfered
-                                //loadBlockchainData("uploadPaper", [titleState, categoryState, abstractState, (Number.parseInt(numberOfWordsState) / 250)])
-                                if(fileState) {
+                        <Button variant="contained" component="span" disabled={buttonControl === false}
+                            onClick={() => {
+                                //uploads the paper to the blockchain
+                                loadBlockchainData_token("uploadPaper").then(result => {
+                                    console.log(result)
+                                    loadBlockchainData("uploadPaper", [titleState, categoryState, abstractState, (Number.parseInt(numberOfWordsState) / 250), url])
+                                })
+                                if (fileState) {
                                     storeFiles(fileState)
                                 }
                             }}>
@@ -104,10 +99,10 @@ function UploadPaper() {
                         </Button>
                     </Box>
                 </Box>
-                    
+
             </Container>
         </>
-    ) 
+    )
 }
 
 export default UploadPaper

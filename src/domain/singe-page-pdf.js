@@ -13,14 +13,17 @@ export default function SinglePage(props) {
     setPageNumber(1);
   }
 
+  //changes to a page
   function changePage(offset) {
     setPageNumber(prevPageNumber => prevPageNumber + offset);
   }
 
+  //goes to the prev page
   function previousPage() {
     changePage(-1);
   }
 
+  //goes to the next page
   function nextPage() {
     changePage(1);
   }
@@ -29,33 +32,33 @@ export default function SinglePage(props) {
 
   return (
     <Box>
-      <Box sx={{height: 655}}>
-        <Document 
+      <Box sx={{ height: 655 }}>
+        <Document
           file={pdf}
           onLoadSuccess={onDocumentLoadSuccess}
           renderMode={'svg'}
-          >
-            <Page size={'A4'} pageNumber={pageNumber} />
+        >
+          <Page size={'A4'} pageNumber={pageNumber} />
         </Document>
       </Box>
-      
-      <Box sx={{display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-        <Typography variant="body1" component="div" sx={{mt: 2, mb: 1.3}}>
+
+      <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+        <Typography variant="body1" component="div" sx={{ mt: 2, mb: 1.3 }}>
           {pageNumber || (numPages ? 1 : "--")} / {numPages || "--"}
         </Typography>
         <Box>
-          <Button 
-            sx={{mr:.7}}
-            disabled={pageNumber <= 1} 
-            size="small" 
+          <Button
+            sx={{ mr: .7 }}
+            disabled={pageNumber <= 1}
+            size="small"
             variant="contained"
             onClick={() => {
               previousPage()
             }}>
-              &lt;
+            &lt;
           </Button>
-          <Button 
-            sx={{ml:.7}}
+          <Button
+            sx={{ ml: .7 }}
             type="button"
             disabled={pageNumber >= numPages}
             size="small"
@@ -63,10 +66,10 @@ export default function SinglePage(props) {
             onClick={() => {
               nextPage()
             }}>
-              &gt;
+            &gt;
           </Button>
         </Box>
-        
+
       </Box>
     </Box>
   );

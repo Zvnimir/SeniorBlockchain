@@ -47,15 +47,14 @@ function Newsfeed({ papers }: PapersProps) {
         setSort(event.target.value);
     };
 
+    //gets data from blockchain
     useEffect(() => {
-        //gets data from blockchain
         console.log("Someting")
         loadBlockchainData<Paper[]>("papers").then(result => {
             if (result) {
                 console.log(result)
                 setPaperState(result)
             }
-            //once we get the data we set loading to false
         }).finally(() => {
             setLoading(false);
         });
@@ -69,14 +68,14 @@ function Newsfeed({ papers }: PapersProps) {
         setSearchState(e.target.value)
     }
 
-    //wait for changes in the search state
+    //handles the search filter
     useEffect(() => {
         setPaperDisplayState(paperState)
-        if(searchState === '') return
+        if (searchState === '') return
         let paperArr = paperDisplayState.slice()//this copies the array by reference
-        paperArr.forEach( (paper, index) => {
-            if(!paper.title.includes(searchState)) paperArr.splice(index,1);
-          });
+        paperArr.forEach((paper, index) => {
+            if (!paper.title.includes(searchState)) paperArr.splice(index, 1);
+        });
         setPaperDisplayState(paperArr)
     }, [searchState])
 
@@ -90,9 +89,9 @@ function Newsfeed({ papers }: PapersProps) {
         <div>
             <Container maxWidth="md" sx={{ marginTop: 3 }}>
 
-                <Box sx={{display: 'flex', justifyContent: 'left', width: '100%'}}>
+                <Box sx={{ display: 'flex', justifyContent: 'left', width: '100%' }}>
                     <FormControl variant="standard" sx={{ m: 2, minWidth: 120, marginBottom: 3 }}>
-                        <TextField  onChange={handleSearch} id="standard-basic" label="Search" variant="standard"  />
+                        <TextField onChange={handleSearch} id="standard-basic" label="Search" variant="standard" />
                     </FormControl>
 
                     <FormControl variant="standard" sx={{ m: 2, minWidth: 120 }}>
@@ -132,6 +131,7 @@ function Newsfeed({ papers }: PapersProps) {
 
 
                 {
+                    //displays all of the papers
                     paperDisplayState.map(paper => (
                         <PaperCard paper={paper}></PaperCard>
                     ))}

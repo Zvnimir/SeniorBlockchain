@@ -30,7 +30,6 @@ function Edit({ user }: UserProps) {
     display: 'none',
   });
 
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -39,6 +38,7 @@ function Edit({ user }: UserProps) {
     setOpen(false);
   };
 
+  //handlers for the from
   const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target.files) {
       setFileState(e.target.files)
@@ -51,34 +51,11 @@ function Edit({ user }: UserProps) {
         } else {
           console.log("url is not loading");
         }
-        //once we get the data we set loading to false
       })
 
     }
   }
 
-  useEffect(() => {
-    //gets data from blockchain
-
-    loadBlockchainData<User>("user")
-      .then((result) => {
-        if (result) {
-          setUserState(result);
-          console.log(result)
-        }
-        //once we get the data we set loading to false
-
-      })
-      .finally(() => {
-        setLoading(false);
-
-      });
-
-  }, []);
-
-  if (loading) {
-    return <p>Data is loading...</p>;
-  }
   const handleChangeFirstName = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFirstNameState(e.target.value)
   }
@@ -95,8 +72,27 @@ function Edit({ user }: UserProps) {
     setBiographyState(e.target.value)
   }
 
+  //gets data from blockchain
+  useEffect(() => {
+    loadBlockchainData<User>("user")
+      .then((result) => {
+        if (result) {
+          setUserState(result);
+          console.log(result)
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  //makes sure that undefined states dont throw errors
+  if (loading) {
+    return <p>Data is loading...</p>;
+  }
+
   return (
-    <Container sx={{display: 'flex', justifyContent: 'center', mt: 15}}>
+    <Container sx={{ display: 'flex', justifyContent: 'center', mt: 15 }}>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '60ch' }}>
         <Typography fontWeight={'light'} variant="h4" gutterBottom component="div" sx={{ m: 1, width: '24ch', mb: 4, textAlign: 'center' }}>
           Edit Your Data
@@ -130,8 +126,6 @@ function Edit({ user }: UserProps) {
           onChange={handleChangeEmail}
         />
 
-
-
         <TextField sx={{ m: 1, width: '50ch', mb: 4 }} defaultValue={userState.biography} id="abstract" label="Bibliography" variant="standard" multiline maxRows={4} fullWidth={true} onChange={handleChangeBiography} />
 
         <Button variant="contained" size="medium" sx={{ m: 1 }} onClick={handleClickOpen}>
@@ -153,13 +147,11 @@ function Edit({ user }: UserProps) {
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
             <Button onClick={() => {
-              
+
               console.log(fileUrl)
-              //loadBlockchainData("requestAuthentication", [fileUrl]).then(result => { console.log(result) });
               if (fileState) {
                 storeFiles(fileState)
               };
-              //getUrl(fileState)
               setOpen(false)
             }}>Ok</Button>
           </DialogActions>

@@ -13,8 +13,9 @@ function PaperCard({ paper }: PaperCardProps) {
     let navigate = useNavigate();
 
     return (
-        <Card sx={{ minWidth: 275, marginTop: 2, marginBottom: 3, backgroundColor: "#F9FEFF", boxShadow: 3, borderRadius: ".7em"}}>
+        <Card sx={{ minWidth: 275, marginTop: 2, marginBottom: 3, backgroundColor: "#F9FEFF", boxShadow: 3, borderRadius: ".7em" }}>
             <CardActionArea onClick={() => {
+                //navigates to the paper
                 navigate("../paper", { state: { paperId: paper.id } });
             }}>
                 <CardContent>
@@ -34,7 +35,7 @@ function PaperCard({ paper }: PaperCardProps) {
                                 paper.category
                             }
                         </Typography>
-                        <ArrowForwardIosRoundedIcon sx={{color: grey[800]}} />
+                        <ArrowForwardIosRoundedIcon sx={{ color: grey[800] }} />
                     </Box>
                 </CardContent>
             </CardActionArea>
